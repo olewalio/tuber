@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
+  <channel>
+    <atom:link href="https://one.test/search/rss?f=tweets&amp;q=ai" rel="self" type="application/rss+xml" />
+    <title>Search / ai</title>
+    <link>https://one.test/search/rss?f=tweets&amp;q=ai</link>
+    <description>Twitter search: ai</description>
+    <language>en-us</language>
+    <ttl>40</ttl>
+
+    <!-- 1. автор + упоминания + ссылка на x.com/<handle> -->
+    <item>
+      <title>New model release by @beta and @gamma https://x.com/delta/status/4001</title>
+      <dc:creator>@alpha</dc:creator>
+      <description><![CDATA[<p>New model release by <a href="https://one.test/beta" title="beta">@beta</a> and <a href="https://one.test/gamma" title="gamma">@gamma</a> see https://x.com/delta/status/4001</p>]]></description>
+      <pubDate>Mon, 14 Sep 2026 10:00:00 GMT</pubDate>
+      <guid isPermaLink="false">2099438001976246272</guid>
+      <link>https://one.test/alpha/status/2099438001976246272#m</link>
+    </item>
+
+    <!-- 2. ретвит: владелец ленты vs автор оригинала -->
+    <item>
+      <title>RT by @omega: agentic LLM eval results are out</title>
+      <dc:creator>@epsilon</dc:creator>
+      <description><![CDATA[<p>agentic LLM eval results are out https://arxiv.org/abs/2505.10468</p>]]></description>
+      <pubDate>Sun, 13 Sep 2026 08:30:00 GMT</pubDate>
+      <guid isPermaLink="false">2099052964869046272</guid>
+      <link>https://one.test/omega/status/2099052964869046272#m</link>
+    </item>
+
+    <!-- 3. цитата: автор оригинала в blockquote -->
+    <item>
+      <title>This is the most important safety result of the year, thanks @zeta</title>
+      <dc:creator>@quoter</dc:creator>
+      <description><![CDATA[<p>This is the most important safety result of the year, thanks <a href="https://one.test/zeta">@zeta</a></p>
+<hr/>
+<blockquote>
+<b>Jane Researcher (@janeresearcher)</b>
+<p>We released a new benchmark for agentic AI evaluation.</p>
+<footer>— <cite><a href="https://one.test/janeresearcher/status/2098883095557046272#m">link</a></footer>
+</blockquote>]]></description>
+      <pubDate>Sat, 12 Sep 2026 21:15:00 GMT</pubDate>
+      <guid isPermaLink="false">2098883095557046272</guid>
+      <link>https://one.test/quoter/status/2098883095557046272#m</link>
+    </item>
+
+    <!-- 4. автор + ссылка twitter.com/<handle> -->
+    <item>
+      <title>Funding round for an AI infra startup https://twitter.com/eta/status/4004</title>
+      <dc:creator>@theta</dc:creator>
+      <description><![CDATA[<p>Funding round for an AI infra startup https://twitter.com/eta/status/4004</p>]]></description>
+      <pubDate>Fri, 11 Sep 2026 18:00:00 GMT</pubDate>
+      <guid isPermaLink="false">2098700000000000000</guid>
+      <link>https://one.test/theta/status/2098700000000000000#m</link>
+    </item>
+
+  </channel>
+</rss>

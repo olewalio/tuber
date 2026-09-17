@@ -1,0 +1,139 @@
+Журнал приёмки ТЗ-3b (Tuber): D-27 (тайбрейк отчёта X) и D-24 (platform у run_log)
+====================================================================================
+Дата: 17.09.2026. Замеры — на ЗАМОРОЖЕННЫХ копиях (/tmp/v-*.db, сняты заказчиком;
+скопированы в рабочий каталог, боевые базы только читаются).
+
+1. Копии и единая база
+----------------------
+  os (legacy YouTube)      /tmp/v-os.db  md5=359e40416f970b9ec9440976e8590456
+  x (legacy X)             /tmp/v-x.db  md5=b82fc9077440c9db8e7d1bcb5d12274f
+  tg (legacy Telegram)     /tmp/v-tg.db  md5=2612f5641e59aef77b51a634660151ca
+  единая база собрана из копий: /root/.jcode/scratch/tz3b/unified2.db
+  (python3 -m tuber migrate --target ... --os ... --x ... --tg ...)
+
+2. Полный parity (os+x+tg), пересобранная база
+---------------------------------------------
+правило                                        было      стало     дельта  статус
+------------------------------------------------------------------------------------------
+os.channels                                    7563       7563         +0  OK
+os.videos                                     33986      33986         +0  OK
+os.snapshots                                  96433      96433         +0  OK
+os.video_scores                               76433      76433         +0  OK
+os.video_classification                       33873      33873         +0  OK
+os.video_classification.title_ru              33796      33796         +0  OK
+os.video_classification.summary_ru            33796      33796         +0  OK
+os.video_classification.reason                33873      33873         +0  OK
+os.seo_fields                                 33986      33986         +0  OK
+os.quota_log                                  10620      10620         +0  OK
+os.llm_usage                                   2162       2162         +0  OK
+os.channel_candidates+query_candidates         4595       4595         +0  OK
+os.thumbnail_vision                             182        182         +0  OK
+os.video_comments                              1170       1170         +0  OK
+os.comment_checks                                60         60         +0  OK
+os.topics                                        17         17         +0  OK
+x.accounts                                       72         72         +0  OK
+x.posts                                         811        811         +0  OK
+x.post_metrics_history                          809        809         +0  OK
+x.scores                                        103        103         +0  OK
+x.stories                                       100        100         +0  OK
+x.story_posts                                   123        123         +0  OK
+x.classified                                    598        598         +0  OK
+x.classify_daily                                  2          2         +0  OK
+x.cursors                                        85         85         +0  OK
+x.candidates                                   1407       1407         +0  OK
+x.requests                                     2700       2700         +0  OK
+x.instances                                       4          4         +0  OK
+x.runs                                          167        167         +0  OK
+x.run_log                                      1611       1611         +0  OK
+x.metrics_daily                                   2          2         +0  OK
+x.report_texts                                    1          1         +0  OK
+x.blocklist                                       0          0         +0  OK
+tg.channels                                    1145       1145         +0  OK
+tg.posts                                      14907      14907         +0  OK
+tg.scores                                      9235       9235         +0  OK
+tg.channel_baselines                            391        391         +0  OK
+tg.runs                                         110        110         +0  OK
+tg.run_log                                     6525       6525         +0  OK
+tg.classified                                     0          0         +0  OK
+tg.stories                                        0          0         +0  OK
+tg.story_members                                  0          0         +0  OK
+tg.metrics_daily                                  0          0         +0  OK
+tg.account_state                                  0          0         +0  OK
+------------------------------------------------------------------------------------------
+Итог: расхождений нет.
+
+3. Отчёт 2026-09-15: legacy ↔ монорепо, детерминизм (3 прогона на сторону)
+-------------------------------------------------------------------------
+  legacy_report_1.txt md5=637acb680e4aa741377459a618a3b697
+  legacy_report_2.txt md5=637acb680e4aa741377459a618a3b697
+  legacy_report_3.txt md5=637acb680e4aa741377459a618a3b697
+  core2_a.txt         md5=637acb680e4aa741377459a618a3b697
+  core2_b.txt         md5=637acb680e4aa741377459a618a3b697
+  core2_c.txt         md5=637acb680e4aa741377459a618a3b697
+  строк: legacy 62, монорепо 62; diff пуст (0 строк расхождения)
+  строка «отчёт сохранён» в вывод не попадает: обе стороны с --stdout-only
+
+4. Приёмочный инструмент scripts/acceptance/x_compare_reports.py
+---------------------------------------------------------------
+1. копии баз → /root/.jcode/scratch/tz3b/acceptance/x_legacy_copy.db, /root/.jcode/scratch/tz3b/acceptance/unified_copy.db
+   домиграция X: 4043 строк, пропусков 0
+2a. parity на копиях (правила X)
+правило                                        было      стало     дельта  статус
+------------------------------------------------------------------------------------------
+x.accounts                                       72         72         +0  OK
+x.posts                                         811        811         +0  OK
+x.post_metrics_history                          809        809         +0  OK
+x.scores                                        103        103         +0  OK
+x.stories                                       100        100         +0  OK
+x.story_posts                                   123        123         +0  OK
+x.classified                                    598        598         +0  OK
+x.classify_daily                                  2          2         +0  OK
+x.cursors                                        85         85         +0  OK
+x.candidates                                   1407       1407         +0  OK
+x.requests                                     2700       2700         +0  OK
+x.instances                                       4          4         +0  OK
+x.runs                                          167        167         +0  OK
+x.run_log                                      1611       1611         +0  OK
+x.metrics_daily                                   2          2         +0  OK
+x.report_texts                                    1          1         +0  OK
+x.blocklist                                       0          0         +0  OK
+------------------------------------------------------------------------------------------
+Итог: расхождений нет.
+   код parity: 0 (0 — расхождений нет, 2 — есть)
+2. отчёт legacy (2026-09-15)
+   код 0, 62 строк, 0.13 с
+3. отчёт монорепозитория (2026-09-15)
+   код 0, 62 строк, 0.17 с
+4. построчная сверка
+   расхождений нет
+5. время (лучший из 3 повторов)
+   legacy 0.12 с, монорепо 0.17 с, отношение 1.40×
+   вердикт: OK
+
+5. EXPLAIN QUERY PLAN
+---------------------
+legacy _primary_post (копия legacy, SQLite 3.53.1):
+  |--SEARCH sp USING COVERING INDEX sqlite_autoindex_story_posts_1 (story_id=?)
+  |--SEARCH p USING INDEX sqlite_autoindex_posts_1 (tweet_id=?)
+  |--SEARCH a USING INTEGER PRIMARY KEY (rowid=?) LEFT-JOIN
+  `--USE TEMP B-TREE FOR ORDER BY
+  ключ: PK story_posts(story_id, tweet_id) → скан по tweet_id ASC;
+  при равном published_at_utc первым в сортировку идёт 2099851980843925762.
+
+монорепо _primary_post (адаптер, с тайбрейком):
+  SEARCH sm USING COVERING INDEX sqlite_autoindex_story_member_1 (story_id=?)
+  LIST SUBQUERY 6
+  SEARCH main.story USING COVERING INDEX idx_x_story_xconf (platform=?)
+  CREATE BLOOM FILTER
+  SEARCH c USING INDEX sqlite_autoindex_content_1 (platform=? AND external_id=?)
+  CORRELATED SCALAR SUBQUERY 3
+  SEARCH c USING INTEGER PRIMARY KEY (rowid=?)
+  SEARCH s USING INTEGER PRIMARY KEY (rowid=?) LEFT-JOIN
+  USE TEMP B-TREE FOR ORDER BY
+  MATERIALIZE нет.
+
+монорепо run_log (представление X, D-24):
+  SEARCH rl USING COVERING INDEX idx_run_log_platform (platform=?)
+ядро main.run_log WHERE platform='x':
+  SEARCH main.run_log USING COVERING INDEX idx_run_log_platform (platform=?)
+  MATERIALIZE нет.
