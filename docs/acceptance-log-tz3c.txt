@@ -1,0 +1,156 @@
+Журнал приёмки ТЗ-3c (Tuber): адаптеры на системном SQLite 3.45.1
+==========================================================================
+Дата: 17.09.2026. Все замеры — на ЗАМОРОЖЕННЫХ копиях (/tmp/v-*.db,
+/tmp/unified5.db); боевые базы только читаются, md5/mtime до и после не менялись.
+
+0. Окружение
+------------
+  /usr/bin/python3                            Python 3.12.3, SQLite 3.45.1
+  /usr/local/lib/hermes-agent/venv/bin/python3 Python 3.11.15, SQLite 3.53.1
+
+  `python3 -m tuber doctor` (system):
+    tuber doctor
+      Python:      3.12.3
+      исполняемый: /usr/bin/python3
+      SQLite:      3.45.1 (минимум для адаптеров: 3.24.0)
+  `python3 -m tuber doctor` (venv):
+      Python:      3.11.15
+      исполняемый: /usr/local/lib/hermes-agent/venv/bin/python3
+      SQLite:      3.53.1 (минимум для адаптеров: 3.24.0)
+
+1. Копии и хеши (до == после)
+-----------------------------
+  /tmp/v-os.db        md5=359e40416f970b9ec9440976e8590456  mtime=1789593554
+  /tmp/v-x.db         md5=cb68ac88f0295bda7861d1df3c31bf53  mtime=1789594678
+  /tmp/v-tg.db        md5=2612f5641e59aef77b51a634660151ca  mtime=1789593554
+  /tmp/unified5.db    md5=246a912342d6ab1010f153e3c1bf21f6  mtime=1789594679
+
+  Боевая /root/tuber/data/tuber.db: mtime=1789582528 (16.09 21:15) — не менялась.
+  Приёмка шла на .backup-копиях в /root/.jcode/scratch/tz3c/.
+
+  ВАЖНО: /tmp/unified5.db оказался патологически медленным на отчёте YouTube
+  (>10 мин на `report --days 10`; стек — report._viral_candidate_rows). Это
+  ВОСПРОИЗВОДИТСЯ и на БАЗОВОЙ ревизии (до правок ТЗ-3c): worktree 9c6fe8f,
+  `report --days 1` убит по таймауту 300 с. То есть это свойство копии/данных,
+  не регрессия ТЗ-3c. Для отчётной части приёмки единая база ПЕРЕСОБРАНА из
+  замороженных /tmp/v-*.db (`tuber migrate`, 54 с); отчёт на ней — 17-20 с.
+
+2. Полный parity (os+x+tg), единая база из /tmp/v-*.db
+------------------------------------------------------
+  Команда (одинаковая на обоих интерпретаторах):
+    <python> -m tuber parity --target unified.db --os /tmp/v-os.db \
+             --x /tmp/v-x.db --tg /tmp/v-tg.db
+  Вывод system == вывод venv (md5 совпал), код возврата 0.
+
+правило                                        было      стало     дельта  статус
+------------------------------------------------------------------------------------------
+os.channels                                    7563       7563         +0  OK
+os.videos                                     33986      33986         +0  OK
+os.snapshots                                  96433      96433         +0  OK
+os.video_scores                               76433      76433         +0  OK
+os.video_classification                       33873      33873         +0  OK
+os.video_classification.title_ru              33796      33796         +0  OK
+os.video_classification.summary_ru            33796      33796         +0  OK
+os.video_classification.reason                33873      33873         +0  OK
+os.seo_fields                                 33986      33986         +0  OK
+os.quota_log                                  10620      10620         +0  OK
+os.llm_usage                                   2162       2162         +0  OK
+os.channel_candidates+query_candidates         4595       4595         +0  OK
+os.thumbnail_vision                             182        182         +0  OK
+os.video_comments                              1170       1170         +0  OK
+os.comment_checks                                60         60         +0  OK
+os.topics                                        17         17         +0  OK
+x.accounts                                       72         72         +0  OK
+x.posts                                         811        811         +0  OK
+x.post_metrics_history                          809        809         +0  OK
+x.scores                                        103        103         +0  OK
+x.stories                                       100        100         +0  OK
+x.story_posts                                   123        123         +0  OK
+x.classified                                    598        598         +0  OK
+x.classify_daily                                  2          2         +0  OK
+x.cursors                                        85         85         +0  OK
+x.candidates                                   1407       1407         +0  OK
+x.requests                                     2700       2700         +0  OK
+x.instances                                       4          4         +0  OK
+x.runs                                          167        167         +0  OK
+x.run_log                                      1611       1611         +0  OK
+x.metrics_daily                                   2          2         +0  OK
+x.report_texts                                    1          1         +0  OK
+x.blocklist                                       0          0         +0  OK
+tg.channels                                    1145       1145         +0  OK
+tg.posts                                      14907      14907         +0  OK
+tg.scores                                      9235       9235         +0  OK
+tg.channel_baselines                            391        391         +0  OK
+tg.runs                                         110        110         +0  OK
+tg.run_log                                     6525       6525         +0  OK
+tg.classified                                     0          0         +0  OK
+tg.stories                                        0          0         +0  OK
+tg.story_members                                  0          0         +0  OK
+tg.metrics_daily                                  0          0         +0  OK
+tg.account_state                                  0          0         +0  OK
+------------------------------------------------------------------------------------------
+Итог: расхождений нет.
+
+3. Отчёт YouTube за 10 дней: system ↔ venv
+------------------------------------------
+  Команда:
+    <python> -m tuber yt report --days 10 --db <copy>/unified.db   (изолированные каталоги)
+  system: код 1 (нет индекса виральности — предупреждение), 20 с, 423 строки
+  venv:   код 1 (то же), 17 с, 423 строки
+  diff:   0 строк
+  md5:    system debddc9d89e488378527d264a1c5e603
+          venv   debddc9d89e488378527d264a1c5e603
+  Вывод: 0 строк расхождения.
+
+4. Отчёт X за 2026-09-15: system ↔ venv
+---------------------------------------
+  Команда:
+    <python> -m tuber x report --date 2026-09-15 --stdout-only --no-model --db <copy>/unified.db
+  system: код 0, 62 строки
+  venv:   код 0, 62 строки
+  diff:   0 строк
+  md5:    system 10a9b2fb7a9e1cde70636a466f5dee7e
+          venv   10a9b2fb7a9e1cde70636a466f5dee7e
+
+5. EXPLAIN QUERY PLAN (типовые запросы), оба интерпретатора
+----------------------------------------------------------
+  Запросы: 6 типовых LEFT JOIN YouTube (videos↔snapshots/classification/scores/
+  seo_fields/thumbnail_vision, snapshots↔videos) и 4 запроса X (run_log-представление,
+  ядро main.run_log, blocklist, metrics_daily). Планы system == планы venv,
+  отличается только строка версии SQLite.
+  Итог обоих прогонов: `MATERIALIZE: none`.
+
+  Примеры планов (system, 3.45.1):
+    yt[0] SEARCH c USING COVERING INDEX idx_youtube_content_videos (platform=?)
+          SEARCH m USING INDEX idx_metric_ext (platform=? AND external_id=?) LEFT-JOIN
+    yt[4] SEARCH c USING COVERING INDEX idx_youtube_content_videos (platform=?)
+          SEARCH tv USING INDEX idx_thumbnail_vision_ext (platform=? AND external_id=?) LEFT-JOIN
+    x[0] run_log view: SEARCH rl USING COVERING INDEX idx_run_log_platform (platform=?)
+    x[1] run_log core: SEARCH main.run_log USING COVERING INDEX idx_run_log_platform (platform=?)
+  MATERIALIZE нет ни в одном плане — на обеих версиях.
+
+6. Тесты
+--------
+  До ТЗ-3c:  907 passed, 1 xfailed
+  После:     921 passed, 1 xfailed   (+14 тестов ТЗ-3c)
+  Новый файл tests/core/test_tz3c_sqlite_compat.py: 14 тестов, в т.ч.
+  subprocess-прогон connect()+запись конфликтующих таблиц под /usr/bin/python3
+  и venv, отсутствие квалифицированных имён в TEMP DDL, диагностика версии,
+  трансляция legacy-имён, обёртка с PATH=/usr/bin:/bin.
+
+7. Обёртки
+----------
+  `PATH=/usr/bin:/bin` + TUBER_PYTHON=<venv> → обёртка исполняет venv-python
+  (проверено тестом; фолбэка на системный /usr/bin/python3 нет — при отсутствии
+  интерпретатора обёртка выходит с кодом 4 и внятным сообщением).
+
+8. Тест ловит именно дефект (базовая ревизия 9c6fe8f)
+------------------------------------------------------
+  git archive 9c6fe8f → отдельное дерево; /usr/bin/python3:
+    X  connect() -> OperationalError: qualified table names are not allowed on
+                    INSERT, UPDATE, and DELETE statements within triggers
+    YT connect() -> OperationalError: qualified table names … within triggers
+  На текущей ревизии оба connect() успешны (см. §3). Значит subprocess-тест
+  tests/core/test_tz3c_sqlite_compat.py на старой ревизии падал бы, а на новой
+  проходит — он проверяет ровно дефект, а не окружение.
+

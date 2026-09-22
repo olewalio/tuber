@@ -1,0 +1,159 @@
+
+==============================================================================
+ПРИЁМКА ТЗ-9 (задачи 1–4): шимы вместо симлинков
+==============================================================================
+начало:              2026-09-15 15:33:06 UTC
+каталог планировщика: /root/.hermes/scripts
+рабочая БД (RO):      /root/tuber-x/data/tuber_x.db
+установщик:           /root/tuber-x/scripts/install_hermes_cron.sh
+
+==============================================================================
+РЕЕСТР МЕХАНИЗМОВ. Блок LAUNCHERS установщика
+==============================================================================
+[ 0] OK   реестр механизмов (LAUNCHERS) разобран
+      данные: шимов=11; обёрток в реестре=9
+   tuber_x_collect_a.sh     -> scripts/tuber_x_collect.sh A
+   tuber_x_collect_b.sh     -> scripts/tuber_x_collect.sh B
+   tuber_x_collect_c.sh     -> scripts/tuber_x_collect.sh C
+   tuber_x_enrich.sh        -> scripts/tuber_x_enrich.sh
+   tuber_x_fulltext.sh      -> scripts/tuber_x_fulltext.sh
+   tuber_x_classify.sh      -> scripts/tuber_x_classify.sh
+   tuber_x_scores.sh        -> scripts/tuber_x_scores.sh
+   tuber_x_report.sh        -> scripts/tuber_x_report.sh
+   tuber_x_synd.sh          -> scripts/tuber_x_synd.sh
+   tuber_x_health.sh        -> scripts/tuber_x_health.sh
+   tuber_x_discover.sh      -> scripts/tuber_x_discover.sh
+[12] OK   реестр и рецепты scripts/tuber_x_*.sh согласованы попарно
+      данные: рецептов=9; без шима=[]; без рецепта=[]
+
+файлов в каталоге ДО: 164 (посторонних 153)
+статусы БД ДО:        user_version=6 posts=548 stories=100 scores=83 report_texts=1 classified=[('classified', 395), ('heuristic', 5)]
+
+==============================================================================
+ЗАДАЧА 1/2. Запуск установщика (боевой каталог планировщика)
+==============================================================================
+--- вывод установщика ---
+   Tuber-x: установка запускалок в /root/.hermes/scripts
+   источник обёрток: /root/tuber-x/scripts
+   
+   установлено:
+     tuber_x_collect_a.sh -> exec /root/tuber-x/scripts/tuber_x_collect.sh A
+     tuber_x_collect_b.sh -> exec /root/tuber-x/scripts/tuber_x_collect.sh B
+     tuber_x_collect_c.sh -> exec /root/tuber-x/scripts/tuber_x_collect.sh C
+     tuber_x_enrich.sh -> exec /root/tuber-x/scripts/tuber_x_enrich.sh
+     tuber_x_fulltext.sh -> exec /root/tuber-x/scripts/tuber_x_fulltext.sh
+     tuber_x_classify.sh -> exec /root/tuber-x/scripts/tuber_x_classify.sh
+     tuber_x_scores.sh -> exec /root/tuber-x/scripts/tuber_x_scores.sh
+     tuber_x_report.sh -> exec /root/tuber-x/scripts/tuber_x_report.sh
+     tuber_x_synd.sh -> exec /root/tuber-x/scripts/tuber_x_synd.sh
+     tuber_x_health.sh -> exec /root/tuber-x/scripts/tuber_x_health.sh
+     tuber_x_discover.sh -> exec /root/tuber-x/scripts/tuber_x_discover.sh
+   
+   итого запускалок: 11
+   шимы установлены: 11 (симлинков: 0)
+   
+   задания для планировщика Hermes (время МСК), регистрирует заказчик:
+     0 * * * *   tuber_x_collect_a.sh     Tuber-x: сбор тира A
+     15 */4 * * * tuber_x_collect_b.sh     Tuber-x: сбор тира B
+     30 3 * * *  tuber_x_collect_c.sh     Tuber-x: сбор тира C
+     5 */2 * * * tuber_x_enrich.sh        Tuber-x: метрики вовлечённости (enrich)
+     20 * * * *  tuber_x_fulltext.sh      Tuber-x: полный текст (fulltext)
+     40 4 * * *  tuber_x_synd.sh          Tuber-x: снимок ленты (synd)
+     50 4 * * *  tuber_x_discover.sh      Tuber-x: расширение реестра (дискавери)
+     20 6 * * *  tuber_x_classify.sh      Tuber-x: классификация (classify)
+     40 6 * * *  tuber_x_scores.sh        Tuber-x: сюжеты и оценки (scores)
+     0 7 * * *   tuber_x_report.sh        Tuber-x: ежедневный отчёт (report)
+     */30 * * * * tuber_x_health.sh        Tuber-x: сторож (health)
+   
+   в crontab ничего не записано: задания регистрирует заказчик.
+   сторож tuber_x_health.sh печатает только строки ALERT; в планировщике
+   Hermes такие строки доставляются владельцу в Telegram.
+   в системный crontab сторож ставить нельзя: почту он не доставляет.
+[ 1] OK   среди 11 имён реестра нет ни одного симлинка (os.path.islink==False)
+      данные: rc=0; симлинков=0; []
+[ 2] OK   все 11 шимов реестра существуют, обычные (не ссылки), исполняемые
+      данные: проверено=11; проблемных=0; []; отсутствовало до прогона=0
+[ 3] OK   содержимое каждого шима содержит команду exec из реестра (11/11)
+      данные: совпало=11/11; []
+
+==============================================================================
+ЗАДАЧА 1. dryrun: топология «запускалка → обёртка» без реального запуска
+==============================================================================
+   OK  tuber_x_collect_a.sh: stdout='exec /root/tuber-x/scripts/tuber_x_collect.sh A\n' rc=0
+   OK  tuber_x_collect_b.sh: stdout='exec /root/tuber-x/scripts/tuber_x_collect.sh B\n' rc=0
+   OK  tuber_x_collect_c.sh: stdout='exec /root/tuber-x/scripts/tuber_x_collect.sh C\n' rc=0
+   OK  tuber_x_enrich.sh: stdout='exec /root/tuber-x/scripts/tuber_x_enrich.sh\n' rc=0
+   OK  tuber_x_fulltext.sh: stdout='exec /root/tuber-x/scripts/tuber_x_fulltext.sh\n' rc=0
+   OK  tuber_x_classify.sh: stdout='exec /root/tuber-x/scripts/tuber_x_classify.sh\n' rc=0
+   OK  tuber_x_scores.sh: stdout='exec /root/tuber-x/scripts/tuber_x_scores.sh\n' rc=0
+   OK  tuber_x_report.sh: stdout='exec /root/tuber-x/scripts/tuber_x_report.sh\n' rc=0
+   OK  tuber_x_synd.sh: stdout='exec /root/tuber-x/scripts/tuber_x_synd.sh\n' rc=0
+   OK  tuber_x_health.sh: stdout='exec /root/tuber-x/scripts/tuber_x_health.sh\n' rc=0
+   OK  tuber_x_discover.sh: stdout='exec /root/tuber-x/scripts/tuber_x_discover.sh\n' rc=0
+[ 4] OK   dryrun каждого из 11 шимов печатает ровно команду реестра и выходит 0
+      данные: проверено 11/11
+
+==============================================================================
+ЗАДАЧА 4.5. Штатный механизм планировщика принимает все 11 путей
+==============================================================================
+   tuber_x_classify.sh      -> None
+   tuber_x_collect_a.sh     -> None
+   tuber_x_collect_b.sh     -> None
+   tuber_x_collect_c.sh     -> None
+   tuber_x_discover.sh      -> None
+   tuber_x_enrich.sh        -> None
+   tuber_x_fulltext.sh      -> None
+   tuber_x_health.sh        -> None
+   tuber_x_report.sh        -> None
+   tuber_x_scores.sh        -> None
+   tuber_x_synd.sh          -> None
+[ 5] OK   validate_within_dir принимает каждый из 11 шимов (вердикт None)
+      данные: импорт=да; принято=11/11
+
+==============================================================================
+ЗАДАЧА 2. Посторонние файлы каталога планировщика
+==============================================================================
+[ 6] OK   файлы каталога вне реестра (11 имён) не изменены и не удалены
+      данные: было=153 стало=153; совпало=True
+[ 8] OK   каталог reports/ не изменён (хэши файлов совпали)
+      данные: файлов=1; совпало=True
+
+==============================================================================
+ЗАДАЧА 2.1. Повторный запуск установщика (идемпотентность)
+==============================================================================
+[10] OK   повторный запуск идемпотентен: содержимое шимов и состав каталога те же
+      данные: rc=0; содержимое совпало=True; файлов 164->164
+[11] OK   итоговая строка установщика: 'шимы установлены: 11 (симлинков: 0)'
+      данные: найдена
+
+==============================================================================
+ТЕСТЫ
+==============================================================================
+[ 9] OK   полный набор тестов зелёный
+      данные: pytest rc=0; .................................                                        [100%]
+
+==============================================================================
+ЗАДАЧА 4.7. Рабочая БД не изменена приёмкой
+==============================================================================
+статусы БД ДО:    user_version=6 posts=548 stories=100 scores=83 report_texts=1 classified=[('classified', 395), ('heuristic', 5)]
+статусы БД ПОСЛЕ: user_version=6 posts=548 stories=100 scores=83 report_texts=1 classified=[('classified', 395), ('heuristic', 5)]
+[ 7] OK   рабочая БД не изменена приёмкой (снимки счётчиков ДО/ПОСЛЕ совпали)
+      данные: posts 548->548; совпало=True
+
+==============================================================================
+СВОДКА
+==============================================================================
+проверок: 13, OK: 13, FAIL: 0
+    0 OK   реестр механизмов (LAUNCHERS) разобран
+   12 OK   реестр и рецепты scripts/tuber_x_*.sh согласованы попарно
+    1 OK   среди 11 имён реестра нет ни одного симлинка (os.path.islink==False)
+    2 OK   все 11 шимов реестра существуют, обычные (не ссылки), исполняемые
+    3 OK   содержимое каждого шима содержит команду exec из реестра (11/11)
+    4 OK   dryrun каждого из 11 шимов печатает ровно команду реестра и выходит 0
+    5 OK   validate_within_dir принимает каждый из 11 шимов (вердикт None)
+    6 OK   файлы каталога вне реестра (11 имён) не изменены и не удалены
+    8 OK   каталог reports/ не изменён (хэши файлов совпали)
+   10 OK   повторный запуск идемпотентен: содержимое шимов и состав каталога те же
+   11 OK   итоговая строка установщика: 'шимы установлены: 11 (симлинков: 0)'
+    9 OK   полный набор тестов зелёный
+    7 OK   рабочая БД не изменена приёмкой (снимки счётчиков ДО/ПОСЛЕ совпали)

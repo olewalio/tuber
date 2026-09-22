@@ -1,0 +1,28 @@
+# Единая база и любые рабочие данные — не в git.
+data/
+*.db
+*.db-wal
+*.db-shm
+*.session
+.env
+# Учётные данные X (свой читатель): куки сессии и карта queryId.
+config/x_session.json
+config/x_qids.json
+x_session.json
+x_qids.json
+tmp/
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Отчёты прогонов (генерируются расписанием в reports/, не документация).
+#   reports/report-ГГГГ-ММ-ДД.txt — `tuber report --save` (analysis/report.py);
+#   reports/ГГГГ-ММ-ДД.md         — `tuber x report` (platforms/x/report.py::write).
+# Дневные артефакты не должны пачкать рабочее дерево после каждого прогона.
+reports/report-*.txt
+reports/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9].md
+reports/significance-*.md
+# Приёмочные копии базы и артефакты прогонов (ТЗ-50 и др.) — не в git.
+acceptance-tz50/
+data/acceptance/

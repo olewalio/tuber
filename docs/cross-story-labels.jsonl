@@ -1,0 +1,51 @@
+# Разметка кросс-платформенных пар сквозных сюжетов (ТЗ «сквозной сюжет»).
+# Каждая строка: {"a_id", "b_id", "verdict": "same"|"different", "note"}.
+# Пары, которых нет в предсказании, тоже можно размечать (для recall).
+# a_id/b_id — реальные content.id на копии боевой базы (17.09.2026).
+{"a_id": 19935, "b_id": 53063, "verdict": "same", "note": "YouTube 'Agent Showdown' и твит Илона Маска — об одном событии: прямой эфир SpaceXAI, где Grok Bot строит компанию вживую"}
+{"a_id": 48728, "b_id": 53063, "verdict": "same", "note": "Telegram futuris и твит Маска — тот же эфир SpaceXAI с Grok Bot"}
+{"a_id": 22269, "b_id": 34518, "verdict": "same", "note": "YouTube и твит про Crusoe Intelligence Foundry (deploy open LLM)"}
+{"a_id": 49644, "b_id": 61392, "verdict": "same", "note": "Telegram data_secrets и твит Machinelearrn — отчёт OpenAI о шести случаях нежелательного поведения моделей"}
+{"a_id": 53033, "b_id": 57654, "verdict": "same", "note": "Твит и Telegram (корейский) — итоги сентябрьского заседания FOMC и пресс-конференция Уорша"}
+{"a_id": 53218, "b_id": 53581, "verdict": "same", "note": "Дословная копия: 'NVIDIA официально идёт в native GPU programming на Rust'"}
+{"a_id": 53808, "b_id": 61298, "verdict": "same", "note": "Telegram про 'похороны Claude' и твит NY Post про культ в Anthropic — один сюжет"}
+{"a_id": 60843, "b_id": 61298, "verdict": "same", "note": "Telegram-перепост NY Post 'Anthropic — это культ' и исходный твит с той же ссылкой"}
+{"a_id": 61284, "b_id": 61298, "verdict": "same", "note": "Второй Telegram-перепост NY Post 'Anthropic — это культ' и исходный твит"}
+{"a_id": 8994, "b_id": 34217, "verdict": "different", "note": "YouTube про поиск Hermes по 400 млрд URL и твит-чейнджлог 'merged 108 PRs' — разные новости одного проекта"}
+{"a_id": 15486, "b_id": 56531, "verdict": "different", "note": "YouTube про интерпретируемость (Steinhardt) и Telegram про использование Qwen в госструктурах США — разные события"}
+{"a_id": 50477, "b_id": 56531, "verdict": "different", "note": "'Uncensored AI costs $5' и Telegram про Qwen в госреестре США — только общая тема"}
+{"a_id": 50872, "b_id": 56531, "verdict": "different", "note": "'How AI Got Smaller' и Telegram про Qwen — общая тема, разные материалы"}
+{"a_id": 51875, "b_id": 56531, "verdict": "different", "note": "Qwen3.8-27B + TestSprite и Telegram про Qwen в США — разные события"}
+{"a_id": 17814, "b_id": 34388, "verdict": "different", "note": "'Qwen model on apple silicon' и твит про open models — разные материалы"}
+{"a_id": 17814, "b_id": 38838, "verdict": "different", "note": "YouTube про Qwen на Apple Silicon и Telegram про веса модели Яндекса — разные события"}
+{"a_id": 17814, "b_id": 53187, "verdict": "different", "note": "Qwen на Apple Silicon и AI NEWS ROUNDUP (Salesforce/NVIDIA Koa) — разные"}
+{"a_id": 17814, "b_id": 53990, "verdict": "different", "note": "Qwen на Apple Silicon и релиз llama.cpp — разные"}
+{"a_id": 34388, "b_id": 38838, "verdict": "different", "note": "Твит про open models и Telegram про веса Яндекса — разные"}
+{"a_id": 34388, "b_id": 53990, "verdict": "different", "note": "Твит про open models и релиз llama.cpp — разные"}
+{"a_id": 38838, "b_id": 53187, "verdict": "different", "note": "Веса Яндекса и AI NEWS ROUNDUP — разные"}
+{"a_id": 53187, "b_id": 53990, "verdict": "different", "note": "AI NEWS ROUNDUP и релиз llama.cpp — разные"}
+{"a_id": 19935, "b_id": 45460, "verdict": "different", "note": "YouTube Agent Showdown и Telegram-промо 'топ метод' — реклама, не событие"}
+{"a_id": 19935, "b_id": 53710, "verdict": "different", "note": "YouTube Agent Showdown и Telegram про роадмап Grok — разные новости"}
+{"a_id": 45460, "b_id": 53063, "verdict": "different", "note": "Telegram-промо и твит Маска — разные"}
+{"a_id": 53063, "b_id": 53710, "verdict": "different", "note": "Твит про эфир Grok Bot и Telegram про роадмап Grok — разные новости"}
+{"a_id": 27606, "b_id": 34433, "verdict": "different", "note": "YouTube ChatGPT vs Claude и крипто-поэма 'EMPTY GATE' — разные"}
+{"a_id": 34433, "b_id": 50044, "verdict": "different", "note": "Крипто-поэма и YouTube про Musk/безопасность — разные"}
+{"a_id": 34433, "b_id": 50293, "verdict": "different", "note": "Крипто-поэма и YouTube про Hugging Face ethics — разные"}
+{"a_id": 34065, "b_id": 51206, "verdict": "different", "note": "Твит об уходе исследователя DeepMind и YouTube 'DeepMind says AI can't be Einstein' — разные новости DeepMind"}
+{"a_id": 34149, "b_id": 51206, "verdict": "different", "note": "Твит про Navier-Stokes и YouTube про DeepMind — разные"}
+{"a_id": 51206, "b_id": 53125, "verdict": "different", "note": "YouTube про DeepMind и дайджест BestBlogs — разные"}
+{"a_id": 51206, "b_id": 53147, "verdict": "different", "note": "YouTube про DeepMind и 'Politics of AI Doom' — разные"}
+{"a_id": 34145, "b_id": 51619, "verdict": "different", "note": "Твит про GPT-2/Amodei и YouTube про agent swarms — разные материалы про одного человека"}
+{"a_id": 34148, "b_id": 49808, "verdict": "different", "note": "Твит про NVDA/Трампа и YouTube 'AI Is Replacing Coders' — разные"}
+{"a_id": 37658, "b_id": 51285, "verdict": "different", "note": "Дайджест boris_again и корейский YouTube про Fish Audio — разные"}
+{"a_id": 34620, "b_id": 51848, "verdict": "different", "note": "Твит-чейнджлог Hermes и YouTube про Agent Go — разные проекты"}
+{"a_id": 49210, "b_id": 61392, "verdict": "different", "note": "Telegram про 'пенсию GPT-5.5' и твит про инциденты OpenAI — разные"}
+{"a_id": 51845, "b_id": 53057, "verdict": "different", "note": "YouTube Mac Studio и твит про дистилляцию Qwen — разные"}
+{"a_id": 51845, "b_id": 53677, "verdict": "different", "note": "YouTube Mac Studio и Telegram про Qwen-молекулы — разные"}
+{"a_id": 53057, "b_id": 53677, "verdict": "different", "note": "Твит про дистилляцию Qwen и Telegram про Qwen-молекулы — разные"}
+{"a_id": 53216, "b_id": 53808, "verdict": "different", "note": "Твит 'Кто удержит AGI' и Telegram 'похороны Claude' — разные материалы"}
+{"a_id": 53216, "b_id": 60843, "verdict": "different", "note": "Твит 'Кто удержит AGI' и Telegram NY Post 'культ' — разные материалы"}
+{"a_id": 53216, "b_id": 61284, "verdict": "different", "note": "Твит 'Кто удержит AGI' и второй Telegram NY Post — разные материалы"}
+{"a_id": 53548, "b_id": 53808, "verdict": "different", "note": "Твит 'Same-Price Switching' и Telegram 'похороны Claude' — разные"}
+{"a_id": 53548, "b_id": 60843, "verdict": "different", "note": "Твит 'Same-Price Switching' и Telegram NY Post — разные"}
+{"a_id": 53548, "b_id": 61284, "verdict": "different", "note": "Твит 'Same-Price Switching' и второй Telegram NY Post — разные"}
