@@ -1,0 +1,25 @@
+Tuber — объединённая выдача: сводка владельцу
+Окно: последние 10 дней (с 2026-09-07 09:05:44 UTC); база: data/backups/tuber-20260917-084822.db; сформировано 2026-09-17 09:05:44 UTC
+
+1. YouTube — топ по просмотрам/сутки:
+1. Grok Bot за $20: девять сценариев использования — канал Paul J Lipsky; просмотры/сутки 1 033 710, просмотры 3 399 934, лайки 9 055; https://www.youtube.com/watch?v=UyMJBUCyDIs
+2. ИИ-реклама: битва копа и чистящего средства — канал Mio Comedy Factory; просмотры/сутки 809 471, просмотры 13 826 867, лайки 67 066; https://www.youtube.com/watch?v=FUq1DjLaKfo
+3. Экс-сотрудник Anthropic о риске гибели человечества от ИИ — канал CNN; просмотры/сутки 687 883, просмотры 8 990 854, лайки 59 125; https://www.youtube.com/watch?v=i30jVPqQeOM
+   скрыто пунктов: 12
+
+2. X — топ по лайкам:
+1. @OpenAI: We’re sharing a solution to the Navier-Stokes Millennium Prize Problem, one of the deepest problems at the frontier of mathematics. The proof was produced by a group of agents, using an OpenAI next-ge… — лайки 120 522, лайки/час 580.1; https://x.com/OpenAI/status/2097374640582668336
+2. @sama: I agree with Dario that we need to pace the frontier. This has been a primary topic of discussions we've had at OpenAI in recent weeks. Committing to having independent evaluators with employee-like a… — лайки 67 527, лайки/час 599.8; https://x.com/sama/status/2098811563415150910
+   скрыто пунктов: 13
+
+3. Telegram — топ постов за окно:
+1. [CGIT_Vines] Я тут на радостях с коннектомами решил покопать дорожную карту и узнать что там будет дальше. После нынешних Drosophila, zebrafish и MICrONS главный следующий рубеж — мышь. Причем не вся сразу а по ча… — просмотры 1 710, forwards —, significance 54.701, eng_channel 52.010; https://t.me/CGIT_Vines/3292
+2. [CGIT_Vines] Кризис среднего возраста меллиниалов выглядит именно как "а не установить ли мне ещё раз WOW? " Ну нахер! Я в свое время всрал буквально 3 года своей жизни на пати, рейды и вынес оттуда 2 крутых назва… — просмотры 1 750, forwards —, significance 20.265, eng_channel 19.280; https://t.me/CGIT_Vines/3291
+3. [CGIT_Vines] 30 секунд после изобретения AGI @CGIT_Vines (https://t.me/CGIT_Vines) — просмотры 2 850, forwards —, significance 3.946, eng_channel 3.796; https://t.me/CGIT_Vines/3290
+   скрыто пунктов: 33
+
+4. Сквозной сюжет: нет сюжетов с материалами разных платформ.
+
+Правила ранжирования и полный список — в полном отчёте.
+Полный отчёт: /root/tuber/reports/report-2026-09-17.txt
+Скрыто по платформам: YouTube 12, X 13, Telegram 33.

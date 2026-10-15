@@ -1,0 +1,117 @@
+........................................................................ [  3%]
+........................................................................ [  7%]
+........................................................................ [ 11%]
+........................................................................ [ 15%]
+........................................................................ [ 18%]
+........................................................................ [ 22%]
+........................................................................ [ 26%]
+........................................................................ [ 30%]
+........................................................................ [ 34%]
+........................................................................ [ 37%]
+........................................................................ [ 41%]
+........................FF.............................................. [ 45%]
+........................................................................ [ 49%]
+........................................................................ [ 53%]
+........................................................................ [ 56%]
+...............................x........................................ [ 60%]
+........................................................................ [ 64%]
+........................................................................ [ 68%]
+........................................................................ [ 72%]
+........................................................................ [ 75%]
+........................................................................ [ 79%]
+........................................................................ [ 83%]
+........................................................................ [ 87%]
+........................................................................ [ 91%]
+........................................................................ [ 94%]
+........................................................................ [ 98%]
+.........................                                                [100%]
+=================================== FAILURES ===================================
+____________________ test_live_compact_shows_every_platform ____________________
+
+live_copy = '/tmp/pytest-of-root/pytest-2/live_filled0/live.db'
+
+    def test_live_compact_shows_every_platform(live_copy):
+        """На живой базе в сводке ≥1 пункт каждой платформы, КРОМЕ Telegram.
+    
+        Telegram-раздел в сводке не печатается вообще (ТЗ-38 §2.1, D-52).
+        """
+        conn = db.connect(live_copy, readonly=True)
+        try:
+            totals = _section_totals(conn, _iso(10))
+            out = report.build_compact(conn, days=10, db_path=live_copy)
+        finally:
+            conn.close()
+        assert totals["YouTube"] and totals["X"]
+        assert totals["Telegram"] > 0, "в полном отчёте Telegram-данные должны быть"
+        sections = _sections(out)
+        names = ("YouTube", "X") + (("Telegram",)
+                                    if report.telegram_section_enabled() else ())
+        for name in names:
+            assert _shown(sections[name]) >= 1, (
+                f"платформа {name} без пунктов (в полном отчёте {totals[name]}):\n{out}")
+        if report.telegram_section_enabled():
+            # ТЗ-A: флаг включён — раздел Telegram присутствует и наполнен.
+            assert "Telegram" in out
+        else:
+            # ТЗ-38 §2.1 (дефолт OFF): Telegram-раздела в сводке нет.
+>           assert "Telegram" not in out
+E           AssertionError: assert 'Telegram' not in 'Tuber — объ... за сутки 0.'
+E             
+E             'Telegram' is contained here:
+E               . Реклама Telegram-бота Буквица для расшифровки лекций — канал Буквица; просмотры/сутки 512 377, просмотры 530 577, лайки 9 925; https://www.youtube.com/watch?v=PHfwscHlxIQ
+E             ?           ++++++++
+E               2. Что такое Jev: ИИ-модель, которая не генерирует текст — канал IBM Technology; просмотры/сутки 158 262, просмотры 788 254, лайки 5 674; https://www.youtube.com/watch?v=YGgNBcIgI4s
+E               3. ИИ-камеры на дорогах Индии ошибаются и штрафуют невиновных — канал FactTechz; просмотры/сутки 140 826, просмотры 1 186 146, лайки 62 664; https://www.youtube.com/watch?v=SaOekuTVluQ
+E               ...
+E             
+E             ...Full output truncated (56 lines hidden), use '-vv' to show
+
+tests/test_report_compact.py:375: AssertionError
+__________________ test_live_compact_counts_match_full_report __________________
+
+live_copy = '/tmp/pytest-of-root/pytest-2/live_filled0/live.db'
+
+    def test_live_compact_counts_match_full_report(live_copy):
+        """Показано + скрыто = число пунктов раздела в полном отчёте (живая база)."""
+        conn = db.connect(live_copy, readonly=True)
+        try:
+            cutoff = _iso(10)
+            totals = _section_totals(conn, cutoff)
+            out = report.build_compact(conn, days=10, db_path=live_copy)
+            full = report.build(conn, days=10, db_path=live_copy)
+        finally:
+            conn.close()
+        full_sections = _sections(full)
+        sections = _sections(out)
+        names = ("YouTube", "X") + (("Telegram",)
+                                    if report.telegram_section_enabled() else ())
+        for name in names:
+            assert _shown(full_sections[name]) == totals[name], name
+            shown, hidden = _shown(sections[name]), _hidden(sections[name])
+            assert shown + hidden == totals[name], (
+                f"{name}: показано {shown} + скрыто {hidden} != {totals[name]}")
+        # Telegram в сводке есть только при включённом флаге (ТЗ-A); полный отчёт
+        # держит раздел всегда (ТЗ-38 §2.1).
+        assert _shown(full_sections["Telegram"]) == totals["Telegram"]
+        if report.telegram_section_enabled():
+            assert "Telegram" in out
+        else:
+>           assert "Telegram" not in out
+E           AssertionError: assert 'Telegram' not in 'Tuber — объ... за сутки 0.'
+E             
+E             'Telegram' is contained here:
+E               . Реклама Telegram-бота Буквица для расшифровки лекций — канал Буквица; просмотры/сутки 512 377, просмотры 530 577, лайки 9 925; https://www.youtube.com/watch?v=PHfwscHlxIQ
+E             ?           ++++++++
+E               2. Что такое Jev: ИИ-модель, которая не генерирует текст — канал IBM Technology; просмотры/сутки 158 262, просмотры 788 254, лайки 5 674; https://www.youtube.com/watch?v=YGgNBcIgI4s
+E               3. ИИ-камеры на дорогах Индии ошибаются и штрафуют невиновных — канал FactTechz; просмотры/сутки 140 826, просмотры 1 186 146, лайки 62 664; https://www.youtube.com/watch?v=SaOekuTVluQ
+E               ...
+E             
+E             ...Full output truncated (56 lines hidden), use '-vv' to show
+
+tests/test_report_compact.py:404: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_report_compact.py::test_live_compact_shows_every_platform
+FAILED tests/test_report_compact.py::test_live_compact_counts_match_full_report
+2 failed, 1894 passed, 1 xfailed in 648.92s (0:10:48)
+RU-DEGRADED: 16 описаний без перевода (нет ключа/кэша)
+EXIT=1

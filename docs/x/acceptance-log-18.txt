@@ -1,0 +1,137 @@
+
+==============================================================================
+ПРИЁМКА ТЗ-18: приём кандидатов X из фидов YouTube-описаний и Telegram-постов
+==============================================================================
+начало:                  2026-09-15 20:56:41 UTC
+репозиторий:             /root/tuber-x
+боевая БД (только чтение): /root/tuber-x/data/tuber_x.db
+рабочий каталог приёмки:   /tmp/tuber_x_accept18_bwxqm4ih
+фид Telegram: /root/tuber-telegram/data/exchange/external_candidates.jsonl (есть=True)
+фид YouTube (tuber-os): /root/tuber-os/data/exchange/external_candidates.jsonl (есть=True)
+боевая БД ДО: user_version=7 accounts=72 candidates=1407 posts=602 stories=100
+
+==============================================================================
+П.1. Миграция схемы 6 -> 7 на КОПИИ боевой базы (снимок VACUUM INTO)
+==============================================================================
+примечание: боевая база уже несёт user_version=7 — миграцию к ней применил
+живой сторож (задание 23eee973e095, прогон 23:30:37 MSK), а не приёмка.
+Поэтому 6 -> 7 проверяется честно: у копии откатываем схему к v6.
+[ 1] OK   копия мигрировала 6 -> 7; ключевые таблицы не изменились; колонки ai_hint/feed_source появились
+      данные: rc init=0; user_version=6->7; счётчики совпали=True; новые колонки=['ai_hint', 'feed_source']
+
+==============================================================================
+П.2. Приём реальных фидов на КОПИИ (полный импорт)
+==============================================================================
+stdout CLI:
+{"feeds": [{"path": "/root/tuber-telegram/data/exchange/external_candidates.jsonl", "feed_tag": "tuber-telegram", "rows": 239, "x_rows": 152, "skipped_kinds": 87, "bad_lines": 0, "bad_fields": 0}, {"path": "/root/tuber-os/data/exchange/external_candidates.jsonl", "feed_tag": "tuber-os", "rows": 2182, "x_rows": 1086, "skipped_kinds": 1096, "bad_lines": 0, "bad_fields": 0}], "feeds_missing": [], "imported_new": 367, "merged": 24, "skipped_filter": {"bad_handle": 0, "service_handle": 0, "blocklist": 0, "already_registered": 14, "bot": 2, "news_giant": 22, "below_mention_threshold": 760}, "bad_fields": 0, "skipped_limit": 0, "queue_total": 1774, "dry": false}
+[ 2] OK   импорт реальных фидов отработал; ровно один JSON в stdout
+      данные: rc=0; imported_new=367; merged=24; skipped_filter={'bad_handle': 0, 'service_handle': 0, 'blocklist': 0, 'already_registered': 14, 'bot': 2, 'news_giant': 22, 'below_mention_threshold': 760}; bad_fields=0; skipped_limit=0; queue_total=1774
+приток по ai_hint (новые кандидаты): {'0': 51, '1': 316}
+feeds: [{"path": "/root/tuber-telegram/data/exchange/external_candidates.jsonl", "feed_tag": "tuber-telegram", "rows": 239, "x_rows": 152, "skipped_kinds": 87, "bad_lines": 0, "bad_fields": 0}, {"path": "/root/tuber-os/data/exchange/external_candidates.jsonl", "feed_tag": "tuber-os", "rows": 2182, "x_rows": 1086, "skipped_kinds": 1096, "bad_lines": 0, "bad_fields": 0}]
+feeds_missing: []
+  tuber-telegram: строк=239, kind=x=152, bad_lines=0, bad_fields=0, imported_new=39, merged=0, skipped_limit=0, queue_total=39
+  tuber-os: строк=2182, kind=x=1086, bad_lines=0, bad_fields=0, imported_new=359, merged=0, skipped_limit=0, queue_total=359
+[17] OK   импорт КАЖДОГО живого фида по отдельности не падает (числа выше)
+      данные: фидов проверено: ['tuber-os', 'tuber-telegram']
+
+Фактически отсеиваемые новостники-гиганты из живого фида (kind=x):
+  @ajenglish: упоминаний 100; пример: srvFjZr9q7U: Subscribe to our channel: http://bit.ly/AJSubscribe Follow us on X : https://twitter.com/AJEnglish Find us 
+  @bbgenespanol: упоминаний 105; пример: Rcl0Q-Yewn0: pp: https://trib.al/PIK6kY1 TikTok: https://vm.tiktok.com/ZGeuw69Ao/ X: https://x.com/BBGenEspanol Para más
+  @bbgoriginals: упоминаний 87; пример: YxjL1wLLnHE: Bloomberg Politics: https://twitter.com/bpolitics Bloomberg Originals: https://twitter.com/bbgoriginals Wat
+  @bloombergradio: упоминаний 146; пример: YxjL1wLLnHE: .com/company/bloomberg-news/ More from Bloomberg: Bloomberg Radio: https://twitter.com/BloombergRadio Bloom
+  @bloombergtv: упоминаний 88; пример: YxjL1wLLnHE: tures, profiles and more. Connect with Bloomberg Television on: X: https://twitter.com/BloombergTV Facebook
+  @bpolitics: упоминаний 87; пример: YxjL1wLLnHE: rg Surveillance: https://twitter.com/bsurveillance Bloomberg Politics: https://twitter.com/bpolitics Bloomb
+  @bsurveillance: упоминаний 88; пример: YxjL1wLLnHE: rg Radio: https://twitter.com/BloombergRadio Bloomberg Surveillance: https://twitter.com/bsurveillance Bloo
+  @businessinsider: упоминаний 3; пример: wFBsryJNjZ8: ... on Instagram: https://www.instagram.com/businessinsider ... on X: https://x.com/BusinessInsider ... on 
+  @cbsnews: упоминаний 114; пример: 7u1FZzhp5aw: BS News on Facebook: https://facebook.com/cbsnews Follow CBS News on X: https://twitter.com/cbsnews Subscri
+  @cnn: упоминаний 1; пример: Q6ZDUl2FhTU: 8562 https://www.cnbc.com/2026/08/19/open-ai-ipo-timing-2027-friar.html https://x.com/CNN/status/2090051177
+  @dwnews: упоминаний 105; пример: xOUElf7catg: dwnews ►Facebook: https://www.facebook.com/deutschewellenews/ ►Twitter: https://twitter.com/dwnews Für Vide
+  @firstpost: упоминаний 105; пример: KJEbRvRVdmc: acebook: https://www.facebook.com/firstpostin/ Follow Firstpost on X: https://twitter.com/firstpost Follow 
+  @forbes: упоминаний 86; пример: 6F1MpmYZCxY: om Forbes on Facebook: http://fb.com/forbes Forbes Video on Twitter: http://www.twitter.com/forbes Forbes V
+  @foxbusiness: упоминаний 137; пример: WNmUYyqF2P0: k: https://www.facebook.com/FoxBusiness Follow Fox Business on Twitter: https://twitter.com/foxbusiness Fol
+  @foxnews: упоминаний 150; пример: kvkXkeCjrbA: Facebook: https://www.facebook.com/FoxNews/ Follow Fox News on Twitter: https://twitter.com/FoxNews/ Follow
+  @khabar_gaon: упоминаний 249; пример: yQUqn7GrrT0: com/khabargaon Instagram: https://www.instagram.com/khabargaon Twitter: https://x.com/khabar_gaon WhatsApp:
+  @ndtv: упоминаний 370; пример: WLxGO3EgjFk: e us on Facebook: https://www.facebook.com/ndtv/ Follow us on Twitter: https://twitter.com/ndtv/ Follow us 
+  @reuters: упоминаний 82; пример: e5XtFfJqHLQ: ters on Facebook: https://www.facebook.com/Reuters Follow Reuters on X: https://twitter.com/Reuters Follow 
+  @skynews: упоминаний 259; пример: INpVD65s8mA: hannel for more videos: http://www.youtube.com/skynews Follow us on X: https://twitter.com/skynews Like us 
+[ 3] OK   импорт НЕ регистрирует аккаунты (реестр до/после совпал)
+      данные: accounts 72 -> 72
+
+==============================================================================
+П.3. Идемпотентность: повторный импорт того же фида
+==============================================================================
+[ 4] OK   повтор -> imported_new=0, merged>0 (растёт учёт подтверждений)
+      данные: imported_new=0; merged=391; queue_total=1774
+
+==============================================================================
+П.4-9. Негативные проверки (отдельная чистая база приёмки)
+==============================================================================
+neg: {"feeds": [{"path": "/tmp/tuber_x_accept18_bwxqm4ih/feeds/a/external_candidates.jsonl", "feed_tag": "a", "rows": 12, "x_rows": 9, "skipped_kinds": 1, "bad_lines": 2, "bad_fields": 0}, {"path": "/tmp/tuber_x_accept18_bwxqm4ih/feeds/b/external_candidates.jsonl", "feed_tag": "b", "rows": 2, "x_rows": 2, "skipped_kinds": 0, "bad_lines": 0, "bad_fields": 0}], "feeds_missing": ["/tmp/tuber_x_accept18_bwxqm4ih/feeds/нет.jsonl"], "imported_new": 2, "merged": 3, "skipped_filter": {"bad_handle": 0, "service_handle": 1, "blocklist": 1, "already_registered": 0, "bot": 1, "news_giant": 1, "below_mention_threshold": 1}, "bad_fields": 0, "skipped_limit": 0, "queue_total": 5, "dry": false}
+[ 5] OK   reject/ok/provisional существующих не изменились и не понижены
+      данные: reject=reject; ok=ok; provisional=provisional
+[ 6] OK   терпимость: битые строки -> bad_lines, чужой kind -> skipped_kinds
+      данные: bad_lines=2; skipped_kinds=1
+[ 7] OK   отсутствующий файл — не ошибка, а feeds_missing
+      данные: feeds_missing=['/tmp/tuber_x_accept18_bwxqm4ih/feeds/нет.jsonl']; rc=0
+[ 8] OK   фильтры: сервисный, бот, новостник-гигант, стоп-лист, порог
+      данные: service=1; bot=1; news_giant=1; blocklist=1; below_threshold=1
+[ 9] OK   дубль в двух фидах -> один кандидат, оба фида в feed_source
+      данные: candidates=5; imported_new=2; merged=3 (new_a в двух фидах учтён один раз)
+[10] OK   --limit ограничивает приём; остаток учтён в skipped_limit
+      данные: imported_new=3; skipped_limit=28; записей в базе=3
+
+==============================================================================
+П.10. Живой прогон --dry на реальных фидах (запись запрещена)
+==============================================================================
+живой stdout --dry:
+{"feeds": [{"path": "/root/tuber-telegram/data/exchange/external_candidates.jsonl", "feed_tag": "tuber-telegram", "rows": 239, "x_rows": 152, "skipped_kinds": 87, "bad_lines": 0, "bad_fields": 0}, {"path": "/root/tuber-os/data/exchange/external_candidates.jsonl", "feed_tag": "tuber-os", "rows": 2182, "x_rows": 1086, "skipped_kinds": 1096, "bad_lines": 0, "bad_fields": 0}], "feeds_missing": [], "imported_new": 367, "merged": 24, "skipped_filter": {"bad_handle": 0, "service_handle": 0, "blocklist": 0, "already_registered": 14, "bot": 2, "news_giant": 22, "below_mention_threshold": 760}, "bad_fields": 0, "skipped_limit": 0, "queue_total": 1774, "dry": true}
+[11] OK   --dry считает те же числа, но в базу ничего не пишет
+      данные: imported_new=367; merged=24; в базе новых=0; queue_total=1774
+
+==============================================================================
+П.12. Строка о притоке из фидов в суточной сводке (ТЗ-12)
+==============================================================================
+строка сводки:
+Приток из фидов: описания YouTube 0, посты Telegram 0. Всего в очереди: 1407. Проверка очереди: 1407 кандидатов при 120 запросах/сутки и 30 проверках/сутки — закроется за 47 суток.
+[12] OK   сводка содержит строку «Приток из фидов» с очередью и горизонтом
+      данные: rc=0; строк=1
+[13] OK   feed_influx честен на схеме без feed_source (нули, не падение)
+      данные: yt=0; tg=0; queue=1; horizon=1
+
+==============================================================================
+П.13. Полный набор тестов
+==============================================================================
+[14] OK   полный набор тестов зелёный
+      данные: pytest rc=0; ..................................................................       [100%]
+
+==============================================================================
+П.14. Боевая база и reports/ приёмкой не затронуты
+==============================================================================
+боевая ДО:    {'user_version': 7, 'posts': 602, 'accounts': 72, 'candidates': 1407, 'stories': 100}
+боевая ПОСЛЕ: {'user_version': 7, 'posts': 602, 'accounts': 72, 'candidates': 1407, 'stories': 100}
+[15] OK   боевая база не изменена (счётчики и user_version совпали)
+      данные: совпало=True
+[16] OK   служебные файлы приёмки — во временном каталоге /tmp
+      данные: work=/tmp/tuber_x_accept18_bwxqm4ih; gettempdir=/root/.jcode/scratch
+
+==============================================================================
+СВОДКА ПРИЁМКИ
+==============================================================================
+проверок: 17, OK: 17, FAIL: 0
+    1 OK   копия мигрировала 6 -> 7; ключевые таблицы не изменились; колонки ai_hint/feed_source появились
+    2 OK   импорт реальных фидов отработал; ровно один JSON в stdout
+   17 OK   импорт КАЖДОГО живого фида по отдельности не падает (числа выше)
+    3 OK   импорт НЕ регистрирует аккаунты (реестр до/после совпал)
+    4 OK   повтор -> imported_new=0, merged>0 (растёт учёт подтверждений)
+    5 OK   reject/ok/provisional существующих не изменились и не понижены
+    6 OK   терпимость: битые строки -> bad_lines, чужой kind -> skipped_kinds
+    7 OK   отсутствующий файл — не ошибка, а feeds_missing
+    8 OK   фильтры: сервисный, бот, новостник-гигант, стоп-лист, порог
+    9 OK   дубль в двух фидах -> один кандидат, оба фида в feed_source
+   10 OK   --limit ограничивает приём; остаток учтён в skipped_limit
+   11 OK   --dry считает те же числа, но в базу ничего не пишет
+   12 OK   сводка содержит строку «Приток из фидов» с очередью и горизонтом
+   13 OK   feed_influx честен на схеме без feed_source (нули, не падение)
+   14 OK   полный набор тестов зелёный
+   15 OK   боевая база не изменена (счётчики и user_version совпали)
+   16 OK   служебные файлы приёмки — во временном каталоге /tmp

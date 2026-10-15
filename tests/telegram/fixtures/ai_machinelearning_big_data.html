@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Machinelearning – Telegram</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta http-equiv="X-UA-Compatible"
+     content="IE=edge" />
+    <meta name="MobileOptimized" content="176" />
+    <meta name="HandheldFriendly" content="True" />
+    
+<meta property="og:title" content="Machinelearning">
+<meta property="og:image" content="https://cdn4.telesco.pe/file/tQ7mgEzBY-jG90gLdFaBU_S6iKpKkk57REEer9nQK7m-jcEMzkQEdf_7OiNP0bXIdMggXvhXbAho_d7ji1WcWBYPmFFCG-ZfkF0AVEW9kkygEL5LAWORAu8_s-mooy3UiTtSmM789_ycxxh9c8afSA9kxWsZgP3gBN_myJUaWygR_ExJtFf82IGw55jSgDr9pnVWyDCeHE0C5IWhHBNox7YnKR6lBaq5BCafxA_EOdN0OVQaj3Nl0wm6keoG6x1aksz484cM1HGtLr3jpNViIkAV9v2Ng8S0VkK3zVJi9Vp_9xTlQpVuUvX7Bfj8y1pwEpzQ5nhOArqN4nrexAf0pA.jpg">
+<meta property="og:site_name" content="Telegram">
+<meta property="og:description" content="Погружаемся в машинное обучение и Data Science
+
+Показываем  как запускать любые LLm на пальцах. 
+
+По  всем вопросам - @haarrp
+
+@itchannels_telegram -🔥best channels
+
+Реестр РКН: clck.ru/3Fmqri">
+
+<meta property="twitter:title" content="Machinelearning">
+<meta property="twitter:image" content="https://cdn4.telesco.pe/file/tQ7mgEzBY-jG90gLdFaBU_S6iKpKkk57REEer9nQK7m-jcEMzkQEdf_7OiNP0bXIdMggXvhXbAho_d7ji1WcWBYPmFFCG-ZfkF0AVEW9kkygEL5LAWORAu8_s-mooy3UiTtSmM789_ycxxh9c8afSA9kxWsZgP3gBN_myJUaWygR_ExJtFf82IGw55jSgDr9pnVWyDCeHE0C5IWhHBNox7YnKR6lBaq5BCafxA_EOdN0OVQaj3Nl0wm6keoG6x1aksz484cM1HGtLr3jpNViIkAV9v2Ng8S0VkK3zVJi9Vp_9xTlQpVuUvX7Bfj8y1pwEpzQ5nhOArqN4nrexAf0pA.jpg">
+<meta property="twitter:site" content="@Telegram">
+
+<meta property="al:ios:app_store_id" content="686449807">
+<meta property="al:ios:app_name" content="Telegram Messenger">
+<meta property="al:ios:url" content="tg://resolve?domain=ai_machinelearning_big_data">
+
+<meta property="al:android:url" content="tg://resolve?domain=ai_machinelearning_big_data">
+<meta property="al:android:app_name" content="Telegram">
+<meta property="al:android:package" content="org.telegram.messenger">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@Telegram">
+<meta name="twitter:description" content="Погружаемся в машинное обучение и Data Science
+
+Показываем  как запускать любые LLm на пальцах. 
+
+По  всем вопросам - @haarrp
+
+@itchannels_telegram -🔥best channels
+
+Реестр РКН: clck.ru/3Fmqri
+">
+
+    <link rel="prev" href="/s/ai_machinelearning_big_data?before=10909">
+<link rel="canonical" href="/s/ai_machinelearning_big_data?before=10930">
+
+    <script>window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches&&document.documentElement&&document.documentElement.classList&&document.documentElement.classList.add('theme_dark');</script>
+    <link rel="icon" type="image/svg+xml" href="//telegram.org/img/website_icon.svg?4">
+<link rel="apple-touch-icon" sizes="180x180" href="//telegram.org/img/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="//telegram.org/img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="//telegram.org/img/favicon-16x16.png">
+<link rel="alternate icon" href="//telegram.org/img/favicon.ico" type="image/x-icon" />
+    <link href="//telegram.org/css/font-roboto.css?1" rel="stylesheet" type="text/css">
+    <link href="//telegram.org/css/widget-frame.css?75" rel="stylesheet" media="screen">
+    <link href="//telegram.org/css/telegram-web.css?39" rel="stylesheet" media="screen">
+    <script>TBaseUrl='/';</script>
+    <style>        .user-color-12 {
+          --user-line-gradient: repeating-linear-gradient(-45deg, #3391d4 0px, #3391d4 5px, #7dd3f0 5px, #7dd3f0 10px);
+          --user-accent-color: #3391d4;
+          --user-background: #3391d41f;
+        }        .user-color-10 {
+          --user-line-gradient: repeating-linear-gradient(-45deg, #27a910 0px, #27a910 5px, #a7dc57 5px, #a7dc57 10px);
+          --user-accent-color: #27a910;
+          --user-background: #27a9101f;
+        }        .user-color-8 {
+          --user-line-gradient: repeating-linear-gradient(-45deg, #e0802b 0px, #e0802b 5px, #fac534 5px, #fac534 10px);
+          --user-accent-color: #e0802b;
+          --user-background: #e0802b1f;
+        }        .user-color-7 {
+          --user-line-gradient: repeating-linear-gradient(-45deg, #e15052 0px, #e15052 5px, #f9ae63 5px, #f9ae63 10px);
+          --user-accent-color: #e15052;
+          --user-background: #e150521f;
+        }        .user-color-9 {
+          --user-line-gradient: repeating-linear-gradient(-45deg, #a05ff3 0px, #a05ff3 5px, #f48fff 5px, #f48fff 10px);
+          --user-accent-color: #a05ff3;
+          --user-background: #a05ff31f;
+        }        .user-color-11 {
+          --user-line-gradient: repeating-linear-gradient(-45deg, #27acce 0px, #27acce 5px, #82e8d6 5px, #82e8d6 10px);
+          --user-accent-color: #27acce;
+          --user-background: #27acce1f;
+        }        .user-color-13 {
+          --user-line-gradient: repeating-linear-gradient(-45deg, #dd4371 0px, #dd4371 5px, #ffbe9f 5px, #ffbe9f 10px);
+          --user-accent-color: #dd4371;
+          --user-background: #dd43711f;
+        }        .user-color-14 {
+          --user-line-gradient: repeating-linear-gradient(-45deg, #247bed 0px, #247bed 5px, #f04856 5px, #f04856 10px, #ffffff 10px, #ffffff 15px);
+          --user-accent-color: #247bed;
+          --user-background: #247bed1f;
+        }        .user-color-15 {
+          --user-line-gradient: repeating-linear-gradient(-45deg, #d67722 0px, #d67722 5px, #1ea011 5px, #1ea011 10px, #ffffff 10px, #ffffff 15px);
+          --user-accent-color: #d67722;
+          --user-background: #d677221f;
+        }        .user-color-16 {
+          --user-line-gradient: repeating-linear-gradient(-45deg, #179e42 0px, #179e42 5px, #e84a3f 5px, #e84a3f 10px, #ffffff 10px, #ffffff 15px);
+          --user-accent-color: #179e42;
+          --user-background: #179e421f;
+        }        .user-color-17 {
+          --user-line-gradient: repeating-linear-gradient(-45deg, #2894af 0px, #2894af 5px, #6fc456 5px, #6fc456 10px, #ffffff 10px, #ffffff 15px);
+          --user-accent-color: #2894af;
+          --user-background: #2894af1f;
+        }        .user-color-18 {
+          --user-line-gradient: repeating-linear-gradient(-45deg, #0c9ab3 0px, #0c9ab3 5px, #ffad95 5px, #ffad95 10px, #ffe6b5 10px, #ffe6b5 15px);
+          --user-accent-color: #0c9ab3;
+          --user-background: #0c9ab31f;
+        }        .user-color-19 {
+          --user-line-gradient: repeating-linear-gradient(-45deg, #7757d6 0px, #7757d6 5px, #f79610 5px, #f79610 10px, #ffde8e 10px, #ffde8e 15px);
+          --user-accent-color: #7757d6;
+          --user-background: #7757d61f;
+        }        .user-color-20 {
+          --user-line-gradient: repeating-linear-gradient(-45deg, #1585cf 0px, #1585cf 5px, #f2ab1d 5px, #f2ab1d 10px, #ffffff 10px, #ffffff 15px);
+          --user-accent-color: #1585cf;
+          --user-background: #1585cf1f;
+        }        body.dark .user-color-12, html.theme_dark .user-color-12 {
+          --user-line-gradient: repeating-linear-gradient(-45deg, #52bfff 0px, #52bfff 5px, #0b5494 5px, #0b5494 10px);
+          --user-accent-color: #52bfff;
+          --user-background: #52bfff1f;
+        }        body.dark .user-color-10, html.theme_dark .user-color-10 {
+          --user-line-gradient: repeating-linear-gradient(-45deg, #a7eb6e 0px, #a7eb6e 5px, #167e2d 5px, #167e2d 10px);
+          --user-accent-color: #a7eb6e;
+          --user-background: #a7eb6e1f;
+        }        body.dark .user-color-8, html.theme_dark .user-color-8 {
+          --user-line-gradient: repeating-linear-gradient(-45deg, #ecb04e 0px, #ecb04e 5px, #c35714 5px, #c35714 10px);
+          --user-accent-color: #ecb04e;
+          --user-background: #ecb04e1f;
+        }        body.dark .user-color-7, html.theme_dark .user-color-7 {
+          --user-line-gradient: repeating-linear-gradient(-45deg, #ff9380 0px, #ff9380 5px, #992f37 5px, #992f37 10px);
+          --user-accent-color: #ff9380;
+          --user-background: #ff93801f;
+        }        body.dark .user-color-9, html.theme_dark .user-color-9 {
+          --user-line-gradient: repeating-linear-gradient(-45deg, #c697ff 0px, #c697ff 5px, #5e31c8 5px, #5e31c8 10px);
+          --user-accent-color: #c697ff;
+          --user-background: #c697ff1f;
+        }        body.dark .user-color-11, html.theme_dark .user-color-11 {
+          --user-line-gradient: repeating-linear-gradient(-45deg, #40d8d0 0px, #40d8d0 5px, #045c7f 5px, #045c7f 10px);
+          --user-accent-color: #40d8d0;
+          --user-background: #40d8d01f;
+        }        body.dark .user-color-13, html.theme_dark .user-color-13 {
+          --user-line-gradient: repeating-linear-gradient(-45deg, #ff86a6 0px, #ff86a6 5px, #8e366e 5px, #8e366e 10px);
+          --user-accent-color: #ff86a6;
+          --user-background: #ff86a61f;
+        }        body.dark .user-color-14, html.theme_dark .user-color-14 {
+          --user-line-gradient: repeating-linear-gradient(-45deg, #3fa2fe 0px, #3fa2fe 5px, #e5424f 5px, #e5424f 10px, #ffffff 10px, #ffffff 15px);
+          --user-accent-color: #3fa2fe;
+          --user-background: #3fa2fe1f;
+        }        body.dark .user-color-15, html.theme_dark .user-color-15 {
+          --user-line-gradient: repeating-linear-gradient(-45deg, #ff905e 0px, #ff905e 5px, #32a527 5px, #32a527 10px, #ffffff 10px, #ffffff 15px);
+          --user-accent-color: #ff905e;
+          --user-background: #ff905e1f;
+        }        body.dark .user-color-16, html.theme_dark .user-color-16 {
+          --user-line-gradient: repeating-linear-gradient(-45deg, #66d364 0px, #66d364 5px, #d5444f 5px, #d5444f 10px, #ffffff 10px, #ffffff 15px);
+          --user-accent-color: #66d364;
+          --user-background: #66d3641f;
+        }        body.dark .user-color-17, html.theme_dark .user-color-17 {
+          --user-line-gradient: repeating-linear-gradient(-45deg, #22bce2 0px, #22bce2 5px, #3da240 5px, #3da240 10px, #ffffff 10px, #ffffff 15px);
+          --user-accent-color: #22bce2;
+          --user-background: #22bce21f;
+        }        body.dark .user-color-18, html.theme_dark .user-color-18 {
+          --user-line-gradient: repeating-linear-gradient(-45deg, #22bce2 0px, #22bce2 5px, #ff9778 5px, #ff9778 10px, #ffda6b 10px, #ffda6b 15px);
+          --user-accent-color: #22bce2;
+          --user-background: #22bce21f;
+        }        body.dark .user-color-19, html.theme_dark .user-color-19 {
+          --user-line-gradient: repeating-linear-gradient(-45deg, #9791ff 0px, #9791ff 5px, #f2731d 5px, #f2731d 10px, #ffdb59 10px, #ffdb59 15px);
+          --user-accent-color: #9791ff;
+          --user-background: #9791ff1f;
+        }        body.dark .user-color-20, html.theme_dark .user-color-20 {
+          --user-line-gradient: repeating-linear-gradient(-45deg, #3da6eb 0px, #3da6eb 5px, #eea51d 5px, #eea51d 10px, #ffffff 10px, #ffffff 15px);
+          --user-accent-color: #3da6eb;
+          --user-background: #3da6eb1f;
+        }.user-color-6, .user-color-4, .user-color-2, .user-color-0, .user-color-1, .user-color-3, .user-color-5,   .user-color-default {
+    --user-accent-color: var(--accent-color);
+    --user-accent-background: var(--accent-background);
+    --user-line-gradient: linear-gradient(45deg, var(--accent-color), var(--accent-color));
+  }</style>
+  </head>
+  <body class="widget_frame_base tgme_webpreview emoji_image thin_box_shadow tme_mode no_transitions">
+    <div class="tgme_background_wrap">
+      <canvas id="tgme_background" class="tgme_background" width="50" height="50" data-colors="dbddbb,6ba587,d5d88d,88b884"></canvas>
+      <div class="tgme_background_pattern"></div>
+    </div>
+    <header class="tgme_header search_collapsed">
+  <div class="tgme_container">
+    <div class="tgme_header_search">
+      <form class="tgme_header_search_form" action="/s/ai_machinelearning_big_data">
+        <svg class="tgme_header_search_form_icon" width="20" height="20" viewBox="0 0 20 20"><g fill="none" stroke="#7D7F81" stroke-width="1.4"><circle cx="9" cy="9" r="6"></circle><path d="M13.5,13.5 L17,17" stroke-linecap="round"></path></g></svg>
+        <input class="tgme_header_search_form_input js-header_search" placeholder="Search" name="q" autocomplete="off" value="" />
+        <a href="/s/ai_machinelearning_big_data" class="tgme_header_search_form_clear"><svg class="tgme_action_button_icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width="20" height="20"><g class="icon_body" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="#000000" stroke-width="1.5"><path d="M6 14l8-8m0 8L6 6" stroke-dasharray="0,11.314" stroke-dashoffset="5.657"/><path d="M26 14l8-8m0 8l-8-8" stroke-dasharray="0.371,10.943" stroke-dashoffset="5.842"/><path d="M46 14l8-8m0 8l-8-8" stroke-dasharray="1.982,9.332" stroke-dashoffset="6.647756"/><path d="M66 14l8-8m0 8l-8-8" stroke-dasharray="5.173,6.14" stroke-dashoffset="8.243"/><path d="M86 14l8-8m0 8l-8-8" stroke-dasharray="7.866,3.448" stroke-dashoffset="9.59"/><path d="M106 14l8-8m0 8l-8-8" stroke-dasharray="9.471,1.843" stroke-dashoffset="10.392"/><path d="M126 14l8-8m0 8l-8-8" stroke-dasharray="10.417,0.896" stroke-dashoffset="10.866"/><path d="M146 14l8-8m0 8l-8-8" stroke-dasharray="10.961,0.353" stroke-dashoffset="11.137"/><path d="M166 14l8-8m0 8l-8-8" stroke-dasharray="11.234,0.08" stroke-dashoffset="11.274"/><path d="M186 14l8-8m0 8l-8-8"/></g></svg></a>
+      </form>
+    </div>
+    <div class="tgme_header_right_column">
+      <section class="tgme_right_column">
+        <div class="tgme_channel_info">
+          <div class="tgme_channel_info_header">
+            <i class="tgme_page_photo_image bgcolor0" data-content="M"><img src="https://cdn4.telesco.pe/file/OZOUR4lzxXbPziBI1Sx4JhIoZoR6ub2__Nlxjnkl_dA3IvJPeNyR5ZerTDJItRjZnKTSygFFy0tRvk5k91Kd05YAv7VmiZpUxFmyp8gzyp2egyr8HeUPMr-EgsSctt325CJIYEWNocl3Gx6UtBqJlk5d5cwmlZvpo0oF--AuRyXEmPEN5h50sS5keB_UmpIuLOFKWNGUbeFFH-yO2jfT073eIRy9pdYf0WkoX4-FJFF1F4fpwcCRn2QH7ZgvoP-IAxA4BYgVuWTTf_p9nzIYQrVLsLPtxhcUp_ymeAf2zPyP8C2j4JE39my1vmd7Sw8cFIgDIBqj2KKeAI6xk_JPxA.jpg"></i>
+            <div class="tgme_channel_info_header_title_wrap">
+              <div class="tgme_channel_info_header_title"><span dir="auto">Machinelearning</span></div>
+              <div class="tgme_channel_info_header_labels"></div>
+            </div>
+            <div class="tgme_channel_info_header_username"><a href="https://t.me/ai_machinelearning_big_data">@ai_machinelearning_big_data</a></div>
+          </div>
+          <div class="tgme_channel_info_counters"><div class="tgme_channel_info_counter"><span class="counter_value">281K</span> <span class="counter_type">subscribers</span></div><div class="tgme_channel_info_counter"><span class="counter_value">5.44K</span> <span class="counter_type">photos</span></div><div class="tgme_channel_info_counter"><span class="counter_value">1.26K</span> <span class="counter_type">videos</span></div><div class="tgme_channel_info_counter"><span class="counter_value">17</span> <span class="counter_type">files</span></div><div class="tgme_channel_info_counter"><span class="counter_value">5.78K</span> <span class="counter_type">links</span></div></div>
+          <div class="tgme_channel_info_description">Погружаемся в машинное обучение и Data Science<br/><br/>Показываем  как запускать любые LLm на пальцах. <br/><br/>По  всем вопросам - <a href="https://t.me/haarrp" target="_blank">@haarrp</a><br/><br/><a href="https://t.me/itchannels_telegram" target="_blank">@itchannels_telegram</a> -<i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F94A5.png')"><b>🔥</b></i>best channels<br/><br/>Реестр РКН: <a href="http://clck.ru/3Fmqri" target="_blank" rel="noopener">clck.ru/3Fmqri</a></div>
+          <a class="tgme_channel_download_telegram" href="//telegram.org/dl?tme=43f22ecf4b682c78c1_10193821373670423023">
+            <svg class="tgme_channel_download_telegram_icon" width="21px" height="18px" viewBox="0 0 21 18"><g fill="none"><path fill="#ffffff" d="M0.554,7.092 L19.117,0.078 C19.737,-0.156 20.429,0.156 20.663,0.776 C20.745,0.994 20.763,1.23 20.713,1.457 L17.513,16.059 C17.351,16.799 16.62,17.268 15.88,17.105 C15.696,17.065 15.523,16.987 15.37,16.877 L8.997,12.271 C8.614,11.994 8.527,11.458 8.805,11.074 C8.835,11.033 8.869,10.994 8.905,10.958 L15.458,4.661 C15.594,4.53 15.598,4.313 15.467,4.176 C15.354,4.059 15.174,4.037 15.036,4.125 L6.104,9.795 C5.575,10.131 4.922,10.207 4.329,10.002 L0.577,8.704 C0.13,8.55 -0.107,8.061 0.047,7.614 C0.131,7.374 0.316,7.182 0.554,7.092 Z"></path></g></svg>Download Telegram
+          </a>
+          <div class="tgme_footer">
+            <div class="tgme_footer_column">
+              <h5><a href="//telegram.org/faq">About</a></h5>
+            </div>
+            <div class="tgme_footer_column">
+              <h5><a href="//telegram.org/blog">Blog</a></h5>
+            </div>
+            <div class="tgme_footer_column">
+              <h5><a href="//telegram.org/apps">Apps</a></h5>
+            </div>
+            <div class="tgme_footer_column">
+              <h5><a href="//core.telegram.org/">Platform</a></h5>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div class="tgme_header_info">
+      <a class="tgme_channel_join_telegram" href="//telegram.org/dl?tme=43f22ecf4b682c78c1_10193821373670423023">
+        <svg class="tgme_channel_join_telegram_icon" width="19px" height="16px" viewBox="0 0 19 16"><g fill="none"><path fill="#ffffff" d="M0.465,6.638 L17.511,0.073 C18.078,-0.145 18.714,0.137 18.932,0.704 C19.009,0.903 19.026,1.121 18.981,1.33 L16.042,15.001 C15.896,15.679 15.228,16.111 14.549,15.965 C14.375,15.928 14.211,15.854 14.068,15.748 L8.223,11.443 C7.874,11.185 7.799,10.694 8.057,10.345 C8.082,10.311 8.109,10.279 8.139,10.249 L14.191,4.322 C14.315,4.201 14.317,4.002 14.195,3.878 C14.091,3.771 13.926,3.753 13.8,3.834 L5.602,9.138 C5.112,9.456 4.502,9.528 3.952,9.333 L0.486,8.112 C0.077,7.967 -0.138,7.519 0.007,7.11 C0.083,6.893 0.25,6.721 0.465,6.638 Z"></path></g></svg>Join
+      </a>
+      <a class="tgme_header_link" href="https://t.me/ai_machinelearning_big_data">
+        <i class="tgme_page_photo_image bgcolor0" data-content="M"><img src="https://cdn4.telesco.pe/file/OZOUR4lzxXbPziBI1Sx4JhIoZoR6ub2__Nlxjnkl_dA3IvJPeNyR5ZerTDJItRjZnKTSygFFy0tRvk5k91Kd05YAv7VmiZpUxFmyp8gzyp2egyr8HeUPMr-EgsSctt325CJIYEWNocl3Gx6UtBqJlk5d5cwmlZvpo0oF--AuRyXEmPEN5h50sS5keB_UmpIuLOFKWNGUbeFFH-yO2jfT073eIRy9pdYf0WkoX4-FJFF1F4fpwcCRn2QH7ZgvoP-IAxA4BYgVuWTTf_p9nzIYQrVLsLPtxhcUp_ymeAf2zPyP8C2j4JE39my1vmd7Sw8cFIgDIBqj2KKeAI6xk_JPxA.jpg"></i>
+        <div class="tgme_header_title_wrap">
+          <div class="tgme_header_title"><span dir="auto">Machinelearning</span></div>
+          <div class="tgme_header_labels"></div>
+        </div>
+        <div class="tgme_header_counter">281K subscribers</div>
+      </a>
+    </div>
+  </div>
+</header>
+<main class="tgme_main" data-url="/ai_machinelearning_big_data">
+  <div class="tgme_container">
+    <section class="tgme_channel_history js-message_history">
+      <div class="tgme_widget_message_centered js-messages_more_wrap"><a href="/s/ai_machinelearning_big_data?before=10909" class="tme_messages_more js-messages_more" data-before="10909"></a></div><div class="tgme_widget_message_wrap js-widget_message_wrap"><div class="tgme_widget_message text_not_supported_wrap js-widget_message" data-post="ai_machinelearning_big_data/10909" data-view="eyJjIjotMTExNDU5MTA4NiwicCI6MTA5MDksInQiOjE3ODk0MDc5ODMsImgiOiIwYzMxYTE5NTYyMjBmODk3ZjEifQ">
+  <div class="tgme_widget_message_user"><a href="https://t.me/ai_machinelearning_big_data"><i class="tgme_widget_message_user_photo bgcolor0" data-content="M"><img src="https://cdn4.telesco.pe/file/OZOUR4lzxXbPziBI1Sx4JhIoZoR6ub2__Nlxjnkl_dA3IvJPeNyR5ZerTDJItRjZnKTSygFFy0tRvk5k91Kd05YAv7VmiZpUxFmyp8gzyp2egyr8HeUPMr-EgsSctt325CJIYEWNocl3Gx6UtBqJlk5d5cwmlZvpo0oF--AuRyXEmPEN5h50sS5keB_UmpIuLOFKWNGUbeFFH-yO2jfT073eIRy9pdYf0WkoX4-FJFF1F4fpwcCRn2QH7ZgvoP-IAxA4BYgVuWTTf_p9nzIYQrVLsLPtxhcUp_ymeAf2zPyP8C2j4JE39my1vmd7Sw8cFIgDIBqj2KKeAI6xk_JPxA.jpg"></i></a></div>
+  <div class="tgme_widget_message_bubble">
+    
+        <i class="tgme_widget_message_bubble_tail">
+      <svg class="bubble_icon" width="9px" height="20px" viewBox="0 0 9 20">
+        <g fill="none">
+          <path class="background" fill="#ffffff" d="M8,1 L9,1 L9,20 L8,20 L8,18 C7.807,15.161 7.124,12.233 5.950,9.218 C5.046,6.893 3.504,4.733 1.325,2.738 L1.325,2.738 C0.917,2.365 0.89,1.732 1.263,1.325 C1.452,1.118 1.72,1 2,1 L8,1 Z"></path>
+          <path class="border_1x" fill="#d7e3ec" d="M9,1 L2,1 C1.72,1 1.452,1.118 1.263,1.325 C0.89,1.732 0.917,2.365 1.325,2.738 C3.504,4.733 5.046,6.893 5.95,9.218 C7.124,12.233 7.807,15.161 8,18 L8,20 L9,20 L9,1 Z M2,0 L9,0 L9,20 L7,20 L7,20 L7.002,18.068 C6.816,15.333 6.156,12.504 5.018,9.58 C4.172,7.406 2.72,5.371 0.649,3.475 C-0.165,2.729 -0.221,1.464 0.525,0.649 C0.904,0.236 1.439,0 2,0 Z"></path>
+          <path class="border_2x" d="M9,1 L2,1 C1.72,1 1.452,1.118 1.263,1.325 C0.89,1.732 0.917,2.365 1.325,2.738 C3.504,4.733 5.046,6.893 5.95,9.218 C7.124,12.233 7.807,15.161 8,18 L8,20 L9,20 L9,1 Z M2,0.5 L9,0.5 L9,20 L7.5,20 L7.5,20 L7.501,18.034 C7.312,15.247 6.64,12.369 5.484,9.399 C4.609,7.15 3.112,5.052 0.987,3.106 C0.376,2.547 0.334,1.598 0.894,0.987 C1.178,0.677 1.579,0.5 2,0.5 Z"></path>
+          <path class="border_3x" d="M9,1 L2,1 C1.72,1 1.452,1.118 1.263,1.325 C0.89,1.732 0.917,2.365 1.325,2.738 C3.504,4.733 5.046,6.893 5.95,9.218 C7.124,12.233 7.807,15.161 8,18 L8,20 L9,20 L9,1 Z M2,0.667 L9,0.667 L9,20 L7.667,20 L7.667,20 L7.668,18.023 C7.477,15.218 6.802,12.324 5.64,9.338 C4.755,7.064 3.243,4.946 1.1,2.983 C0.557,2.486 0.52,1.643 1.017,1.1 C1.269,0.824 1.626,0.667 2,0.667 Z"></path>
+        </g>
+      </svg>
+    </i>
+    <div class="tgme_widget_message_author accent_color"><a class="tgme_widget_message_owner_name" href="https://t.me/ai_machinelearning_big_data"><span dir="auto">Machinelearning</span></a></div>
+
+
+<a class="tgme_widget_message_photo_wrap 5269514097684848006 1226904359_460004742" href="https://t.me/ai_machinelearning_big_data/10909" style="width:800px;background-image:url('https://cdn4.telesco.pe/file/omHWHF25sVjkL1AzPSLJMg3DraX9k2_Ahcx0OJJhHm49LtySl4aq9zRsvEZq_N93LqjDwgbttpzw1Xw7np46-YZbh1El5lCySyJsHDFfjWzo9xHUhR5sIUUMn0SGLTdLPEXFBXHQIY0g7joGNrM2uJT-M8Ni_kyGZTgs-xmPEO8y4TM9ouYCUsP6VdfkYAuhlvtekcOOOAk_BkUsed-8y_eVSV2nt7p9jHxGN99Bozim2E0ek8OoIFKpgiytAz7SbnWb2bWGMHX-4cXG0dx_QGgkY3Z91vwY-mAEzdNIc_nAqXTHuRfvIGzLthnB3OZaVyCgRLtsjFoJqHjq-YyG_A.jpg')">
+  <div class="tgme_widget_message_photo" style="padding-top:56.25%"></div>
+</a><div class="tgme_widget_message_text js-message_text" dir="auto">Сбер представил GigaChat 3.5 Reasoning — флагманскую модель с режимом рассуждений<br/><br/>Новая версия умеет последовательно решать сложные задачи. Сначала разбирает их на этапы и выстраивает план. Затем проверяет промежуточные результаты и исправляет ошибки. <br/><br/>Ещё одна особенность релиза — экономный расход токенов. В среднем на математические расчёты здесь используется на 37% меньше токенов, чем у открытой ИИ-модели DeepSeek V4 Flash Preview. <br/><br/>По сравнению с моделью без режима рассуждений GigaChat 3.5 Reasoning заметно улучшила результаты бенчмарков. В IFBench показатель вырос с 44 до 77 баллов, в Natural Plan — с 64 до 80, а в Live Code Bench v6 — с 56 до 85.<br/><br/>Модель доступна бесплатно по лицензии MIT на <a href="https://huggingface.co/ai-sage/GigaChat3.5-432B-A28B-Reasoning" target="_blank" rel="noopener" onclick="return confirm('Open this link?\n\n'+this.href);">HuggingFace</a> и <a href="https://gitverse.ru/GigaTeam/gigachat3.5-reasoning" target="_blank" rel="noopener" onclick="return confirm('Open this link?\n\n'+this.href);">GitVerse</a>. Её можно интегрировать в собственные продукты. <br/><br/>Попробуйте обновлённый режим «Рассуждение» на <a href="http://giga.chat/" target="_blank" rel="noopener">giga.chat</a>. Подробнее – в <a href="https://t.me/gigadev_channel/75" target="_blank" rel="noopener" onclick="return confirm('Open this link?\n\n'+this.href);">посте команды</a>.</div>
+<div class="tgme_widget_message_reactions js-message_reactions"><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F918D.png')"><b>👍</b></i>133</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F9881.png')"><b>😁</b></i>67</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/E29DA4.png')"><b>❤</b></i>24</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F918F.png')"><b>👏</b></i>21</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09FA5B1.png')"><b>🥱</b></i>20</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F94A5.png')"><b>🔥</b></i>11</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09FA4A9.png')"><b>🤩</b></i>5</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F9989.png')"><b>🙉</b></i>5</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09FA4A3.png')"><b>🤣</b></i>4</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09FA49D.png')"><b>🤝</b></i>1</span></div><div class="tgme_widget_message_footer compact js-message_footer">
+  
+  <div class="tgme_widget_message_info short js-message_info">
+    <span class="tgme_widget_message_views">18.4K</span><span class="copyonly"> views</span><span class="tgme_widget_message_meta"><a class="tgme_widget_message_date" href="https://t.me/ai_machinelearning_big_data/10909"><time datetime="2026-09-11T15:33:48+00:00" class="time">15:33</time></a></span>
+  </div>
+</div>
+  </div>
+  
+</div></div><div class="tgme_widget_message_wrap js-widget_message_wrap"><div class="tgme_widget_message text_not_supported_wrap js-widget_message" data-post="ai_machinelearning_big_data/10910" data-view="eyJjIjotMTExNDU5MTA4NiwicCI6MTA5MTAsInQiOjE3ODk0MDc5ODMsImgiOiIwYjBjZGQ0NzQwYTExNGI3NDgifQ">
+  <div class="tgme_widget_message_user"><a href="https://t.me/ai_machinelearning_big_data"><i class="tgme_widget_message_user_photo bgcolor0" data-content="M"><img src="https://cdn4.telesco.pe/file/OZOUR4lzxXbPziBI1Sx4JhIoZoR6ub2__Nlxjnkl_dA3IvJPeNyR5ZerTDJItRjZnKTSygFFy0tRvk5k91Kd05YAv7VmiZpUxFmyp8gzyp2egyr8HeUPMr-EgsSctt325CJIYEWNocl3Gx6UtBqJlk5d5cwmlZvpo0oF--AuRyXEmPEN5h50sS5keB_UmpIuLOFKWNGUbeFFH-yO2jfT073eIRy9pdYf0WkoX4-FJFF1F4fpwcCRn2QH7ZgvoP-IAxA4BYgVuWTTf_p9nzIYQrVLsLPtxhcUp_ymeAf2zPyP8C2j4JE39my1vmd7Sw8cFIgDIBqj2KKeAI6xk_JPxA.jpg"></i></a></div>
+  <div class="tgme_widget_message_bubble">
+    
+        <i class="tgme_widget_message_bubble_tail">
+      <svg class="bubble_icon" width="9px" height="20px" viewBox="0 0 9 20">
+        <g fill="none">
+          <path class="background" fill="#ffffff" d="M8,1 L9,1 L9,20 L8,20 L8,18 C7.807,15.161 7.124,12.233 5.950,9.218 C5.046,6.893 3.504,4.733 1.325,2.738 L1.325,2.738 C0.917,2.365 0.89,1.732 1.263,1.325 C1.452,1.118 1.72,1 2,1 L8,1 Z"></path>
+          <path class="border_1x" fill="#d7e3ec" d="M9,1 L2,1 C1.72,1 1.452,1.118 1.263,1.325 C0.89,1.732 0.917,2.365 1.325,2.738 C3.504,4.733 5.046,6.893 5.95,9.218 C7.124,12.233 7.807,15.161 8,18 L8,20 L9,20 L9,1 Z M2,0 L9,0 L9,20 L7,20 L7,20 L7.002,18.068 C6.816,15.333 6.156,12.504 5.018,9.58 C4.172,7.406 2.72,5.371 0.649,3.475 C-0.165,2.729 -0.221,1.464 0.525,0.649 C0.904,0.236 1.439,0 2,0 Z"></path>
+          <path class="border_2x" d="M9,1 L2,1 C1.72,1 1.452,1.118 1.263,1.325 C0.89,1.732 0.917,2.365 1.325,2.738 C3.504,4.733 5.046,6.893 5.95,9.218 C7.124,12.233 7.807,15.161 8,18 L8,20 L9,20 L9,1 Z M2,0.5 L9,0.5 L9,20 L7.5,20 L7.5,20 L7.501,18.034 C7.312,15.247 6.64,12.369 5.484,9.399 C4.609,7.15 3.112,5.052 0.987,3.106 C0.376,2.547 0.334,1.598 0.894,0.987 C1.178,0.677 1.579,0.5 2,0.5 Z"></path>
+          <path class="border_3x" d="M9,1 L2,1 C1.72,1 1.452,1.118 1.263,1.325 C0.89,1.732 0.917,2.365 1.325,2.738 C3.504,4.733 5.046,6.893 5.95,9.218 C7.124,12.233 7.807,15.161 8,18 L8,20 L9,20 L9,1 Z M2,0.667 L9,0.667 L9,20 L7.667,20 L7.667,20 L7.668,18.023 C7.477,15.218 6.802,12.324 5.64,9.338 C4.755,7.064 3.243,4.946 1.1,2.983 C0.557,2.486 0.52,1.643 1.017,1.1 C1.269,0.824 1.626,0.667 2,0.667 Z"></path>
+        </g>
+      </svg>
+    </i>
+    <div class="tgme_widget_message_author accent_color"><a class="tgme_widget_message_owner_name" href="https://t.me/ai_machinelearning_big_data"><span dir="auto">Machinelearning</span></a></div>
+
+
+<div class="media_supported_cont"><a class="tgme_widget_message_photo_wrap 5269691647337897246 1226945698_460004638" href="https://t.me/ai_machinelearning_big_data/10910" style="width:800px;background-image:url('https://cdn4.telesco.pe/file/tRRfMp57vjWmL87c0nLE-3uPXbT2nJw-WmSgkiibqpzvnhUbmpWmJGkDdwovgmPn0glhvbW-uNtZurrfmBYPxKm2oLmClCUUtMb3eR_mrLuBPRI-iE01Im0EXKsnzaCcX9s0iNwZctrjKtEkNjVtUE8dqFGQC4dYcXc-RzYqX5St6slXlezaEt-Ydf6z16BofsDKU7SkMIx66t-XH1zR4SuDIR9cute8mv78ToYZ5JykdEPiBnjFiAC4brVBRu2sunaDAeFFKiQQ9Q3I3Awg10llKiDwbY3tWODcQAIdJOkSceH2sU-EowD_CU7h4oGnTo-qiYOYrmLXHdbe1MDcQQ.jpg')">
+  <div class="tgme_widget_message_photo" style="padding-top:56.25%"></div>
+</a><div class="tgme_widget_message_text js-message_text" dir="auto"><tg-emoji emoji-id="5386448185336017745"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/E29C94.png')"><b>✔️</b></i></tg-emoji> <b>В ComfyUI появился встроенный copilot для сборки и отладки нод</b><br/><br/>Comfy Org открыла бета-тестирование встроенного ассистента Comfy Agent. Инструмент может создавать и изменять воркфлоу, запускать задачи, отлаживать ошибки и предлагать улучшения в интерфейсе ComfyUI по текстовым запросам.<br/><br/>Агент работает в фоне и умеет создавать цепочки нод, оптимизировать имеющиеся воркфлоу и искать ошибки совместимости.<br/><br/>В отличие от Comfy MCP, который позволяет управлять ComfyUI через Claude или Cursor, Comfy Agent работает как готовое коробочное решение внутри редактора.<br/><br/>Бэкенд ассистента развернут в инфраструктуре Comfy Cloud, а для простых задач можно подключать локальные модели.<br/><br/>Comfy Agent, вероятно, войдёт в подписку Comfy Cloud.<br/><br/>Подать заявку на открытую бету можно&nbsp;<a href="https://form.typeform.com/to/UqL3PpAM" target="_blank" rel="noopener" onclick="return confirm('Open this link?\n\n'+this.href);">по ссылке</a>. Запись стрима с демонстрацией возможностей -&nbsp;<a href="https://www.youtube.com/watch?v=6ZT9y3rdvFg" target="_blank" rel="noopener" onclick="return confirm('Open this link?\n\n'+this.href);">на Youtube</a>.<br/><br/><br/><a href="https://t.me/ai_machinelearning_big_data" target="_blank">@ai_machinelearning_big_data</a><br/><br/><a href="?q=%23news">#news</a> <a href="?q=%23ai">#ai</a> <a href="?q=%23ml">#ml</a></div></div><div class="media_not_supported_cont"><div class="message_media_not_supported_wrap">
+  <div class="message_media_not_supported">
+    <div class="message_media_not_supported_label">Please open Telegram to view this post</div>
+    <a href="https://t.me/ai_machinelearning_big_data/10910" class="message_media_view_in_telegram">VIEW IN TELEGRAM</a>
+  </div>
+</div></div>
+<div class="tgme_widget_message_reactions js-message_reactions"><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09FA4A9.png')"><b>🤩</b></i>96</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F918D.png')"><b>👍</b></i>34</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F8E89.png')"><b>🎉</b></i>16</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/E29DA4.png')"><b>❤</b></i>8</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F918F.png')"><b>👏</b></i>6</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F94A5.png')"><b>🔥</b></i>1</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09FA5B1.png')"><b>🥱</b></i>1</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F8CAD.png')"><b>🌭</b></i>1</span></div><div class="tgme_widget_message_footer compact js-message_footer">
+  
+  <div class="tgme_widget_message_info short js-message_info">
+    <span class="tgme_widget_message_views">17.7K</span><span class="copyonly"> views</span><span class="tgme_widget_message_meta"><a class="tgme_widget_message_date" href="https://t.me/ai_machinelearning_big_data/10910"><time datetime="2026-09-11T16:45:10+00:00" class="time">16:45</time></a></span>
+  </div>
+</div>
+  </div>
+  
+</div></div><div class="tgme_widget_message_wrap js-widget_message_wrap"><div class="tgme_widget_message text_not_supported_wrap js-widget_message" data-post="ai_machinelearning_big_data/10911" data-view="eyJjIjotMTExNDU5MTA4NiwicCI6MTA5MTEsInQiOjE3ODk0MDc5ODMsImgiOiJhODNmZmY3OGY5ZThlZDlhNzIifQ">
+  <div class="tgme_widget_message_user"><a href="https://t.me/ai_machinelearning_big_data"><i class="tgme_widget_message_user_photo bgcolor0" data-content="M"><img src="https://cdn4.telesco.pe/file/OZOUR4lzxXbPziBI1Sx4JhIoZoR6ub2__Nlxjnkl_dA3IvJPeNyR5ZerTDJItRjZnKTSygFFy0tRvk5k91Kd05YAv7VmiZpUxFmyp8gzyp2egyr8HeUPMr-EgsSctt325CJIYEWNocl3Gx6UtBqJlk5d5cwmlZvpo0oF--AuRyXEmPEN5h50sS5keB_UmpIuLOFKWNGUbeFFH-yO2jfT073eIRy9pdYf0WkoX4-FJFF1F4fpwcCRn2QH7ZgvoP-IAxA4BYgVuWTTf_p9nzIYQrVLsLPtxhcUp_ymeAf2zPyP8C2j4JE39my1vmd7Sw8cFIgDIBqj2KKeAI6xk_JPxA.jpg"></i></a></div>
+  <div class="tgme_widget_message_bubble">
+    
+        <i class="tgme_widget_message_bubble_tail">
+      <svg class="bubble_icon" width="9px" height="20px" viewBox="0 0 9 20">
+        <g fill="none">
+          <path class="background" fill="#ffffff" d="M8,1 L9,1 L9,20 L8,20 L8,18 C7.807,15.161 7.124,12.233 5.950,9.218 C5.046,6.893 3.504,4.733 1.325,2.738 L1.325,2.738 C0.917,2.365 0.89,1.732 1.263,1.325 C1.452,1.118 1.72,1 2,1 L8,1 Z"></path>
+          <path class="border_1x" fill="#d7e3ec" d="M9,1 L2,1 C1.72,1 1.452,1.118 1.263,1.325 C0.89,1.732 0.917,2.365 1.325,2.738 C3.504,4.733 5.046,6.893 5.95,9.218 C7.124,12.233 7.807,15.161 8,18 L8,20 L9,20 L9,1 Z M2,0 L9,0 L9,20 L7,20 L7,20 L7.002,18.068 C6.816,15.333 6.156,12.504 5.018,9.58 C4.172,7.406 2.72,5.371 0.649,3.475 C-0.165,2.729 -0.221,1.464 0.525,0.649 C0.904,0.236 1.439,0 2,0 Z"></path>
+          <path class="border_2x" d="M9,1 L2,1 C1.72,1 1.452,1.118 1.263,1.325 C0.89,1.732 0.917,2.365 1.325,2.738 C3.504,4.733 5.046,6.893 5.95,9.218 C7.124,12.233 7.807,15.161 8,18 L8,20 L9,20 L9,1 Z M2,0.5 L9,0.5 L9,20 L7.5,20 L7.5,20 L7.501,18.034 C7.312,15.247 6.64,12.369 5.484,9.399 C4.609,7.15 3.112,5.052 0.987,3.106 C0.376,2.547 0.334,1.598 0.894,0.987 C1.178,0.677 1.579,0.5 2,0.5 Z"></path>
+          <path class="border_3x" d="M9,1 L2,1 C1.72,1 1.452,1.118 1.263,1.325 C0.89,1.732 0.917,2.365 1.325,2.738 C3.504,4.733 5.046,6.893 5.95,9.218 C7.124,12.233 7.807,15.161 8,18 L8,20 L9,20 L9,1 Z M2,0.667 L9,0.667 L9,20 L7.667,20 L7.667,20 L7.668,18.023 C7.477,15.218 6.802,12.324 5.64,9.338 C4.755,7.064 3.243,4.946 1.1,2.983 C0.557,2.486 0.52,1.643 1.017,1.1 C1.269,0.824 1.626,0.667 2,0.667 Z"></path>
+        </g>
+      </svg>
+    </i>
+    <div class="tgme_widget_message_author accent_color"><a class="tgme_widget_message_owner_name" href="https://t.me/ai_machinelearning_big_data"><span dir="auto">Machinelearning</span></a></div>
+
+
+<a class="tgme_widget_message_photo_wrap 5269512645985902963 1226904021_460005747" href="https://t.me/ai_machinelearning_big_data/10911" style="width:800px;background-image:url('https://cdn4.telesco.pe/file/u-NMrjdGtAtZMu5HCAbPj6Tx5Xt2nrfp6EqVIb1fy1iImpzucbUxAoxMhUUgMngSwoWvrZnrSn6tLg18VPeYdMbA5D94Ud1dQ6Md4IwRgbz_z-JWdo1VqOQCNDqKeLaUfzd1u6GskGEF2xzvmgv4kGCGzT4Zjakt6GRHRFHqZvVuC9TA0P1Lj21fAv1cdw_SQuPZdju-Yrj96NrxzWL7IyuR-tR25RRUcgPzHlhAGDFwJRsFEsltE4LTgbBZQEmtrA7qEOfMtq0T3sAp6a4-AQ8AtoxCS8g9ZzzINqRB0OUuypmkxmM9NTiVVKroqjrHubtK-fctYSy6RncYqabeOA.jpg')">
+  <div class="tgme_widget_message_photo" style="padding-top:100%"></div>
+</a><div class="tgme_widget_message_text js-message_text" dir="auto"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F9A80.png')"><b>🚀</b></i> Последний шанс зайти на КосмоХакатон — старт сегодня<br/><br/>Сразу два этапа, 11–13 сентября: Нижний Новгород и Благовещенск. Задачи от компаний отрасли — от сервисной модели космических услуг до мониторинга паводков по спутниковым снимкам. Призовые на каждой площадке, общий фонд серии 7,2 млн рублей.<br/><br/>Участвовать можно очно или онлайн из любой точки России, командами 3–5 человек. Своей команды нет — собери на платформе.<br/><br/>Не успеваешь на эти — Питер и Красноярск идут 18–20 сентября. А лучшие команды всех этапов выходят в финал в Москве.<br/><br/>Регистрация и детали здесь: <a href="https://xn--80aa2abijcbdyq6a.xn--p1ai/?utm_source=tg_ai_machinelearning_big_data&amp;amp;utm_content=lastcall" target="_blank" rel="noopener" onclick="return confirm('Open this link?\n\n'+this.href);">космохакатон.рф/</a></div>
+<div class="tgme_widget_message_reactions js-message_reactions"><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F94A5.png')"><b>🔥</b></i>47</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F918D.png')"><b>👍</b></i>11</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F918F.png')"><b>👏</b></i>7</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F8F86.png')"><b>🏆</b></i>5</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F8E89.png')"><b>🎉</b></i>4</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F9881.png')"><b>😁</b></i>3</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09FA5B0.png')"><b>🥰</b></i>2</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/E29DA4.png')"><b>❤</b></i>1</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09FA5B1.png')"><b>🥱</b></i>1</span></div><div class="tgme_widget_message_footer compact js-message_footer">
+  
+  <div class="tgme_widget_message_info short js-message_info">
+    <span class="tgme_widget_message_views">17.5K</span><span class="copyonly"> views</span><span class="tgme_widget_message_meta"><a class="tgme_widget_message_date" href="https://t.me/ai_machinelearning_big_data/10911"><time datetime="2026-09-11T17:30:10+00:00" class="time">17:30</time></a></span>
+  </div>
+</div>
+  </div>
+  
+</div></div><div class="tgme_widget_message_wrap js-widget_message_wrap"><div class="tgme_widget_message text_not_supported_wrap js-widget_message" data-post="ai_machinelearning_big_data/10912" data-view="eyJjIjotMTExNDU5MTA4NiwicCI6MTA5MTIsInQiOjE3ODk0MDc5ODMsImgiOiIxOTllMGE0NjM5YzA1OTExYTAifQ">
+  <div class="tgme_widget_message_user"><a href="https://t.me/ai_machinelearning_big_data"><i class="tgme_widget_message_user_photo bgcolor0" data-content="M"><img src="https://cdn4.telesco.pe/file/OZOUR4lzxXbPziBI1Sx4JhIoZoR6ub2__Nlxjnkl_dA3IvJPeNyR5ZerTDJItRjZnKTSygFFy0tRvk5k91Kd05YAv7VmiZpUxFmyp8gzyp2egyr8HeUPMr-EgsSctt325CJIYEWNocl3Gx6UtBqJlk5d5cwmlZvpo0oF--AuRyXEmPEN5h50sS5keB_UmpIuLOFKWNGUbeFFH-yO2jfT073eIRy9pdYf0WkoX4-FJFF1F4fpwcCRn2QH7ZgvoP-IAxA4BYgVuWTTf_p9nzIYQrVLsLPtxhcUp_ymeAf2zPyP8C2j4JE39my1vmd7Sw8cFIgDIBqj2KKeAI6xk_JPxA.jpg"></i></a></div>
+  <div class="tgme_widget_message_bubble">
+    
+        <i class="tgme_widget_message_bubble_tail">
+      <svg class="bubble_icon" width="9px" height="20px" viewBox="0 0 9 20">
+        <g fill="none">
+          <path class="background" fill="#ffffff" d="M8,1 L9,1 L9,20 L8,20 L8,18 C7.807,15.161 7.124,12.233 5.950,9.218 C5.046,6.893 3.504,4.733 1.325,2.738 L1.325,2.738 C0.917,2.365 0.89,1.732 1.263,1.325 C1.452,1.118 1.72,1 2,1 L8,1 Z"></path>
+          <path class="border_1x" fill="#d7e3ec" d="M9,1 L2,1 C1.72,1 1.452,1.118 1.263,1.325 C0.89,1.732 0.917,2.365 1.325,2.738 C3.504,4.733 5.046,6.893 5.95,9.218 C7.124,12.233 7.807,15.161 8,18 L8,20 L9,20 L9,1 Z M2,0 L9,0 L9,20 L7,20 L7,20 L7.002,18.068 C6.816,15.333 6.156,12.504 5.018,9.58 C4.172,7.406 2.72,5.371 0.649,3.475 C-0.165,2.729 -0.221,1.464 0.525,0.649 C0.904,0.236 1.439,0 2,0 Z"></path>
+          <path class="border_2x" d="M9,1 L2,1 C1.72,1 1.452,1.118 1.263,1.325 C0.89,1.732 0.917,2.365 1.325,2.738 C3.504,4.733 5.046,6.893 5.95,9.218 C7.124,12.233 7.807,15.161 8,18 L8,20 L9,20 L9,1 Z M2,0.5 L9,0.5 L9,20 L7.5,20 L7.5,20 L7.501,18.034 C7.312,15.247 6.64,12.369 5.484,9.399 C4.609,7.15 3.112,5.052 0.987,3.106 C0.376,2.547 0.334,1.598 0.894,0.987 C1.178,0.677 1.579,0.5 2,0.5 Z"></path>
+          <path class="border_3x" d="M9,1 L2,1 C1.72,1 1.452,1.118 1.263,1.325 C0.89,1.732 0.917,2.365 1.325,2.738 C3.504,4.733 5.046,6.893 5.95,9.218 C7.124,12.233 7.807,15.161 8,18 L8,20 L9,20 L9,1 Z M2,0.667 L9,0.667 L9,20 L7.667,20 L7.667,20 L7.668,18.023 C7.477,15.218 6.802,12.324 5.64,9.338 C4.755,7.064 3.243,4.946 1.1,2.983 C0.557,2.486 0.52,1.643 1.017,1.1 C1.269,0.824 1.626,0.667 2,0.667 Z"></path>
+        </g>
+      </svg>
+    </i>
+    <div class="tgme_widget_message_author accent_color"><a class="tgme_widget_message_owner_name" href="https://t.me/ai_machinelearning_big_data"><span dir="auto">Machinelearning</span></a></div>
+<div class="tgme_widget_message_forwarded_from accent_color">Forwarded from&nbsp;<a class="tgme_widget_message_forwarded_from_name" href="https://t.me/data_analysis_ml/5762"><span dir="auto">Анализ данных (Data analysis)</span></a></div>
+
+<a class="tgme_widget_message_photo_wrap 5269695409729248796 1226946574_460004892" href="https://t.me/ai_machinelearning_big_data/10912" style="width:800px;background-image:url('https://cdn4.telesco.pe/file/gKe7nvtwVrdN1YqaF5Dlq2jB8_FKjDljFOrf--2rlkMe_u8UhzzJwCL1o29-n81DDGoBwmNNzZp9DdKa3O11-2yCWzwlNX3RzZ4Fd90zWxcA7J3tdoPpwb9dVjCUxfiBUZDutrTbb4es6c49U39ohNzXaD0JXnmRG96K1fcvGz7Xr_L77LaxwzEV1qoxTt21gW3_vJf0cwx1UDIHS_paNjmj68DVGxN-tZ4-gPPFjWmYe27KZtrUWldNqH6ffxTwvg4SktQmjeAs3UR_gswpxuleHYIBOtwMhDoTbY-CfpJKh0lxxTTtauRCCL1WBOxzMOGpkxc9H2eoqJ0jdf1hdw.jpg')">
+  <div class="tgme_widget_message_photo" style="padding-top:38.5%"></div>
+</a><div class="tgme_widget_message_text js-message_text" dir="auto"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F909F.png')"><b>🐟</b></i> <b>Sakana AI представила Fugu Max и Fugu Ultra v2 - обновление системы оркестрации AI-агентов</b><br/><br/>Fugu распределяет задачи между несколькими моделями, подбирая подходящую по возможностям и стоимости.<br/><br/><b>Fugu Max</b> использует расширенный набор моделей с открытыми весами и специализированных моделей, включая NVIDIA Nemotron. По заявлению Sakana, система приближается к ведущим моделям по качеству при <b>стоимости в 2–6 раз ниже</b>.<br/><br/><b>Fugu Ultra v2</b> ориентирована на максимальное качество. По данным компании:<br/><br/>* опережает <b>Opus 5 и Fable 5</b> на Chartography<br/>* на DeepSWE превосходит модели, у которых цена за токен <b>в 3–5 раз выше</b><br/>* при этом <b>Fable 5, Fable 5.1 и GPT-6-Astra не входят</b> в её набор агентов<br/><br/>Модели внутри системы можно заменять. Такая архитектура рассчитана на снижение зависимости от отдельных поставщиков и сохранение работы при изменениях доступности API.<br/><br/>[Попробовать Fugu - <a href="https://sakana.ai/fugu" target="_blank" rel="noopener">https://sakana.ai/fugu</a><br/><br/>Анонс Sakana AI - <a href="https://sakana.ai/fugu-max-release/" target="_blank" rel="noopener">https://sakana.ai/fugu-max-release/</a></div>
+<div class="tgme_widget_message_reactions js-message_reactions"><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F8E89.png')"><b>🎉</b></i>121</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F918D.png')"><b>👍</b></i>39</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09FA493.png')"><b>🤓</b></i>22</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/E29DA4.png')"><b>❤</b></i>8</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/E29AA1.png')"><b>⚡</b></i>2</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F94A5.png')"><b>🔥</b></i>2</span></div><div class="tgme_widget_message_footer compact js-message_footer">
+  
+  <div class="tgme_widget_message_info short js-message_info">
+    <span class="tgme_widget_message_views">17.6K</span><span class="copyonly"> views</span><span class="tgme_widget_message_meta"><a class="tgme_widget_message_date" href="https://t.me/ai_machinelearning_big_data/10912"><time datetime="2026-09-11T18:29:01+00:00" class="time">18:29</time></a></span>
+  </div>
+</div>
+  </div>
+  
+</div></div><div class="tgme_widget_message_wrap js-widget_message_wrap"><div class="tgme_widget_message text_not_supported_wrap js-widget_message" data-post="ai_machinelearning_big_data/10913" data-view="eyJjIjotMTExNDU5MTA4NiwicCI6MTA5MTMsInQiOjE3ODk0MDc5ODMsImgiOiJjNWVmNWI3NDExMzk1MGVjMWEifQ">
+  <div class="tgme_widget_message_user"><a href="https://t.me/ai_machinelearning_big_data"><i class="tgme_widget_message_user_photo bgcolor0" data-content="M"><img src="https://cdn4.telesco.pe/file/OZOUR4lzxXbPziBI1Sx4JhIoZoR6ub2__Nlxjnkl_dA3IvJPeNyR5ZerTDJItRjZnKTSygFFy0tRvk5k91Kd05YAv7VmiZpUxFmyp8gzyp2egyr8HeUPMr-EgsSctt325CJIYEWNocl3Gx6UtBqJlk5d5cwmlZvpo0oF--AuRyXEmPEN5h50sS5keB_UmpIuLOFKWNGUbeFFH-yO2jfT073eIRy9pdYf0WkoX4-FJFF1F4fpwcCRn2QH7ZgvoP-IAxA4BYgVuWTTf_p9nzIYQrVLsLPtxhcUp_ymeAf2zPyP8C2j4JE39my1vmd7Sw8cFIgDIBqj2KKeAI6xk_JPxA.jpg"></i></a></div>
+  <div class="tgme_widget_message_bubble">
+    
+        <i class="tgme_widget_message_bubble_tail">
+      <svg class="bubble_icon" width="9px" height="20px" viewBox="0 0 9 20">
+        <g fill="none">
+          <path class="background" fill="#ffffff" d="M8,1 L9,1 L9,20 L8,20 L8,18 C7.807,15.161 7.124,12.233 5.950,9.218 C5.046,6.893 3.504,4.733 1.325,2.738 L1.325,2.738 C0.917,2.365 0.89,1.732 1.263,1.325 C1.452,1.118 1.72,1 2,1 L8,1 Z"></path>
+          <path class="border_1x" fill="#d7e3ec" d="M9,1 L2,1 C1.72,1 1.452,1.118 1.263,1.325 C0.89,1.732 0.917,2.365 1.325,2.738 C3.504,4.733 5.046,6.893 5.95,9.218 C7.124,12.233 7.807,15.161 8,18 L8,20 L9,20 L9,1 Z M2,0 L9,0 L9,20 L7,20 L7,20 L7.002,18.068 C6.816,15.333 6.156,12.504 5.018,9.58 C4.172,7.406 2.72,5.371 0.649,3.475 C-0.165,2.729 -0.221,1.464 0.525,0.649 C0.904,0.236 1.439,0 2,0 Z"></path>
+          <path class="border_2x" d="M9,1 L2,1 C1.72,1 1.452,1.118 1.263,1.325 C0.89,1.732 0.917,2.365 1.325,2.738 C3.504,4.733 5.046,6.893 5.95,9.218 C7.124,12.233 7.807,15.161 8,18 L8,20 L9,20 L9,1 Z M2,0.5 L9,0.5 L9,20 L7.5,20 L7.5,20 L7.501,18.034 C7.312,15.247 6.64,12.369 5.484,9.399 C4.609,7.15 3.112,5.052 0.987,3.106 C0.376,2.547 0.334,1.598 0.894,0.987 C1.178,0.677 1.579,0.5 2,0.5 Z"></path>
+          <path class="border_3x" d="M9,1 L2,1 C1.72,1 1.452,1.118 1.263,1.325 C0.89,1.732 0.917,2.365 1.325,2.738 C3.504,4.733 5.046,6.893 5.95,9.218 C7.124,12.233 7.807,15.161 8,18 L8,20 L9,20 L9,1 Z M2,0.667 L9,0.667 L9,20 L7.667,20 L7.667,20 L7.668,18.023 C7.477,15.218 6.802,12.324 5.64,9.338 C4.755,7.064 3.243,4.946 1.1,2.983 C0.557,2.486 0.52,1.643 1.017,1.1 C1.269,0.824 1.626,0.667 2,0.667 Z"></path>
+        </g>
+      </svg>
+    </i>
+    <div class="tgme_widget_message_author accent_color"><a class="tgme_widget_message_owner_name" href="https://t.me/ai_machinelearning_big_data"><span dir="auto">Machinelearning</span></a></div>
+
+
+<div class="media_supported_cont"><a class="tgme_widget_message_video_player js-message_video_player" href="https://t.me/ai_machinelearning_big_data/10913"><i class="tgme_widget_message_video_thumb" style="background-image:url('https://cdn4.telesco.pe/file/DgwjeovFAr3EHigNb5eKfY5Li6Wd_sjBNL674P-SQ8AlMwh4uyg2_sgtxggN7CskxkHCr8B_UOJRMjoKMmxoGC16OKM1Rhx9mM8yMePDZ63V8zw2mtBC38H59SDvkpDspQKbLPktdVXrZ7DGl00KvF6DlHKpydvSIfu5BuFUhIeRBWffC-cC1qsfM66mRNIF646rRUKWRJtOEncHfA_ykGzYdjyu5m73hEf2XNQ7PWA8pqMTR6FWhouo9fP8p9CVNr27Bwi_G9Fwc_R1O5j5A3NrfbckPMHfqFWvnOxxi9KLWmwQBEq5sbyCxGImQvuZWa_slS26ObDc_hlXNS6dwQ')"></i>
+
+<div class="tgme_widget_message_video_wrap" style="width:640px;padding-top:56.25%">
+  <video src="https://cdn4.telesco.pe/file/4600905176.mp4?token=ZaLMnsGSWhCK6ziabdLeJA1w68Dk8RWiaPPkAhyzNAPKtRHbbdvsQLZ9Hfouhdz3LDPncbdLfig-3XgJzAhEPcUo5cSKsl9B0JK3uCx3QkYt1AYuOQ-5efSeRxTyO0O3FztSjWzA5KDaQ5tJUX2pp5-v1VuXEza8fUTJLpN_oPVsJ-DNbeH9tUs0NtQWka_mEiRCg0zmQ9BrxLA4SmFFMMAOuKMVR1GImGQcHTKMm_-MivcYGJ2nQT0thtQHPR21g9xjIAmB5rg3NRI9FK2-yUGKyl3B4elrC6azmVwdEg4O7yLQ9M1ujzFzPPgVjUh_2JNlbGOCLZxY-E7TIMb7KQ" class="tgme_widget_message_video js-message_video" width="100%" height="100%"></video>
+</div>
+<div class="message_video_play js-message_video_play"></div>
+<time class="message_video_duration js-message_video_duration">2:17</time>
+<div class="message_media_not_supported_wrap">
+  <div class="message_media_not_supported">
+    <div class="message_media_not_supported_label">This media is not supported in your browser</div>
+    <span class="message_media_view_in_telegram">VIEW IN TELEGRAM</span>
+  </div>
+</div></a><div class="tgme_widget_message_text js-message_text" dir="auto"><tg-emoji emoji-id="5386448185336017745"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/E29C94.png')"><b>✔️</b></i></tg-emoji> <b>OpenAI отдала по API харнесс, на котором работает Codex</b><br/><br/>Компания&nbsp;<a href="https://openai.com/index/introducing-the-agents-api/" target="_blank" rel="noopener" onclick="return confirm('Open this link?\n\n'+this.href);">открыла</a>&nbsp;Agents API - публичную бету сервиса, который берёт на себя всю обвязку вокруг агента. Она здесь та же, что у Codex и ChatGPT for Work.<br/><br/>Агент создаётся одним вызовом API, где указывается задача, модель, инструменты и окружение. Дальше действует OpenAI, а разработчик занимается своими инструментами, знаниями и процессами.<br/><br/><blockquote>Харнесс умеет сжимать ранний контекст, когда сессия подбирается к лимиту и подгружать описания инструментов по необходимости. Плюс дает агентам вызывать инструменты программно - выполнять вызовы параллельно, сцеплять их и фильтровать результаты прямо в коде, возвращая в контекст только нужное.</blockquote><br/><br/>Место работы агента можно выбрать из песочницы самой OpenAI, поднять на своей инфраструктуре или уйти к партнёрам: Blaxel, Cloudflare, Daytona, DigitalOcean, E2B, Modal, Oracle, Runloop и Vercel.<br/><br/>Отдельной платы за Agents API нет, только токены и инструменты, которые расходует агент.<br/><br/><a href="https://t.me/ai_machinelearning_big_data" target="_blank">@ai_machinelearning_big_data</a><br/><br/><a href="?q=%23news">#news</a> <a href="?q=%23ai">#ai</a> <a href="?q=%23ml">#ml</a></div></div><div class="media_not_supported_cont"><div class="message_media_not_supported_wrap">
+  <div class="message_media_not_supported">
+    <div class="message_media_not_supported_label">Please open Telegram to view this post</div>
+    <a href="https://t.me/ai_machinelearning_big_data/10913" class="message_media_view_in_telegram">VIEW IN TELEGRAM</a>
+  </div>
+</div></div>
+<div class="tgme_widget_message_reactions js-message_reactions"><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F91A8E2808DF09F92BB.png')"><b>👨‍💻</b></i>75</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F918D.png')"><b>👍</b></i>34</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F918F.png')"><b>👏</b></i>21</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/E29DA4.png')"><b>❤</b></i>14</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F94A5.png')"><b>🔥</b></i>14</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09FA4A3.png')"><b>🤣</b></i>3</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09FA493.png')"><b>🤓</b></i>3</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F958A.png')"><b>🕊</b></i>1</span></div><div class="tgme_widget_message_footer compact js-message_footer">
+  
+  <div class="tgme_widget_message_info short js-message_info">
+    <span class="tgme_widget_message_views">19.3K</span><span class="copyonly"> views</span><span class="tgme_widget_message_meta"><a class="tgme_widget_message_date" href="https://t.me/ai_machinelearning_big_data/10913"><time datetime="2026-09-12T06:41:01+00:00" class="time">06:41</time></a></span>
+  </div>
+</div>
+  </div>
+  
+</div></div><div class="tgme_widget_message_wrap js-widget_message_wrap"><div class="tgme_widget_message text_not_supported_wrap js-widget_message" data-post="ai_machinelearning_big_data/10914" data-view="eyJjIjotMTExNDU5MTA4NiwicCI6MTA5MTQsInQiOjE3ODk0MDc5ODMsImgiOiJhMDQzNDA2YWViZTk2ZTZlNDkifQ">
+  <div class="tgme_widget_message_user"><a href="https://t.me/ai_machinelearning_big_data"><i class="tgme_widget_message_user_photo bgcolor0" data-content="M"><img src="https://cdn4.telesco.pe/file/OZOUR4lzxXbPziBI1Sx4JhIoZoR6ub2__Nlxjnkl_dA3IvJPeNyR5ZerTDJItRjZnKTSygFFy0tRvk5k91Kd05YAv7VmiZpUxFmyp8gzyp2egyr8HeUPMr-EgsSctt325CJIYEWNocl3Gx6UtBqJlk5d5cwmlZvpo0oF--AuRyXEmPEN5h50sS5keB_UmpIuLOFKWNGUbeFFH-yO2jfT073eIRy9pdYf0WkoX4-FJFF1F4fpwcCRn2QH7ZgvoP-IAxA4BYgVuWTTf_p9nzIYQrVLsLPtxhcUp_ymeAf2zPyP8C2j4JE39my1vmd7Sw8cFIgDIBqj2KKeAI6xk_JPxA.jpg"></i></a></div>
+  <div class="tgme_widget_message_bubble">
+    
+        <i class="tgme_widget_message_bubble_tail">
+      <svg class="bubble_icon" width="9px" height="20px" viewBox="0 0 9 20">
+        <g fill="none">
+          <path class="background" fill="#ffffff" d="M8,1 L9,1 L9,20 L8,20 L8,18 C7.807,15.161 7.124,12.233 5.950,9.218 C5.046,6.893 3.504,4.733 1.325,2.738 L1.325,2.738 C0.917,2.365 0.89,1.732 1.263,1.325 C1.452,1.118 1.72,1 2,1 L8,1 Z"></path>
+          <path class="border_1x" fill="#d7e3ec" d="M9,1 L2,1 C1.72,1 1.452,1.118 1.263,1.325 C0.89,1.732 0.917,2.365 1.325,2.738 C3.504,4.733 5.046,6.893 5.95,9.218 C7.124,12.233 7.807,15.161 8,18 L8,20 L9,20 L9,1 Z M2,0 L9,0 L9,20 L7,20 L7,20 L7.002,18.068 C6.816,15.333 6.156,12.504 5.018,9.58 C4.172,7.406 2.72,5.371 0.649,3.475 C-0.165,2.729 -0.221,1.464 0.525,0.649 C0.904,0.236 1.439,0 2,0 Z"></path>
+          <path class="border_2x" d="M9,1 L2,1 C1.72,1 1.452,1.118 1.263,1.325 C0.89,1.732 0.917,2.365 1.325,2.738 C3.504,4.733 5.046,6.893 5.95,9.218 C7.124,12.233 7.807,15.161 8,18 L8,20 L9,20 L9,1 Z M2,0.5 L9,0.5 L9,20 L7.5,20 L7.5,20 L7.501,18.034 C7.312,15.247 6.64,12.369 5.484,9.399 C4.609,7.15 3.112,5.052 0.987,3.106 C0.376,2.547 0.334,1.598 0.894,0.987 C1.178,0.677 1.579,0.5 2,0.5 Z"></path>
+          <path class="border_3x" d="M9,1 L2,1 C1.72,1 1.452,1.118 1.263,1.325 C0.89,1.732 0.917,2.365 1.325,2.738 C3.504,4.733 5.046,6.893 5.95,9.218 C7.124,12.233 7.807,15.161 8,18 L8,20 L9,20 L9,1 Z M2,0.667 L9,0.667 L9,20 L7.667,20 L7.667,20 L7.668,18.023 C7.477,15.218 6.802,12.324 5.64,9.338 C4.755,7.064 3.243,4.946 1.1,2.983 C0.557,2.486 0.52,1.643 1.017,1.1 C1.269,0.824 1.626,0.667 2,0.667 Z"></path>
+        </g>
+      </svg>
+    </i>
+    <div class="tgme_widget_message_author accent_color"><a class="tgme_widget_message_owner_name" href="https://t.me/ai_machinelearning_big_data"><span dir="auto">Machinelearning</span></a></div>
+
+
+<div class="media_supported_cont"><a class="tgme_widget_message_photo_wrap 5260249535399796368 1224747285_460005008" href="https://t.me/ai_machinelearning_big_data/10914" style="width:800px;background-image:url('https://cdn4.telesco.pe/file/liJjn8TFx0Fv2645024v-A9WzoihXVNQzheh6XCO-FZyg16WUgUyBaMTPOQh4rX3GGCtLta0_4kaEj5x1rtreNZINKJZHkYn0EnTRE-H4C0pB28ht50EMdf301tng6VX2hp5nL3eUJQptc-DBwYjGYnDFZYx4mnMHh70gHCyH61GBdXKlymCAsPQFJXbgcEdXbQDKyAx75lMhSEorelFdM8g4Wv1KH9eh5qDYNfX1NIbGY8goWsXRIVKh71EN_jeL7lFiagQIIrlQsntYU0_XAZ13deqe3OiwnTer3tfN5nDaCaW2qM5-TTevcA_eDSXW7EioN-5bmJu1k1iw-PLOg.jpg')">
+  <div class="tgme_widget_message_photo" style="padding-top:56.25%"></div>
+</a><div class="tgme_widget_message_text js-message_text" dir="auto"><tg-emoji emoji-id="5447410659077661506"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F8C90.png')"><b>🌐</b></i></tg-emoji><b> Твоё ИИ-решение — в одной из крупнейших энергетических компаний России</b><br/><br/>Получи подготовленные данные и разработай ИИ-ассистента для энергетики <b>на соревновании от ПАО «Интер РАО» при поддержке компании «Яндекс»</b>. <br/><br/>Призовой фонд — <b>750 000 рублей</b>. Лучшие проекты смогут стать частью экосистемы компании. <br/><br/><a href="https://cnrlink.com/interraohack26ml?erid=2W5zFJipseH" target="_blank" rel="noopener" onclick="return confirm('Open this link?\n\n'+this.href);">Регистрация открыта</a> до 27 сентября.<br/><br/>Можно участвовать <b>одному или командой до 5 человек</b>. Идеальный состав: разработчик, специалист по машинному обучению, аналитик и дизайнер.<br/><br/>Стартуем 28 сентября. Придумай концепт проекта: самые сильные идеи участники доработают под руководством экспертов с 9 по 23 октября. Финал в Москве — 3 ноября.<br/><br/><i>Задачи соревнования — за какую возьмешься?</i><br/><blockquote expandable><b><tg-emoji emoji-id="5382322671679708881"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/31E283A3.png')"><b>1️⃣</b></i></tg-emoji></b><b> ИИ-помощник для подготовки презентаций</b>.<br/>Создай инструмент генерации презентации в корпоративном стиле из текстового брифа.<br/><br/><tg-emoji emoji-id="5381990043642502553"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/32E283A3.png')"><b>2️⃣</b></i></tg-emoji> <b>Помощник для анализа документов из судов</b>.<br/>Разработай систему, которая сможет распознавать, классифицировать и заносить судебные и исполнительные документы в базу данных.<br/><br/><tg-emoji emoji-id="5381879959335738545"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/33E283A3.png')"><b>3️⃣</b></i></tg-emoji> <b>Ассистент для создания ИТ/ИБ-дайджестов</b>.<br/>Напиши ассистента, который будет регулярно анализировать релевантные новости из различных источников и формировать краткую сводку.<br/><br/><tg-emoji emoji-id="5382054253403577563"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/34E283A3.png')"><b>4️⃣</b></i></tg-emoji> <b>Архитектор BPMN-диаграмм</b>.<br/>Создай генератор BPMN-диаграмм, который позволит из текстового описания процесса собрать валидную схему в формате BPMN 2.0.</blockquote><br/><br/>Получи сильную строчку в портфолио и уникальный опыт работы под руководством экспертов Группы «Интер РАО».<br/><br/><b>Регистрируйся:</b> <a href="https://cnrlink.com/interraohack26ml" target="_blank" rel="noopener">https://cnrlink.com/interraohack26ml</a></div></div><div class="media_not_supported_cont"><div class="message_media_not_supported_wrap">
+  <div class="message_media_not_supported">
+    <div class="message_media_not_supported_label">Please open Telegram to view this post</div>
+    <a href="https://t.me/ai_machinelearning_big_data/10914" class="message_media_view_in_telegram">VIEW IN TELEGRAM</a>
+  </div>
+</div></div>
+<div class="tgme_widget_message_reactions js-message_reactions"><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09FA4A9.png')"><b>🤩</b></i>46</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09FA4A3.png')"><b>🤣</b></i>18</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F8E89.png')"><b>🎉</b></i>17</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F918D.png')"><b>👍</b></i>7</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F94A5.png')"><b>🔥</b></i>6</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/E29DA4.png')"><b>❤</b></i>4</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09FA4AC.png')"><b>🤬</b></i>1</span></div><div class="tgme_widget_message_footer compact js-message_footer">
+  
+  <div class="tgme_widget_message_info short js-message_info">
+    <span class="tgme_widget_message_views">17.7K</span><span class="copyonly"> views</span><span class="tgme_widget_message_meta"><a class="tgme_widget_message_date" href="https://t.me/ai_machinelearning_big_data/10914"><time datetime="2026-09-12T09:03:14+00:00" class="time">09:03</time></a></span>
+  </div>
+</div>
+  </div>
+  
+</div></div><div class="tgme_widget_message_wrap js-widget_message_wrap"><div class="tgme_widget_message text_not_supported_wrap js-widget_message" data-post="ai_machinelearning_big_data/10915" data-view="eyJjIjotMTExNDU5MTA4NiwicCI6MTA5MTUsInQiOjE3ODk0MDc5ODMsImgiOiJjNmNiNjJmOGY2MmYzM2QzMjQifQ">
+  <div class="tgme_widget_message_user"><a href="https://t.me/ai_machinelearning_big_data"><i class="tgme_widget_message_user_photo bgcolor0" data-content="M"><img src="https://cdn4.telesco.pe/file/OZOUR4lzxXbPziBI1Sx4JhIoZoR6ub2__Nlxjnkl_dA3IvJPeNyR5ZerTDJItRjZnKTSygFFy0tRvk5k91Kd05YAv7VmiZpUxFmyp8gzyp2egyr8HeUPMr-EgsSctt325CJIYEWNocl3Gx6UtBqJlk5d5cwmlZvpo0oF--AuRyXEmPEN5h50sS5keB_UmpIuLOFKWNGUbeFFH-yO2jfT073eIRy9pdYf0WkoX4-FJFF1F4fpwcCRn2QH7ZgvoP-IAxA4BYgVuWTTf_p9nzIYQrVLsLPtxhcUp_ymeAf2zPyP8C2j4JE39my1vmd7Sw8cFIgDIBqj2KKeAI6xk_JPxA.jpg"></i></a></div>
+  <div class="tgme_widget_message_bubble">
+    
+        <i class="tgme_widget_message_bubble_tail">
+      <svg class="bubble_icon" width="9px" height="20px" viewBox="0 0 9 20">
+        <g fill="none">
+          <path class="background" fill="#ffffff" d="M8,1 L9,1 L9,20 L8,20 L8,18 C7.807,15.161 7.124,12.233 5.950,9.218 C5.046,6.893 3.504,4.733 1.325,2.738 L1.325,2.738 C0.917,2.365 0.89,1.732 1.263,1.325 C1.452,1.118 1.72,1 2,1 L8,1 Z"></path>
+          <path class="border_1x" fill="#d7e3ec" d="M9,1 L2,1 C1.72,1 1.452,1.118 1.263,1.325 C0.89,1.732 0.917,2.365 1.325,2.738 C3.504,4.733 5.046,6.893 5.95,9.218 C7.124,12.233 7.807,15.161 8,18 L8,20 L9,20 L9,1 Z M2,0 L9,0 L9,20 L7,20 L7,20 L7.002,18.068 C6.816,15.333 6.156,12.504 5.018,9.58 C4.172,7.406 2.72,5.371 0.649,3.475 C-0.165,2.729 -0.221,1.464 0.525,0.649 C0.904,0.236 1.439,0 2,0 Z"></path>
+          <path class="border_2x" d="M9,1 L2,1 C1.72,1 1.452,1.118 1.263,1.325 C0.89,1.732 0.917,2.365 1.325,2.738 C3.504,4.733 5.046,6.893 5.95,9.218 C7.124,12.233 7.807,15.161 8,18 L8,20 L9,20 L9,1 Z M2,0.5 L9,0.5 L9,20 L7.5,20 L7.5,20 L7.501,18.034 C7.312,15.247 6.64,12.369 5.484,9.399 C4.609,7.15 3.112,5.052 0.987,3.106 C0.376,2.547 0.334,1.598 0.894,0.987 C1.178,0.677 1.579,0.5 2,0.5 Z"></path>
+          <path class="border_3x" d="M9,1 L2,1 C1.72,1 1.452,1.118 1.263,1.325 C0.89,1.732 0.917,2.365 1.325,2.738 C3.504,4.733 5.046,6.893 5.95,9.218 C7.124,12.233 7.807,15.161 8,18 L8,20 L9,20 L9,1 Z M2,0.667 L9,0.667 L9,20 L7.667,20 L7.667,20 L7.668,18.023 C7.477,15.218 6.802,12.324 5.64,9.338 C4.755,7.064 3.243,4.946 1.1,2.983 C0.557,2.486 0.52,1.643 1.017,1.1 C1.269,0.824 1.626,0.667 2,0.667 Z"></path>
+        </g>
+      </svg>
+    </i>
+    <div class="tgme_widget_message_author accent_color"><a class="tgme_widget_message_owner_name" href="https://t.me/ai_machinelearning_big_data"><span dir="auto">Machinelearning</span></a></div>
+
+
+<div class="media_supported_cont"><a class="tgme_widget_message_video_player not_supported js-message_video_player" href="https://t.me/ai_machinelearning_big_data/10915"><i class="tgme_widget_message_video_thumb" style="background-image:url('https://cdn4.telesco.pe/file/HeJCg3Ejd0PAQIA5X_FN7y81Do2qRGkY2fRsrQNizRAiMVYv6hwt7WyDUMfPyzuOb9Y_aLaRzZLoagmS7mztaW2OgO7qnCwDW41m6vJ1QcaNB_4Q9NFal4guu_e5wc_W_H6O0CsYcOz-S9HWpTJAlWND7z2vGVhQppPSjHPbe9iEqtEQGHzeoaGxg7VJbHHZycwvCWI5EJ3_PAWU9tOZZ9lcb_0HGSYqnNXRI5-8tkSMO1iqOGoOLejfY05XJGvcFt2lfVGdg1Cm16cmKEZhTXcMARwbJ4vl87ZqC6L59IO6diG_ilemrdFGWJUyfEHFUVs8LTIc4GFeDHo0wlITHA')"></i>
+
+<div class="tgme_widget_message_video_wrap" style="width:1024px;padding-top:75%">
+  
+</div>
+<div class="message_video_play js-message_video_play"></div>
+<time class="message_video_duration js-message_video_duration">4:03</time>
+<div class="message_media_not_supported_wrap">
+  <div class="message_media_not_supported">
+    <div class="message_media_not_supported_label">Media is too big</div>
+    <span class="message_media_view_in_telegram">VIEW IN TELEGRAM</span>
+  </div>
+</div></a><div class="tgme_widget_message_text js-message_text" dir="auto"><tg-emoji emoji-id="5386448185336017745"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/E29C94.png')"><b>✔️</b></i></tg-emoji> <b>OpenAI готова замедлить разработку, если на это пойдут остальные</b><br/><br/>Сэм Альтман заявил сотрудникам, что компания готова притормозить работу над моделями следующего поколения - но только если то же сделают другие лаборатории. По данным Bloomberg, часть циклов предобучения OpenAI уже приостановила из соображений безопасности.<br/><br/>Идею контролируемого темпа Альтман обсуждал и раньше, в том числе в Белом доме. Инициатива родилась на фоне ухода ведущих специалистов по безопасности из OpenAI, Anthropic и Google DeepMind.<br/><br/>На этой неделе главный научный сотрудник OpenAI Якуб Пахоцкий публично&nbsp;<a href="https://t.me/ai_machinelearning_big_data/10863" target="_blank" rel="noopener" onclick="return confirm('Open this link?\n\n'+this.href);">призвал</a>&nbsp;отрасль к координации и добровольным паузам в релизах.<br/><a href="https://www.bloomberg.com/news/articles/2026-09-11/openai-is-open-to-slowing-cutting-edge-ai-ceo-sam-altman-tells-staff" target="_blank" rel="noopener" onclick="return confirm('Open this link?\n\n'+this.href);">bloomberg.com</a><br/><br/><tg-emoji emoji-id="5386448185336017745"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/E29C94.png')"><b>✔️</b></i></tg-emoji> <b>Cognition выпустила кодинг-модель SWE-2</b><br/><br/>Разработчик Devin обучил SWE-2 на базе открытой Kimi K3 с её 2,8 трлн параметров. По словам авторов, обучение с подкреплением впервые масштабировали на исходную модель такого размера. <br/><br/>Вместо дистилляции экспертов использовали линейные штрафы за стоимость вычислений, привязанные к наклону границы Парето.<br/><br/>На FrontierCode 1.1 Main модель набрала 50,0%. Инференс, по замерам Cognition, обходится на 60-75% дешевле, чем у Fable 5.1 и GPT-6 Astra.<br/><br/>Сократили и время на изучение репозитория - на среднем уровне рассуждений агент начинает править код на 18-м шаге вместо 48-го у SWE-1.7. Модель доступна в Devin CLI, десктопе и веб-версии.<br/><a href="https://cognition.com/blog/swe-2" target="_blank" rel="noopener" onclick="return confirm('Open this link?\n\n'+this.href);">cognition.com</a><br/><br/><tg-emoji emoji-id="5386448185336017745"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/E29C94.png')"><b>✔️</b></i></tg-emoji> <b>Cursor открыл бету системы координации агентов</b><br/><br/>Новая возможность Projects рассчитана на задачи, которые живут дольше одного чата: рефакторинг, миграции, крупные фичи.<br/><br/>Координатору ставят задачу, он составляет план и раздаёт подзадачи субагентам - по заявлению Cursor, их может быть тысячи. Сам код он не пишет, поэтому никогда не занят, но умеет реагировать на события - следит за ветками Git, ловит падения CI и триггеры из Slack.<br/><br/>Бета раскатывается на всех, о тарификации в анонсе не сообщается.<br/><a href="https://cursor.com/blog/projects" target="_blank" rel="noopener" onclick="return confirm('Open this link?\n\n'+this.href);">cursor.com</a><br/><br/><tg-emoji emoji-id="5386448185336017745"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/E29C94.png')"><b>✔️</b></i></tg-emoji> <b>Black Forest Labs представила модель редактирования видео</b><br/><br/>FLUX Video Edit правит готовые ролики по текстовому запросу в режиме video-to-video - сохраняет композицию, траекторию камеры, тайминги и звук, меняя только указанное. Модель также умеет подгонять липсинк под новый дубляж, не меняя хронометраж.<br/><br/>На вход идут MP4 до 15 секунд и 50 МБ, на выходе 720p при 24 кадрах в секунду. Секунда обработанного видео стоит 3 цента.<br/><a href="https://x.com/bfl_ai/status/2098068980376510769" target="_blank" rel="noopener" onclick="return confirm('Open this link?\n\n'+this.href);">Black Forest Labs в X</a><br/><br/><tg-emoji emoji-id="5386448185336017745"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/E29C94.png')"><b>✔️</b></i></tg-emoji> <b>Филдсовский лауреат основал институт формальной верификации ИИ</b><br/><br/>Канадский математик Джейкоб Цимерман создаёт центр&nbsp;<a href="https://maisi.org/" target="_blank" rel="noopener" onclick="return confirm('Open this link?\n\n'+this.href);">Mathematical A.I. Safety Institute</a>&nbsp;со штатом в несколько десятков специалистов, запуск которого запланирован на январь 2027 года. Параллельно Цимерман присоединится к команде безопасности OpenAI, то есть будет верифицировать в том числе собственного работодателя.<br/><br/>Идея - перевести оценку рисков с эмпирического тестирования на строгую теоретическую верификацию и наделить модели доказуемыми свойствами надёжности, как у криптографических алгоритмов.<br/><br/>Механизмом аудита предлагают сделать доказательства с нулевым разглашением - лаборатория подтверждает соблюдение ограничений, не раскрывая ни архитектуру, ни веса.&nbsp;<br/><a href="https://www.nytimes.com/2026/09/08/science/jacob-tsimerman-math-ai-safety.html" target="_blank" rel="noopener" onclick="return confirm('Open this link?\n\n'+this.href);">nytimes.com</a><br/><br/><a href="https://t.me/ai_machinelearning_big_data" target="_blank">@ai_machinelearning_big_data</a><br/><br/><a href="?q=%23news">#news</a> <a href="?q=%23ai">#ai</a> <a href="?q=%23ml">#ml</a></div></div><div class="media_not_supported_cont"><div class="message_media_not_supported_wrap">
+  <div class="message_media_not_supported">
+    <div class="message_media_not_supported_label">Please open Telegram to view this post</div>
+    <a href="https://t.me/ai_machinelearning_big_data/10915" class="message_media_view_in_telegram">VIEW IN TELEGRAM</a>
+  </div>
+</div></div>
+<div class="tgme_widget_message_reactions js-message_reactions"><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F918D.png')"><b>👍</b></i>152</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F918F.png')"><b>👏</b></i>23</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F9881.png')"><b>😁</b></i>17</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09FA494.png')"><b>🤔</b></i>14</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/E29DA4.png')"><b>❤</b></i>10</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F8E89.png')"><b>🎉</b></i>7</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F94A5.png')"><b>🔥</b></i>5</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09FA493.png')"><b>🤓</b></i>4</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/E29AA1.png')"><b>⚡</b></i>2</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F998F.png')"><b>🙏</b></i>1</span></div><div class="tgme_widget_message_footer compact js-message_footer">
+  
+  <div class="tgme_widget_message_info short js-message_info">
+    <span class="tgme_widget_message_views">17.8K</span><span class="copyonly"> views</span><span class="tgme_widget_message_meta"><a class="tgme_widget_message_date" href="https://t.me/ai_machinelearning_big_data/10915"><time datetime="2026-09-12T10:10:11+00:00" class="time">10:10</time></a></span>
+  </div>
+</div>
+  </div>
+  
+</div></div><div class="tgme_widget_message_wrap js-widget_message_wrap"><div class="tgme_widget_message text_not_supported_wrap js-widget_message" data-post="ai_machinelearning_big_data/10916" data-view="eyJjIjotMTExNDU5MTA4NiwicCI6MTA5MTYsInQiOjE3ODk0MDc5ODMsImgiOiI0MjYzZmVjNWJkMWJmNTEyZmIifQ">
+  <div class="tgme_widget_message_user"><a href="https://t.me/ai_machinelearning_big_data"><i class="tgme_widget_message_user_photo bgcolor0" data-content="M"><img src="https://cdn4.telesco.pe/file/OZOUR4lzxXbPziBI1Sx4JhIoZoR6ub2__Nlxjnkl_dA3IvJPeNyR5ZerTDJItRjZnKTSygFFy0tRvk5k91Kd05YAv7VmiZpUxFmyp8gzyp2egyr8HeUPMr-EgsSctt325CJIYEWNocl3Gx6UtBqJlk5d5cwmlZvpo0oF--AuRyXEmPEN5h50sS5keB_UmpIuLOFKWNGUbeFFH-yO2jfT073eIRy9pdYf0WkoX4-FJFF1F4fpwcCRn2QH7ZgvoP-IAxA4BYgVuWTTf_p9nzIYQrVLsLPtxhcUp_ymeAf2zPyP8C2j4JE39my1vmd7Sw8cFIgDIBqj2KKeAI6xk_JPxA.jpg"></i></a></div>
+  <div class="tgme_widget_message_bubble">
+    
+        <i class="tgme_widget_message_bubble_tail">
+      <svg class="bubble_icon" width="9px" height="20px" viewBox="0 0 9 20">
+        <g fill="none">
+          <path class="background" fill="#ffffff" d="M8,1 L9,1 L9,20 L8,20 L8,18 C7.807,15.161 7.124,12.233 5.950,9.218 C5.046,6.893 3.504,4.733 1.325,2.738 L1.325,2.738 C0.917,2.365 0.89,1.732 1.263,1.325 C1.452,1.118 1.72,1 2,1 L8,1 Z"></path>
+          <path class="border_1x" fill="#d7e3ec" d="M9,1 L2,1 C1.72,1 1.452,1.118 1.263,1.325 C0.89,1.732 0.917,2.365 1.325,2.738 C3.504,4.733 5.046,6.893 5.95,9.218 C7.124,12.233 7.807,15.161 8,18 L8,20 L9,20 L9,1 Z M2,0 L9,0 L9,20 L7,20 L7,20 L7.002,18.068 C6.816,15.333 6.156,12.504 5.018,9.58 C4.172,7.406 2.72,5.371 0.649,3.475 C-0.165,2.729 -0.221,1.464 0.525,0.649 C0.904,0.236 1.439,0 2,0 Z"></path>
+          <path class="border_2x" d="M9,1 L2,1 C1.72,1 1.452,1.118 1.263,1.325 C0.89,1.732 0.917,2.365 1.325,2.738 C3.504,4.733 5.046,6.893 5.95,9.218 C7.124,12.233 7.807,15.161 8,18 L8,20 L9,20 L9,1 Z M2,0.5 L9,0.5 L9,20 L7.5,20 L7.5,20 L7.501,18.034 C7.312,15.247 6.64,12.369 5.484,9.399 C4.609,7.15 3.112,5.052 0.987,3.106 C0.376,2.547 0.334,1.598 0.894,0.987 C1.178,0.677 1.579,0.5 2,0.5 Z"></path>
+          <path class="border_3x" d="M9,1 L2,1 C1.72,1 1.452,1.118 1.263,1.325 C0.89,1.732 0.917,2.365 1.325,2.738 C3.504,4.733 5.046,6.893 5.95,9.218 C7.124,12.233 7.807,15.161 8,18 L8,20 L9,20 L9,1 Z M2,0.667 L9,0.667 L9,20 L7.667,20 L7.667,20 L7.668,18.023 C7.477,15.218 6.802,12.324 5.64,9.338 C4.755,7.064 3.243,4.946 1.1,2.983 C0.557,2.486 0.52,1.643 1.017,1.1 C1.269,0.824 1.626,0.667 2,0.667 Z"></path>
+        </g>
+      </svg>
+    </i>
+    <div class="tgme_widget_message_author accent_color"><a class="tgme_widget_message_owner_name" href="https://t.me/ai_machinelearning_big_data"><span dir="auto">Machinelearning</span></a></div>
+
+
+<div class="media_supported_cont"><a class="tgme_widget_message_video_player js-message_video_player" href="https://t.me/ai_machinelearning_big_data/10916"><i class="tgme_widget_message_video_thumb" style="background-image:url('https://cdn4.telesco.pe/file/RRxD3o31Y0OKIzQhoQl6suDSxRuQAdYVrzCWlyasS-lqofGSnHcpj_SzHB0YfYoc8B7L1I_qeZXVcOMKA_ICIiKjkzIbwxY2VCoSLYSyupe2sCvaPXnvAKOrrqLilSA7Gz_AgwIWDzdYTzz7CszxLoop7mwelFjXZj1WsPTr_n2hymRAUyOmcjc3z8avXmnOiANHT0zteNebVquPpybxz8-i2tQ2D2hRKLgmS9lsEW3CModuK3Ri1FJZhcQmpIbwuSbs7CIJulN3xIKBtML6msZtkxvqdZphtLyQUUKmJ0HGFWmhmWH5PCiwrbH2fubaiIDBfCKW7rn0Mnw1qdOLtw')"></i>
+
+<div class="tgme_widget_message_video_wrap" style="width:1920px;padding-top:56.25%">
+  <video src="https://cdn4.telesco.pe/file/5a2504daf3.mp4?token=kp203vflifdqU2M9MdM3hQpCupS2UBaDoxJz7-3CVZzoOL9EdSzfs3rrBptdOTDc3hGaAVc8j-fQXDdLCjiKwJm1cYVgIPnVFZd93Pts3RhfefOrMR4PNj_vTrtd8xwmpUeWADRLhU53bCZhtWBwuXywXCu64hxD9Y8hIxA9cRFWxfJ8FtNDQA3joJdDRWX46gje9_fWgoC4Gj2zeWzg_75wa6qHpV9g7ZQJfOERTnxGD4hbVVu2fy73_r_pL-fG_e0g_k_NIB509AwBEXSbzxlN9BwWSwt8-CyGAPr04-sTQIJJDfvrOXHkQBwhiXjWvujvTPN8htAgggLNz4gsx3hTNQasWjUrTPI5lND02ux7BWR6WF1xAjh14NJCyM-srYXa16R-WQVUirC9gMxGREK6a3CepIXVaGpshnn8wGMhYeZasYcrQXoGATvZ2Ku2nT5UAIzgWItFIIR7SbSl4zPgNHoBMxun4kX4hWuQzEdbHV4IrEHiXzAvURlLRco0MNFKTRYFPLpnmevkYin1nQc47DHPL1M3ZekXK71yRmWbYgLfyIlD7cWJO86JYmwVdLmivWhhnrFBYQvshr06R3NAdS_1-WcI8-388hjR2Si_CvZNUYEjpMGLyctIINdnWA5hwCK1STYpwrQRIc3aSQJTRjAo3uFuRiRj2lxoK64" class="tgme_widget_message_video js-message_video" width="100%" height="100%"></video>
+</div>
+<div class="message_video_play js-message_video_play"></div>
+<time class="message_video_duration js-message_video_duration">1:21</time>
+<div class="message_media_not_supported_wrap">
+  <div class="message_media_not_supported">
+    <div class="message_media_not_supported_label">This media is not supported in your browser</div>
+    <span class="message_media_view_in_telegram">VIEW IN TELEGRAM</span>
+  </div>
+</div></a><div class="tgme_widget_message_text js-message_text" dir="auto"><tg-emoji emoji-id="5386448185336017745"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/E29C94.png')"><b>✔️</b></i></tg-emoji> <b>OpenAI собрала версию ChatGPT для финансовых услуг</b><br/><br/><a href="https://openai.com/index/introducing-chatgpt-financial-services/" target="_blank" rel="noopener" onclick="return confirm('Open this link?\n\n'+this.href);">ChatGPT for Financial Services</a>&nbsp;- специализированная версия платформы, которую делаи вместе с банками Morgan Stanley и Evercore.<br/><br/>Инструмент объединяет аналитические возможности GPT-6 Astra со встроенными финансовыми датасетами от PitchBook, Crunchbase, Daloopa, FiscalAI и LSEG News, которые индексируются напрямую на инфраструктуре разработчика.<br/><br/><blockquote>Это решает проблемы интеграции внешних баз через MCP-коннекторы, ускоряет выборку и позволяет делать детализированное цитирование - система привязывает каждую цифру, показатель или вывод к точным строкам, таблицам и сноскам в исходных финансовых документах.</blockquote><br/><br/>Платформа автоматизирует LBO-моделирование, нормализацию отчётности, скрининг покупателей и генерацию аналитических отчётов и питчбуков по корпоративным шаблонам в форматах Excel, Word и PowerPoint, публикуемым администратором.<br/><br/>Для финсектора предусмотрена сквозная авторизация по существующим подпискам на S&amp;P Capital IQ, LSEG, MSCI, Factiva и Moody&#39;s, а также ролевой доступ, единый вход по SAML, автоматическое управление учётными записями через SCIM, поддержка информационных барьеров между рабочими пространствами, аудит действий через OpenAI Compliance Platform и запрет на использование клиентских данных для обучения моделей.<br/><br/><blockquote>На бенчмарке OfficeQA Pro, где модель ищет и анализирует данные в бюллетенях Минфина США со сложными таблицами, графиками и сносками, GPT-6 Astra показывает 69,9% против 60,2% у GPT-5.6 Sol.</blockquote><br/><br/>Решение доступно финансовым организациям по запросу, стоимость не раскрывается.<br/><br/><br/><a href="https://t.me/ai_machinelearning_big_data" target="_blank">@ai_machinelearning_big_data</a><br/><br/><a href="?q=%23news">#news</a> <a href="?q=%23ai">#ai</a> <a href="?q=%23ml">#ml</a></div></div><div class="media_not_supported_cont"><div class="message_media_not_supported_wrap">
+  <div class="message_media_not_supported">
+    <div class="message_media_not_supported_label">Please open Telegram to view this post</div>
+    <a href="https://t.me/ai_machinelearning_big_data/10916" class="message_media_view_in_telegram">VIEW IN TELEGRAM</a>
+  </div>
+</div></div>
+<div class="tgme_widget_message_reactions js-message_reactions"><span class="tgme_reaction tgme_reaction_paid"><i class="icon icon-telegram-stars"></i>1</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09FA493.png')"><b>🤓</b></i>85</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F918D.png')"><b>👍</b></i>73</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F9180.png')"><b>👀</b></i>13</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/E29DA4.png')"><b>❤</b></i>6</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F94A5.png')"><b>🔥</b></i>5</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09FA4A3.png')"><b>🤣</b></i>5</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F98AD.png')"><b>😭</b></i>2</span></div><div class="tgme_widget_message_footer compact js-message_footer">
+  
+  <div class="tgme_widget_message_info short js-message_info">
+    <span class="tgme_widget_message_views">19.1K</span><span class="copyonly"> views</span><span class="tgme_widget_message_meta"><a class="tgme_widget_message_date" href="https://t.me/ai_machinelearning_big_data/10916"><time datetime="2026-09-12T13:02:00+00:00" class="time">13:02</time></a></span>
+  </div>
+</div>
+  </div>
+  
+</div></div><div class="tgme_widget_message_wrap js-widget_message_wrap"><div class="tgme_widget_message text_not_supported_wrap js-widget_message" data-post="ai_machinelearning_big_data/10917" data-view="eyJjIjotMTExNDU5MTA4NiwicCI6IjEwOTE3ZyIsInQiOjE3ODk0MDc5ODMsImgiOiIyYWJhOTdiY2Y0ZWQxYTY1M2IifQ">
+  <div class="tgme_widget_message_user"><a href="https://t.me/ai_machinelearning_big_data"><i class="tgme_widget_message_user_photo bgcolor0" data-content="M"><img src="https://cdn4.telesco.pe/file/OZOUR4lzxXbPziBI1Sx4JhIoZoR6ub2__Nlxjnkl_dA3IvJPeNyR5ZerTDJItRjZnKTSygFFy0tRvk5k91Kd05YAv7VmiZpUxFmyp8gzyp2egyr8HeUPMr-EgsSctt325CJIYEWNocl3Gx6UtBqJlk5d5cwmlZvpo0oF--AuRyXEmPEN5h50sS5keB_UmpIuLOFKWNGUbeFFH-yO2jfT073eIRy9pdYf0WkoX4-FJFF1F4fpwcCRn2QH7ZgvoP-IAxA4BYgVuWTTf_p9nzIYQrVLsLPtxhcUp_ymeAf2zPyP8C2j4JE39my1vmd7Sw8cFIgDIBqj2KKeAI6xk_JPxA.jpg"></i></a></div>
+  <div class="tgme_widget_message_bubble">
+    
+        <i class="tgme_widget_message_bubble_tail">
+      <svg class="bubble_icon" width="9px" height="20px" viewBox="0 0 9 20">
+        <g fill="none">
+          <path class="background" fill="#ffffff" d="M8,1 L9,1 L9,20 L8,20 L8,18 C7.807,15.161 7.124,12.233 5.950,9.218 C5.046,6.893 3.504,4.733 1.325,2.738 L1.325,2.738 C0.917,2.365 0.89,1.732 1.263,1.325 C1.452,1.118 1.72,1 2,1 L8,1 Z"></path>
+          <path class="border_1x" fill="#d7e3ec" d="M9,1 L2,1 C1.72,1 1.452,1.118 1.263,1.325 C0.89,1.732 0.917,2.365 1.325,2.738 C3.504,4.733 5.046,6.893 5.95,9.218 C7.124,12.233 7.807,15.161 8,18 L8,20 L9,20 L9,1 Z M2,0 L9,0 L9,20 L7,20 L7,20 L7.002,18.068 C6.816,15.333 6.156,12.504 5.018,9.58 C4.172,7.406 2.72,5.371 0.649,3.475 C-0.165,2.729 -0.221,1.464 0.525,0.649 C0.904,0.236 1.439,0 2,0 Z"></path>
+          <path class="border_2x" d="M9,1 L2,1 C1.72,1 1.452,1.118 1.263,1.325 C0.89,1.732 0.917,2.365 1.325,2.738 C3.504,4.733 5.046,6.893 5.95,9.218 C7.124,12.233 7.807,15.161 8,18 L8,20 L9,20 L9,1 Z M2,0.5 L9,0.5 L9,20 L7.5,20 L7.5,20 L7.501,18.034 C7.312,15.247 6.64,12.369 5.484,9.399 C4.609,7.15 3.112,5.052 0.987,3.106 C0.376,2.547 0.334,1.598 0.894,0.987 C1.178,0.677 1.579,0.5 2,0.5 Z"></path>
+          <path class="border_3x" d="M9,1 L2,1 C1.72,1 1.452,1.118 1.263,1.325 C0.89,1.732 0.917,2.365 1.325,2.738 C3.504,4.733 5.046,6.893 5.95,9.218 C7.124,12.233 7.807,15.161 8,18 L8,20 L9,20 L9,1 Z M2,0.667 L9,0.667 L9,20 L7.667,20 L7.667,20 L7.668,18.023 C7.477,15.218 6.802,12.324 5.64,9.338 C4.755,7.064 3.243,4.946 1.1,2.983 C0.557,2.486 0.52,1.643 1.017,1.1 C1.269,0.824 1.626,0.667 2,0.667 Z"></path>
+        </g>
+      </svg>
+    </i>
+    <div class="tgme_widget_message_author accent_color"><a class="tgme_widget_message_owner_name" href="https://t.me/ai_machinelearning_big_data"><span dir="auto">Machinelearning</span></a></div>
+
+
+<div class="tgme_widget_message_grouped_wrap js-message_grouped_wrap" data-margin-w="2" data-margin-h="2" style="width:453px;">
+  <div class="tgme_widget_message_grouped js-message_grouped" style="padding-top:133.333%">
+    <div class="tgme_widget_message_grouped_layer js-message_grouped_layer" style="width:453px;height:604px">
+      <a class="tgme_widget_message_photo_wrap grouped_media_wrap blured js-message_photo" style="left:0px;top:0px;width:297px;height:604px;margin-right:2px;margin-bottom:0px;background-image:url('https://cdn4.telesco.pe/file/uMpUJFcQF7ChcFaKY68pvvC_5j6vbMuuUti7-E4xk71nT1YxhjG7d80XpWWMzZTx2Co2dFmcAUS1hV-AhP7u6FvQBH-yk842YRcRW6RYLE_kl2ZhRKxPc0L4vcuLOAMcnRsi2sdy6HvjJw1rmG_s5NqQdwVNJ4rVmBMF8J0FZSOQD4N-VjpyMIat-Ec6fUq8nJsC8GtiErxF1N_D3IUp-Injr4rK4Elrf50DRpGtLWKOEh6eWY8UUtayomIt7AOHAuA1EFBGCfGKPxuboS5yKUINL6xx40a1M86W6zdV1u9LxLkanFm53ivjBZWnZuPKV2wTgsQl8Utc9k0EbuwHhw.jpg')" data-ratio="1" href="https://t.me/ai_machinelearning_big_data/10917?single">
+  <div class="grouped_media_helper" style="left:0;right:0;top:75px;bottom:76px;">
+    <div class="tgme_widget_message_photo grouped_media" style="top:0;bottom:0;left:-154px;right:-153px;"></div>
+  </div>
+</a><a class="tgme_widget_message_photo_wrap grouped_media_wrap blured js-message_photo" style="left:299px;top:0px;width:154px;height:205px;margin-right:0px;margin-bottom:2px;background-image:url('https://cdn4.telesco.pe/file/epbi7OIcvBqf4xtQRgWnbgHIEjaqJYOmp79X_vmShwsioCGPhCSKQ6fp_fJGnkQR4Oqvute24eUu3kJOoFaZaWRn8t-yY1w0aFd9j7h-fbSVZr86onNft55KHjgu-OZNvvH3esywbDnb1BwbDuR9X9JSw3uqMBhNfity7FtLfNeGSStSXCc1eVk_iPAweBN_-BXwARdDZaO8L6mIxnqdzUQz_1MZLK9SHU9gG9wssxBB5DWqYNeyWzppGVFKhN7ot46TusJt-Iw4xpoGxeegH2uDXLso_-aygVvMHGouuijkLFxCMA8Y2_PdbGPRjoBeezQBXwKG_2_k_QsEqUMJUg.jpg')" data-ratio="1.4760147601476" href="https://t.me/ai_machinelearning_big_data/10918?single">
+  <div class="grouped_media_helper" style="left:0;right:0;top:149px;bottom:149px;">
+    <div class="tgme_widget_message_photo grouped_media" style="top:0;bottom:0;left:-75px;right:-74px;"></div>
+  </div>
+</a><a class="tgme_widget_message_photo_wrap grouped_media_wrap blured js-message_photo" style="left:299px;top:207px;width:154px;height:196px;margin-right:0px;margin-bottom:2px;background-image:url('https://cdn4.telesco.pe/file/og9DPwnFanT00lyVNTUU2pozObN6DdHzrt7zygBgOjliLpY3bFgAgAIHurj3JYseZm-veIDsOZSHEjBfY5a60Dxx9sbAx16F77PI-WRj7AgOpWFH4VRHvp5x-qtFuOIj5V_qtrWR-RKy0eOivEu_k2lfj556SAlQVkvWXQ1vBKmkf9hbjikBPlLtQEikLGIWciHZyed-YGD69v_lEXfFPvQX_pero6S11H-Ot1c0ku_lluKBz7JyNQeNZvLcg8lQTSQVUIMV2Hf0rvyByGn3s8-u5iCx-2KlqLs3WUo8ahXZw_8zd6g196NjgmQZAQwcDmfsMtr1Kk-sbk-iXXZHng.jpg')" data-ratio="1.5520833333333" href="https://t.me/ai_machinelearning_big_data/10919?single">
+  <div class="grouped_media_helper" style="left:0;right:0;top:156px;bottom:157px;">
+    <div class="tgme_widget_message_photo grouped_media" style="top:0;bottom:0;left:-76px;right:-75px;"></div>
+  </div>
+</a><a class="tgme_widget_message_photo_wrap grouped_media_wrap blured js-message_photo" style="left:299px;top:405px;width:154px;height:199px;margin-right:0px;margin-bottom:0px;background-image:url('https://cdn4.telesco.pe/file/X2kkuvxfLQCz2gjlnDSun-OBY0ZiJkHj33cs8vnEWLX_U3Lm0jJ810MOM_y6ky92wgjmmyLxYchxvnV9q9OzfXJUVJ6H0x-e2kEzTOdS1iGOzZzfpumr_SyLAl0wXZ744ubx_-gM9K8J_D4NkbZo7ELcAw5Ph3DOdEhmWR95EuNH19yNLOj_vJ3drnVL5Nz-EYLdouuSfQt0ks9QJ2WKpFCHhhQEnTawthUTC1FUDWw_NeelGJ86mWlSjgAA980mgXMu42rUuzNlA0_TT6k58vEPZPI_bXlVfoU8Avgu1AXSqnz9em5VhRKrYVPAW8-Ury0qkqrOFxF2b6qmtXUx-Q.jpg')" data-ratio="1.52" href="https://t.me/ai_machinelearning_big_data/10920?single">
+  <div class="grouped_media_helper" style="left:0;right:0;top:153px;bottom:153px;">
+    <div class="tgme_widget_message_photo grouped_media" style="top:0;bottom:0;left:-75px;right:-74px;"></div>
+  </div>
+</a>
+    </div>
+  </div>
+</div><div class="tgme_widget_message_text js-message_text" dir="auto"><div class="tgme_widget_message_text js-message_text" dir="auto"><b><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/E29AA1.png')"><b>⚡</b></i> Глава Anthropic призвал замедлить развитие ИИ и допустить независимых проверяющих внутрь лабораторий</b><br/><br/>В статье <b>We Must Pace the Frontier</b> Дарио Амодеи объяснил, почему изменил позицию: в 2023 году замедление казалось ему преждевременным, теперь он считает его необходимым.<br/><br/><b>Самое интересное:</b><br/><br/><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F94B9.png')"><b>🔹</b></i> <b>ИИ уже ускоряет создание следующего поколения моделей.</b> По словам Амодеи, рекурсивное самоулучшение начинается в отрасли, включая Anthropic. Он опасается, что возможности систем будут расти быстрее, чем способы их контроля.<br/><br/><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F94B9.png')"><b>🔹</b></i> <b>Его тревожный сценарий - масштабные кибератаки через 6–12 месяцев.</b> Амодеи допускает, что более мощный рой агентов сможет создать устойчивый ботнет и нанести ущерб на сотни миллиардов долларов. Это его оценка риска.<br/><br/><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F94B9.png')"><b>🔹</b></i> <b>Anthropic обещает постоянный доступ внешним проверяющим.</b> Рабочие места, пропуска, инструменты и права, сопоставимые с внутренними командами оценки рисков. Проверять предлагается и готовые модели, и процесс обучения.<br/><br/><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F94B9.png')"><b>🔹</b></i> <b>Проверяющие смогут публиковать неудобные выводы.</b> Компания предусматривает ограничения для защищённой информации, но обещает не скрывать результаты только потому, что они ей невыгодны.<br/><br/><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F94B9.png')"><b>🔹</b></i> <b>Цель - выиграть год-два для безопасности.</b> Среди предложений: обязательные проверки при достижении опасных возможностей и международные ограничения скорости самоулучшения ИИ. Полную глобальную паузу Амодеи считает маловероятной в ближайшее время.<br/><br/>Полная cтатья - <a href="https://darioamodei.com/post/we-must-pace-the-frontier" target="_blank" rel="noopener">https://darioamodei.com/post/we-must-pace-the-frontier</a><br/><br/><a href="https://t.me/ai_machinelearning_big_data" target="_blank">@ai_machinelearning_big_data</a><br/><br/><a href="?q=%23Anthropic">#Anthropic</a></div></div>
+<div class="tgme_widget_message_reactions js-message_reactions"><span class="tgme_reaction tgme_reaction_paid"><i class="icon icon-telegram-stars"></i>1</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F918D.png')"><b>👍</b></i>84</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09FA4A3.png')"><b>🤣</b></i>72</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/E29AA1.png')"><b>⚡</b></i>32</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09FA494.png')"><b>🤔</b></i>30</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/E29DA4.png')"><b>❤</b></i>16</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F91A8E2808DF09F92BB.png')"><b>👨‍💻</b></i>8</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09FA4A8.png')"><b>🤨</b></i>7</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F91BB.png')"><b>👻</b></i>4</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F94A5.png')"><b>🔥</b></i>3</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F9881.png')"><b>😁</b></i>1</span></div><div class="tgme_widget_message_footer compact js-message_footer">
+  
+  <div class="tgme_widget_message_info short js-message_info">
+    <span class="tgme_widget_message_views">20.4K</span><span class="copyonly"> views</span><span class="tgme_widget_message_meta"><a class="tgme_widget_message_date" href="https://t.me/ai_machinelearning_big_data/10917"><time datetime="2026-09-12T21:12:49+00:00" class="time">21:12</time></a></span>
+  </div>
+</div>
+  </div>
+  
+</div></div><div class="tgme_widget_message_wrap js-widget_message_wrap"><div class="tgme_widget_message text_not_supported_wrap js-widget_message" data-post="ai_machinelearning_big_data/10921" data-view="eyJjIjotMTExNDU5MTA4NiwicCI6IjEwOTIxZyIsInQiOjE3ODk0MDc5ODMsImgiOiJiYzQ4YTUwYzM4ZTkxNWJiYmEifQ">
+  <div class="tgme_widget_message_user"><a href="https://t.me/ai_machinelearning_big_data"><i class="tgme_widget_message_user_photo bgcolor0" data-content="M"><img src="https://cdn4.telesco.pe/file/OZOUR4lzxXbPziBI1Sx4JhIoZoR6ub2__Nlxjnkl_dA3IvJPeNyR5ZerTDJItRjZnKTSygFFy0tRvk5k91Kd05YAv7VmiZpUxFmyp8gzyp2egyr8HeUPMr-EgsSctt325CJIYEWNocl3Gx6UtBqJlk5d5cwmlZvpo0oF--AuRyXEmPEN5h50sS5keB_UmpIuLOFKWNGUbeFFH-yO2jfT073eIRy9pdYf0WkoX4-FJFF1F4fpwcCRn2QH7ZgvoP-IAxA4BYgVuWTTf_p9nzIYQrVLsLPtxhcUp_ymeAf2zPyP8C2j4JE39my1vmd7Sw8cFIgDIBqj2KKeAI6xk_JPxA.jpg"></i></a></div>
+  <div class="tgme_widget_message_bubble">
+    
+        <i class="tgme_widget_message_bubble_tail">
+      <svg class="bubble_icon" width="9px" height="20px" viewBox="0 0 9 20">
+        <g fill="none">
+          <path class="background" fill="#ffffff" d="M8,1 L9,1 L9,20 L8,20 L8,18 C7.807,15.161 7.124,12.233 5.950,9.218 C5.046,6.893 3.504,4.733 1.325,2.738 L1.325,2.738 C0.917,2.365 0.89,1.732 1.263,1.325 C1.452,1.118 1.72,1 2,1 L8,1 Z"></path>
+          <path class="border_1x" fill="#d7e3ec" d="M9,1 L2,1 C1.72,1 1.452,1.118 1.263,1.325 C0.89,1.732 0.917,2.365 1.325,2.738 C3.504,4.733 5.046,6.893 5.95,9.218 C7.124,12.233 7.807,15.161 8,18 L8,20 L9,20 L9,1 Z M2,0 L9,0 L9,20 L7,20 L7,20 L7.002,18.068 C6.816,15.333 6.156,12.504 5.018,9.58 C4.172,7.406 2.72,5.371 0.649,3.475 C-0.165,2.729 -0.221,1.464 0.525,0.649 C0.904,0.236 1.439,0 2,0 Z"></path>
+          <path class="border_2x" d="M9,1 L2,1 C1.72,1 1.452,1.118 1.263,1.325 C0.89,1.732 0.917,2.365 1.325,2.738 C3.504,4.733 5.046,6.893 5.95,9.218 C7.124,12.233 7.807,15.161 8,18 L8,20 L9,20 L9,1 Z M2,0.5 L9,0.5 L9,20 L7.5,20 L7.5,20 L7.501,18.034 C7.312,15.247 6.64,12.369 5.484,9.399 C4.609,7.15 3.112,5.052 0.987,3.106 C0.376,2.547 0.334,1.598 0.894,0.987 C1.178,0.677 1.579,0.5 2,0.5 Z"></path>
+          <path class="border_3x" d="M9,1 L2,1 C1.72,1 1.452,1.118 1.263,1.325 C0.89,1.732 0.917,2.365 1.325,2.738 C3.504,4.733 5.046,6.893 5.95,9.218 C7.124,12.233 7.807,15.161 8,18 L8,20 L9,20 L9,1 Z M2,0.667 L9,0.667 L9,20 L7.667,20 L7.667,20 L7.668,18.023 C7.477,15.218 6.802,12.324 5.64,9.338 C4.755,7.064 3.243,4.946 1.1,2.983 C0.557,2.486 0.52,1.643 1.017,1.1 C1.269,0.824 1.626,0.667 2,0.667 Z"></path>
+        </g>
+      </svg>
+    </i>
+    <div class="tgme_widget_message_author accent_color"><a class="tgme_widget_message_owner_name" href="https://t.me/ai_machinelearning_big_data"><span dir="auto">Machinelearning</span></a></div>
+
+
+<div class="media_supported_cont"><div class="tgme_widget_message_one_media js-message_media"><div class="media_supported_cont"><div class="tgme_widget_message_grouped_wrap js-message_grouped_wrap" data-margin-w="2" data-margin-h="2" style="width:453px;">
+  <div class="tgme_widget_message_grouped js-message_grouped" style="padding-top:83.223%">
+    <div class="tgme_widget_message_grouped_layer js-message_grouped_layer" style="width:453px;height:377px">
+      <a class="tgme_widget_message_photo_wrap grouped_media_wrap blured js-message_photo" style="left:0px;top:0px;width:453px;height:254px;margin-right:0px;margin-bottom:2px;background-image:url('https://cdn4.telesco.pe/file/OWeSL-HpY0IGDoUt_QOeS7muaDgcvOfEJDdJwKYfpnegG6HDWpu83Ba9KxTDWS9X0I0mlFelFcvrQsWrrh-FKB_-XtdFTyxjvAl1qUbRp2JATia2UQuZ19VHHexbJVQJ41k-_sCP6vhSiyogIDt7ATyEwRhrbrNpdevFWFjPGu1nxE6bbhX3mor8TrlMFLDJwwKi1lon_SOVHsao6dnNbY2KpkpJrkxr3FhEJ0gcovLZIpcHSyzJKpSn7KUHoYT-Ez3T6aInrV8SwzivX1j6G-LfSjnYy0BzNwx5MPgiYVfu5uy2sYX-p3ghAgkE3jFddpTUZWO2zdQn-pSGBq1BcQ.jpg')" data-ratio="1.7777777777778" href="https://t.me/ai_machinelearning_big_data/10921?single">
+  <div class="grouped_media_helper" style="left:0;right:0;top:61px;bottom:62px;">
+    <div class="tgme_widget_message_photo grouped_media" style="left:0;right:0;top:-1px;bottom:0px;"></div>
+  </div>
+</a><a class="tgme_widget_message_photo_wrap grouped_media_wrap blured js-message_photo" style="left:0px;top:256px;width:225px;height:121px;margin-right:2px;margin-bottom:0px;background-image:url('https://cdn4.telesco.pe/file/AMc2mNMz0hFa3Av1UpnsNC2t6lFV-J_Ow9Z6KOSF82B-V_sSfRHkBMcG4RycYigjzEf04KePtnkV6B87o7jcxFJEgoICT1XvuLdLZgbbNf1pQ3G6OWmZcqoBwDojwLkW7riYvFP9cjr6KeTp5mYzcAPf7z7qqyHggODL7ACLJPICX18OFUXgwDStVtbsjzkmy6Ph07TVoRazPJw3pya8aQ3cX5HGCyrVhJHMkAoPs9OF5CoAYGvA5x06G8AWJzjvIxFdSJccR-m5Q7RBPuwnNTUN1cNfBZLy4lheM0y7GOK6OcJ1kBsPuzXOl6Q_Zrixi4mFN_A5mci6cn1k8PdhZQ.jpg')" data-ratio="1.8561484918794" href="https://t.me/ai_machinelearning_big_data/10922?single">
+  <div class="grouped_media_helper" style="left:0;right:0;top:66px;bottom:67px;">
+    <div class="tgme_widget_message_photo grouped_media" style="left:0;right:0;top:-1px;bottom:0px;"></div>
+  </div>
+</a><a class="tgme_widget_message_photo_wrap grouped_media_wrap blured js-message_photo" style="left:227px;top:256px;width:226px;height:121px;margin-right:0px;margin-bottom:0px;background-image:url('https://cdn4.telesco.pe/file/SstQZ3AXx83QMp8JUEciJse27oaUkid867LsBSLp8Ve-D_FUWkgXujkXA7RkDbEE9POCvwVpv1dMZGpBS2h4C4kvfuNUNyxZIO4nYWvEkA3jwzXj6PSOrupfFzzpcuRfmGOdTdfQKEtZd8FRdZAkEI05pTZHaUuraL9YqwavGqjTzBoIgb055yXFF-Ht3QpFcNy6tNld65HMaEntersC12ZJlaACw8AeMHY8yNV-VYW51KhtEZJUlsF-IZ8ubPSqB0MW3-WWghqmE36Qb5GpJnkMIl2DvipRmq58jeTgc-IG931ET-T6M8rDMPaTjdrxAT-o9XQBMO2B-yQv78eNng.jpg')" data-ratio="1.3468013468013" href="https://t.me/ai_machinelearning_big_data/10923?single">
+  <div class="grouped_media_helper" style="left:0;right:0;top:20px;bottom:21px;">
+    <div class="tgme_widget_message_photo grouped_media" style="left:0;right:0;top:-24px;bottom:-23px;"></div>
+  </div>
+</a>
+    </div>
+  </div>
+</div><div class="tgme_widget_message_text js-message_text" dir="auto"><tg-emoji emoji-id="5337010070922209271"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F938C.png')"><b>📌</b></i></tg-emoji><b>ApprenticeBench: проверка способности ИИ освоить работу как новый сотрудник</b><br/><br/>Стартап NeoCognition&nbsp;<a href="https://neocognition.io/blog/apprentice-bench/" target="_blank" rel="noopener" onclick="return confirm('Open this link?\n\n'+this.href);">разработал</a>&nbsp;первый сквозной бенчмарк использования компьютера, непрерывного обучения и долгосрочной агентной работы на реальной должности.<br/><br/><blockquote>NeoCognition - лаборатория, в которой собрали бенчмарки MMMU, Mind2Web, SWE-Bench Pro и OSWorld 2, а также агентные системы SeeAct, UGround и HippoRAG.</blockquote><br/><br/>Агента принимают в виртуальную строительную компанию на работу с кредиторской задолженностью, выдают полугодовой архив счетов, внутренний справочник и руководство по ERP-системе, после чего он начинает работать со счетами.<br/><br/>Первый месяц проходит с подробным фидбэком от руководителя по каждому счёту, а дальше - с редкими замечаниями по итогам месяца.<br/><br/>Каждая из ста задач теста проверена профессиональными бухгалтерами строительной отрасли, которые подтвердили и реалистичность сценариев, и то, что любую задачу способен решить рядовой специалист, изучивший доступные агенту материалы.<br/><br/><tg-emoji emoji-id="5415597204955996883"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F9FA1.png')"><b>🟡</b></i></tg-emoji><b>Результаты</b><br/><br/>Большинство моделей, включая Gemini, Muse Spark, Grok и Kimi, не преодолевают порог в 20-25%, тогда как Fable 5.1 выполнила 72% задач, а GPT-6 Astra - 68%.<br/><br/>Лучший из двух тестировщиков-людей показал 51%, причём проваливались люди на поиске нужного в исторических данных, точности расчётов и мелких ошибках от утомления.<br/><br/>Разрыв между открытыми и закрытыми моделями авторы называют крупнейшим из всех виденных ими на бенчмарках - 72% у Fable 5.1 против 18% у Kimi K3, и вызван он не базовыми операциями в интерфейсе, а неспособностью слабых моделей учиться на дистанции.<br/><br/><blockquote>Kimi K3 почти не обращался ни к архиву счетов, ни к собственным заметкам и деградировал к концу серии.</blockquote><br/><br/><tg-emoji emoji-id="5415597204955996883"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F9FA1.png')"><b>🟡</b></i></tg-emoji><b>GUI vs API</b><br/><br/>Так называемый налог на использование компьютера (просадка при переходе с API на графический интерфейс) у большинства моделей достигает 78%, но Fable 5.1 и GPT-6 Astra работают через GUI даже лучше, чем через API.<br/><br/>Дешевле при этом остаётся API - Fable 5.1 обходится в 6,95 доллара за задачу в программном интерфейсе против 18,23 доллара при работе с графическим.<br/><br/><tg-emoji emoji-id="5415597204955996883"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F9FA1.png')"><b>🟡</b></i></tg-emoji><b>Обучаемость</b><br/><br/>Способность к обучению измерили отдельно. Fable 5 без доступа к истории и обратной связи, опираясь только на собственные знания, решает 11 счетов из 100.<br/><br/>Подключение архива счетов поднимает результат до 31, обратная связь руководителя - до 35, а оба канала вместе дают 43.<br/><br/><tg-emoji emoji-id="5415597204955996883"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F9FA1.png')"><b>🟡</b></i></tg-emoji><b>Вывод</b><br/><br/>ИИ пока ещё обходится дороже: 18,23 доллара за задачу против 7,21 у людей. К тому же человек по мере накопления опята работает быстрее, а агент - замедляется.<br/><br/><tg-emoji emoji-id="5359581893589214348"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F949C.png')"><b>🔜</b></i></tg-emoji> <a href="https://www.youtube.com/watch?v=Y6v5iL2OyVM" target="_blank" rel="noopener" onclick="return confirm('Open this link?\n\n'+this.href);">Посмотреть часовой прогон Fable 5.1 по всем ста задачам.</a><br/><br/><br/><a href="https://t.me/ai_machinelearning_big_data" target="_blank">@ai_machinelearning_big_data</a><br/><br/><a href="?q=%23AI">#AI</a> <a href="?q=%23ML">#ML</a> <a href="?q=%23Benchmark">#Benchmark</a> <a href="?q=%23ApprenticeBench">#ApprenticeBench</a> <a href="?q=%23NeoCognition">#NeoCognition</a></div></div><div class="media_not_supported_cont"><div class="message_media_not_supported_wrap">
+  <div class="message_media_not_supported">
+    <div class="message_media_not_supported_label">Please open Telegram to view this post</div>
+    <a href="https://t.me/ai_machinelearning_big_data/10921?single" class="message_media_view_in_telegram">VIEW IN TELEGRAM</a>
+  </div>
+</div></div></div></div><div class="media_not_supported_cont"><div class="message_media_not_supported_wrap">
+  <div class="message_media_not_supported">
+    <div class="message_media_not_supported_label">Please open Telegram to view this post</div>
+    <a href="https://t.me/ai_machinelearning_big_data/10921" class="message_media_view_in_telegram">VIEW IN TELEGRAM</a>
+  </div>
+</div></div>
+<div class="tgme_widget_message_reactions js-message_reactions"><span class="tgme_reaction tgme_reaction_paid"><i class="icon icon-telegram-stars"></i>1</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09FA494.png')"><b>🤔</b></i>94</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/E29DA4.png')"><b>❤</b></i>42</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F918F.png')"><b>👏</b></i>30</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F92AF.png')"><b>💯</b></i>15</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F918D.png')"><b>👍</b></i>11</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F94A5.png')"><b>🔥</b></i>6</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F918C.png')"><b>👌</b></i>4</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F8E89.png')"><b>🎉</b></i>2</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09FA493.png')"><b>🤓</b></i>2</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F9180.png')"><b>👀</b></i>1</span></div><div class="tgme_widget_message_footer compact js-message_footer">
+  
+  <div class="tgme_widget_message_info short js-message_info">
+    <span class="tgme_widget_message_views">18.6K</span><span class="copyonly"> views</span><span class="tgme_widget_message_meta"><a class="tgme_widget_message_date" href="https://t.me/ai_machinelearning_big_data/10921"><time datetime="2026-09-13T10:51:34+00:00" class="time">10:51</time></a></span>
+  </div>
+</div>
+  </div>
+  
+</div></div><div class="tgme_widget_message_wrap js-widget_message_wrap"><div class="tgme_widget_message text_not_supported_wrap js-widget_message" data-post="ai_machinelearning_big_data/10924" data-view="eyJjIjotMTExNDU5MTA4NiwicCI6MTA5MjQsInQiOjE3ODk0MDc5ODMsImgiOiJmOTY0Y2Y3NTFjYTA5NjM3NWQifQ">
+  <div class="tgme_widget_message_user"><a href="https://t.me/ai_machinelearning_big_data"><i class="tgme_widget_message_user_photo bgcolor0" data-content="M"><img src="https://cdn4.telesco.pe/file/OZOUR4lzxXbPziBI1Sx4JhIoZoR6ub2__Nlxjnkl_dA3IvJPeNyR5ZerTDJItRjZnKTSygFFy0tRvk5k91Kd05YAv7VmiZpUxFmyp8gzyp2egyr8HeUPMr-EgsSctt325CJIYEWNocl3Gx6UtBqJlk5d5cwmlZvpo0oF--AuRyXEmPEN5h50sS5keB_UmpIuLOFKWNGUbeFFH-yO2jfT073eIRy9pdYf0WkoX4-FJFF1F4fpwcCRn2QH7ZgvoP-IAxA4BYgVuWTTf_p9nzIYQrVLsLPtxhcUp_ymeAf2zPyP8C2j4JE39my1vmd7Sw8cFIgDIBqj2KKeAI6xk_JPxA.jpg"></i></a></div>
+  <div class="tgme_widget_message_bubble">
+    
+        <i class="tgme_widget_message_bubble_tail">
+      <svg class="bubble_icon" width="9px" height="20px" viewBox="0 0 9 20">
+        <g fill="none">
+          <path class="background" fill="#ffffff" d="M8,1 L9,1 L9,20 L8,20 L8,18 C7.807,15.161 7.124,12.233 5.950,9.218 C5.046,6.893 3.504,4.733 1.325,2.738 L1.325,2.738 C0.917,2.365 0.89,1.732 1.263,1.325 C1.452,1.118 1.72,1 2,1 L8,1 Z"></path>
+          <path class="border_1x" fill="#d7e3ec" d="M9,1 L2,1 C1.72,1 1.452,1.118 1.263,1.325 C0.89,1.732 0.917,2.365 1.325,2.738 C3.504,4.733 5.046,6.893 5.95,9.218 C7.124,12.233 7.807,15.161 8,18 L8,20 L9,20 L9,1 Z M2,0 L9,0 L9,20 L7,20 L7,20 L7.002,18.068 C6.816,15.333 6.156,12.504 5.018,9.58 C4.172,7.406 2.72,5.371 0.649,3.475 C-0.165,2.729 -0.221,1.464 0.525,0.649 C0.904,0.236 1.439,0 2,0 Z"></path>
+          <path class="border_2x" d="M9,1 L2,1 C1.72,1 1.452,1.118 1.263,1.325 C0.89,1.732 0.917,2.365 1.325,2.738 C3.504,4.733 5.046,6.893 5.95,9.218 C7.124,12.233 7.807,15.161 8,18 L8,20 L9,20 L9,1 Z M2,0.5 L9,0.5 L9,20 L7.5,20 L7.5,20 L7.501,18.034 C7.312,15.247 6.64,12.369 5.484,9.399 C4.609,7.15 3.112,5.052 0.987,3.106 C0.376,2.547 0.334,1.598 0.894,0.987 C1.178,0.677 1.579,0.5 2,0.5 Z"></path>
+          <path class="border_3x" d="M9,1 L2,1 C1.72,1 1.452,1.118 1.263,1.325 C0.89,1.732 0.917,2.365 1.325,2.738 C3.504,4.733 5.046,6.893 5.95,9.218 C7.124,12.233 7.807,15.161 8,18 L8,20 L9,20 L9,1 Z M2,0.667 L9,0.667 L9,20 L7.667,20 L7.667,20 L7.668,18.023 C7.477,15.218 6.802,12.324 5.64,9.338 C4.755,7.064 3.243,4.946 1.1,2.983 C0.557,2.486 0.52,1.643 1.017,1.1 C1.269,0.824 1.626,0.667 2,0.667 Z"></path>
+        </g>
+      </svg>
+    </i>
+    <div class="tgme_widget_message_author accent_color"><a class="tgme_widget_message_owner_name" href="https://t.me/ai_machinelearning_big_data"><span dir="auto">Machinelearning</span></a></div>
+
+
+<div class="media_supported_cont"><a class="tgme_widget_message_photo_wrap 5276520636748602264 1228535696_460004248" href="https://t.me/ai_machinelearning_big_data/10924" style="width:800px;background-image:url('https://cdn4.telesco.pe/file/W9yeIRYdYNE9eE7q3iRkrnp8J5ykZXRyEU8v8icLSmSI2vQrfR_voVygyXgqrSy2jjNybUploEzqeGdsbx78eASllreIMUzwmiW1ARS9TqL9gmOmYmKGbh0UAqq7-UkVO-g2jE7rRPRjAEfFDdgy-HHSDTKQuf5OeQzma7mPv45DBTjKTloXwjxr8DxWfeGMP4I8Dibpvs5_DvL2WZ7yng5N6j8TodFzrsckHEKqrHkH7rz4DrCdEfiqpE3OaILOXLZJ4QwaI7HiP30C0QzXSbrAhKeVh6v6KWZmepzuLB2_9goY5R07I6POITocU_HGH9RIDbzAL7oWAj6-r91Xlg.jpg')">
+  <div class="tgme_widget_message_photo" style="padding-top:46.5%"></div>
+</a><div class="tgme_widget_message_text js-message_text" dir="auto"><tg-emoji emoji-id="5337010070922209271"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F938C.png')"><b>📌</b></i></tg-emoji> <b>Сэм Альтман и Дарио Амодеи вошли в Топ-50 самых влиятельных евреев по версии The Jerusalem Post</b><br/><br/>Глава OpenAI занял девятую строчку <a href="https://www.jpost.com/influencers-26/50jews-26" target="_blank" rel="noopener" onclick="return confirm('Open this link?\n\n'+this.href);">рейтинга</a>, разделив её с Марком Цукербергом.<br/><br/>Обе фигуры издание <a href="https://www.jpost.com/influencers-26/50jews-26/article-908113" target="_blank" rel="noopener" onclick="return confirm('Open this link?\n\n'+this.href);">объединило</a> формулировкой <i>«...технологические лидеры, выводящие ИИ за пределы цифрового мира»</i>.<br/><br/>Три года назад Альтман тот же список <a href="https://www.jpost.com/influencers/50jews-23" target="_blank" rel="noopener" onclick="return confirm('Open this link?\n\n'+this.href);">возглавлял</a>, а в прошлогоднем выпуске не значился вовсе.<br/><br/><blockquote>Рейтинг выходит раз в год уже больше десяти лет и приурочен к Рош ха-Шана, еврейскому Новому году,  в этом году праздник наступил 12 сентября.<br/><br/>The Jerusalem Post — старейшая и самая читаемая англоязычная газета Израиля, основанная в 1932 году под названием The Palestine Post. Издание выходит и в печати, и онлайн.</blockquote><br/><br/>Седьмую строчку занимает Ассаф Раппапорт, основатель компании Wiz, семнадцатую — сооснователь Oracle Ларри Эллисон, восемнадцатую — сооснователь Google Сергей Брин.<br/><br/>Двадцатая строчка досталась в том числе Алексу Карпу из Palantir, двадцать шестая — брату и сестре Дарио и Даниэле Амодеи, которых издание называет <i>«...еврейскими родственниками, формирующими ИИ»</i>.<br/><br/><br/><a href="https://t.me/ai_machinelearning_big_data" target="_blank">@ai_machinelearning_big_data</a><br/><br/><a href="?q=%23news">#news</a> <a href="?q=%23ai">#ai</a> <a href="?q=%23ml">#ml</a></div></div><div class="media_not_supported_cont"><div class="message_media_not_supported_wrap">
+  <div class="message_media_not_supported">
+    <div class="message_media_not_supported_label">Please open Telegram to view this post</div>
+    <a href="https://t.me/ai_machinelearning_big_data/10924" class="message_media_view_in_telegram">VIEW IN TELEGRAM</a>
+  </div>
+</div></div>
+<div class="tgme_widget_message_reactions js-message_reactions"><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F9881.png')"><b>😁</b></i>103</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F918F.png')"><b>👏</b></i>21</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F8E89.png')"><b>🎉</b></i>12</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09FA4AC.png')"><b>🤬</b></i>11</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/E29DA4.png')"><b>❤</b></i>9</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09FA4A9.png')"><b>🤩</b></i>7</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F918D.png')"><b>👍</b></i>5</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F92AF.png')"><b>💯</b></i>3</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F94A5.png')"><b>🔥</b></i>2</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09FA5B0.png')"><b>🥰</b></i>1</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09FA4A8.png')"><b>🤨</b></i>1</span></div><div class="tgme_widget_message_footer compact js-message_footer">
+  
+  <div class="tgme_widget_message_info short js-message_info">
+    <span class="tgme_widget_message_views">15.1K</span><span class="copyonly"> views</span><span class="tgme_widget_message_meta"><a class="tgme_widget_message_date" href="https://t.me/ai_machinelearning_big_data/10924"><time datetime="2026-09-14T07:30:50+00:00" class="time">07:30</time></a></span>
+  </div>
+</div>
+  </div>
+  
+</div></div><div class="tgme_widget_message_wrap js-widget_message_wrap"><div class="tgme_widget_message text_not_supported_wrap js-widget_message" data-post="ai_machinelearning_big_data/10925" data-view="eyJjIjotMTExNDU5MTA4NiwicCI6MTA5MjUsInQiOjE3ODk0MDc5ODMsImgiOiJjMGQzZWVmMDk4M2IxMGFhMGUifQ">
+  <div class="tgme_widget_message_user"><a href="https://t.me/ai_machinelearning_big_data"><i class="tgme_widget_message_user_photo bgcolor0" data-content="M"><img src="https://cdn4.telesco.pe/file/OZOUR4lzxXbPziBI1Sx4JhIoZoR6ub2__Nlxjnkl_dA3IvJPeNyR5ZerTDJItRjZnKTSygFFy0tRvk5k91Kd05YAv7VmiZpUxFmyp8gzyp2egyr8HeUPMr-EgsSctt325CJIYEWNocl3Gx6UtBqJlk5d5cwmlZvpo0oF--AuRyXEmPEN5h50sS5keB_UmpIuLOFKWNGUbeFFH-yO2jfT073eIRy9pdYf0WkoX4-FJFF1F4fpwcCRn2QH7ZgvoP-IAxA4BYgVuWTTf_p9nzIYQrVLsLPtxhcUp_ymeAf2zPyP8C2j4JE39my1vmd7Sw8cFIgDIBqj2KKeAI6xk_JPxA.jpg"></i></a></div>
+  <div class="tgme_widget_message_bubble">
+    
+        <i class="tgme_widget_message_bubble_tail">
+      <svg class="bubble_icon" width="9px" height="20px" viewBox="0 0 9 20">
+        <g fill="none">
+          <path class="background" fill="#ffffff" d="M8,1 L9,1 L9,20 L8,20 L8,18 C7.807,15.161 7.124,12.233 5.950,9.218 C5.046,6.893 3.504,4.733 1.325,2.738 L1.325,2.738 C0.917,2.365 0.89,1.732 1.263,1.325 C1.452,1.118 1.72,1 2,1 L8,1 Z"></path>
+          <path class="border_1x" fill="#d7e3ec" d="M9,1 L2,1 C1.72,1 1.452,1.118 1.263,1.325 C0.89,1.732 0.917,2.365 1.325,2.738 C3.504,4.733 5.046,6.893 5.95,9.218 C7.124,12.233 7.807,15.161 8,18 L8,20 L9,20 L9,1 Z M2,0 L9,0 L9,20 L7,20 L7,20 L7.002,18.068 C6.816,15.333 6.156,12.504 5.018,9.58 C4.172,7.406 2.72,5.371 0.649,3.475 C-0.165,2.729 -0.221,1.464 0.525,0.649 C0.904,0.236 1.439,0 2,0 Z"></path>
+          <path class="border_2x" d="M9,1 L2,1 C1.72,1 1.452,1.118 1.263,1.325 C0.89,1.732 0.917,2.365 1.325,2.738 C3.504,4.733 5.046,6.893 5.95,9.218 C7.124,12.233 7.807,15.161 8,18 L8,20 L9,20 L9,1 Z M2,0.5 L9,0.5 L9,20 L7.5,20 L7.5,20 L7.501,18.034 C7.312,15.247 6.64,12.369 5.484,9.399 C4.609,7.15 3.112,5.052 0.987,3.106 C0.376,2.547 0.334,1.598 0.894,0.987 C1.178,0.677 1.579,0.5 2,0.5 Z"></path>
+          <path class="border_3x" d="M9,1 L2,1 C1.72,1 1.452,1.118 1.263,1.325 C0.89,1.732 0.917,2.365 1.325,2.738 C3.504,4.733 5.046,6.893 5.95,9.218 C7.124,12.233 7.807,15.161 8,18 L8,20 L9,20 L9,1 Z M2,0.667 L9,0.667 L9,20 L7.667,20 L7.667,20 L7.668,18.023 C7.477,15.218 6.802,12.324 5.64,9.338 C4.755,7.064 3.243,4.946 1.1,2.983 C0.557,2.486 0.52,1.643 1.017,1.1 C1.269,0.824 1.626,0.667 2,0.667 Z"></path>
+        </g>
+      </svg>
+    </i>
+    <div class="tgme_widget_message_author accent_color"><a class="tgme_widget_message_owner_name" href="https://t.me/ai_machinelearning_big_data"><span dir="auto">Machinelearning</span></a></div>
+
+
+<a class="tgme_widget_message_photo_wrap 5278375972426166289 1228967675_460009489" href="https://t.me/ai_machinelearning_big_data/10925" style="width:800px;background-image:url('https://cdn4.telesco.pe/file/Hj325ItJ08K28DTXaotR-Syd4mQ_Wk-nZBXlcCEFJyity4xbAoj9hGkMV4AGSOZpkpl54ATqYRGo9vVzhL8Cn9eSTykRQfBtuDyjmPVcdAoe-kTstSIRgqqzTkWhfCAR7ikvhJ5nqkW0FAqgaOhFrNmGrCeO7NNpci8dj0HdTrCcL0jOpq8Vx1Fo9JkweQKCN_eMcosSv37UD6P_L5TUfqaMIsU_2Glxy0rHbXE6NYi1gK0I_V0QrRRtgeIkaLHgXy0bBIszTF5mxHFk9KbBW4K9iWZ1YUXAHOKOkmDdeEQ6T7kE5OiR5XURCGJkdT0S59_gSSpM7wMSgv8kBBqrbw.jpg')">
+  <div class="tgme_widget_message_photo" style="padding-top:100%"></div>
+</a><div class="tgme_widget_message_text js-message_text" dir="auto"><b>Как сегодня строят рекомендательные системы — и что будет с ними завтра?</b><br/><br/>30 сентября собираем RecSys-сообщество — разработчиков, ML/DS-специалистов и всех, кто делает персонализацию и рекомендации в реальных продуктах.<br/><br/>В программе — доклады от экспертов Сбера. Поговорим о свежих подходах и нестандартных решениях на реальных кейсах.<br/><br/>А после докладов переключаемся на неформальный режим: знакомимся, спорим про RecSys, обсуждаем идеи, находим единомышленников и просто хорошо проводим вечер среди своих.<br/><br/><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F938D.png')"><b>📍</b></i><a href="https://2gis.ru/n_novgorod/geo/70000001100764743?erid=2Vtzqv48qtp" target="_blank" rel="noopener" onclick="return confirm('Open this link?\n\n'+this.href);">г. Нижний Новгород, пространство «Гараж» </a><br/><br/>Количество мест ограничено — успей забрать своё <a href="https://developers.sber.ru/kak-v-sbere/events/recsys_september_2026?ysclid=mtipxz8y4l138782874?utm_source=telegram&amp;amp;utm_medium=fix&amp;amp;utm_campaign=nn_recsys_sept_2026_post&amp;amp;utm_content=&amp;amp;utm_term=ai_machinelearning_big_data&amp;amp;erid=2Vtzqv48qtp" target="_blank" rel="noopener" onclick="return confirm('Open this link?\n\n'+this.href);">по ссылке</a>&#33;</div>
+<div class="tgme_widget_message_reactions js-message_reactions"><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09FA4A3.png')"><b>🤣</b></i>10</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F918D.png')"><b>👍</b></i>8</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F94A5.png')"><b>🔥</b></i>5</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/E29DA4.png')"><b>❤</b></i>4</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F9881.png')"><b>😁</b></i>1</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F998F.png')"><b>🙏</b></i>1</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F8CAD.png')"><b>🌭</b></i>1</span></div><div class="tgme_widget_message_footer compact js-message_footer">
+  
+  <div class="tgme_widget_message_info short js-message_info">
+    <span class="tgme_widget_message_views">8.32K</span><span class="copyonly"> views</span><span class="tgme_widget_message_meta"><a class="tgme_widget_message_date" href="https://t.me/ai_machinelearning_big_data/10925"><time datetime="2026-09-14T13:28:03+00:00" class="time">13:28</time></a></span>
+  </div>
+</div>
+  </div>
+  
+</div></div><div class="tgme_widget_message_wrap js-widget_message_wrap"><div class="tgme_widget_message text_not_supported_wrap js-widget_message" data-post="ai_machinelearning_big_data/10926" data-view="eyJjIjotMTExNDU5MTA4NiwicCI6IjEwOTI2ZyIsInQiOjE3ODk0MDc5ODMsImgiOiJkMTQ2YTRjYTY1ZGRhYjVjZTEifQ">
+  <div class="tgme_widget_message_user"><a href="https://t.me/ai_machinelearning_big_data"><i class="tgme_widget_message_user_photo bgcolor0" data-content="M"><img src="https://cdn4.telesco.pe/file/OZOUR4lzxXbPziBI1Sx4JhIoZoR6ub2__Nlxjnkl_dA3IvJPeNyR5ZerTDJItRjZnKTSygFFy0tRvk5k91Kd05YAv7VmiZpUxFmyp8gzyp2egyr8HeUPMr-EgsSctt325CJIYEWNocl3Gx6UtBqJlk5d5cwmlZvpo0oF--AuRyXEmPEN5h50sS5keB_UmpIuLOFKWNGUbeFFH-yO2jfT073eIRy9pdYf0WkoX4-FJFF1F4fpwcCRn2QH7ZgvoP-IAxA4BYgVuWTTf_p9nzIYQrVLsLPtxhcUp_ymeAf2zPyP8C2j4JE39my1vmd7Sw8cFIgDIBqj2KKeAI6xk_JPxA.jpg"></i></a></div>
+  <div class="tgme_widget_message_bubble">
+    
+        <i class="tgme_widget_message_bubble_tail">
+      <svg class="bubble_icon" width="9px" height="20px" viewBox="0 0 9 20">
+        <g fill="none">
+          <path class="background" fill="#ffffff" d="M8,1 L9,1 L9,20 L8,20 L8,18 C7.807,15.161 7.124,12.233 5.950,9.218 C5.046,6.893 3.504,4.733 1.325,2.738 L1.325,2.738 C0.917,2.365 0.89,1.732 1.263,1.325 C1.452,1.118 1.72,1 2,1 L8,1 Z"></path>
+          <path class="border_1x" fill="#d7e3ec" d="M9,1 L2,1 C1.72,1 1.452,1.118 1.263,1.325 C0.89,1.732 0.917,2.365 1.325,2.738 C3.504,4.733 5.046,6.893 5.95,9.218 C7.124,12.233 7.807,15.161 8,18 L8,20 L9,20 L9,1 Z M2,0 L9,0 L9,20 L7,20 L7,20 L7.002,18.068 C6.816,15.333 6.156,12.504 5.018,9.58 C4.172,7.406 2.72,5.371 0.649,3.475 C-0.165,2.729 -0.221,1.464 0.525,0.649 C0.904,0.236 1.439,0 2,0 Z"></path>
+          <path class="border_2x" d="M9,1 L2,1 C1.72,1 1.452,1.118 1.263,1.325 C0.89,1.732 0.917,2.365 1.325,2.738 C3.504,4.733 5.046,6.893 5.95,9.218 C7.124,12.233 7.807,15.161 8,18 L8,20 L9,20 L9,1 Z M2,0.5 L9,0.5 L9,20 L7.5,20 L7.5,20 L7.501,18.034 C7.312,15.247 6.64,12.369 5.484,9.399 C4.609,7.15 3.112,5.052 0.987,3.106 C0.376,2.547 0.334,1.598 0.894,0.987 C1.178,0.677 1.579,0.5 2,0.5 Z"></path>
+          <path class="border_3x" d="M9,1 L2,1 C1.72,1 1.452,1.118 1.263,1.325 C0.89,1.732 0.917,2.365 1.325,2.738 C3.504,4.733 5.046,6.893 5.95,9.218 C7.124,12.233 7.807,15.161 8,18 L8,20 L9,20 L9,1 Z M2,0.667 L9,0.667 L9,20 L7.667,20 L7.667,20 L7.668,18.023 C7.477,15.218 6.802,12.324 5.64,9.338 C4.755,7.064 3.243,4.946 1.1,2.983 C0.557,2.486 0.52,1.643 1.017,1.1 C1.269,0.824 1.626,0.667 2,0.667 Z"></path>
+        </g>
+      </svg>
+    </i>
+    <div class="tgme_widget_message_author accent_color"><a class="tgme_widget_message_owner_name" href="https://t.me/ai_machinelearning_big_data"><span dir="auto">Machinelearning</span></a></div>
+
+
+<div class="tgme_widget_message_grouped_wrap js-message_grouped_wrap" data-margin-w="2" data-margin-h="2" style="width:453px;">
+  <div class="tgme_widget_message_grouped js-message_grouped" style="padding-top:8.389%">
+    <div class="tgme_widget_message_grouped_layer js-message_grouped_layer" style="width:453px;height:38px">
+      <a class="tgme_widget_message_photo_wrap grouped_media_wrap blured js-message_photo" style="left:0px;top:0px;width:225px;height:38px;margin-right:2px;margin-bottom:0px;background-image:url('https://cdn4.telesco.pe/file/vy1y1bliOJRXoetwcVKdW_sX8LI5P0b_tLBPGfaFv1Aajl3kvKJKHR7fja6qfSU0KmHJCCQDUOrH29ZLtQ6V9jBvxFYs4026Nfp7ToEiupvOIHuIpWnzSJhp9RodzPEsLqGs1_G7RwzjCRs3pDy2ekEqXFfK-XFBGSGN5TnM_pWm_QBvqEtiFDNBF6ZJtlo_i14OJViEZUaSCSgwQ0FZW4tqp4XWYDLoH69UFvSSEl_vrAIx3U9K8fo9eF4qnEOcL_icjijeudKKfEQHwiYFbNYQHGHutZw-7Cv8nncSZvVXvylwRo1hXYfgQEhrN-xU-ymPMUdB8slXwME5wOW-jA.jpg')" data-ratio="4.3956043956044" href="https://t.me/ai_machinelearning_big_data/10926?single">
+  <div class="grouped_media_helper" style="top:0;bottom:0;left:142px;right:143px;">
+    <div class="tgme_widget_message_photo grouped_media" style="left:0;right:0;top:-7px;bottom:-7px;"></div>
+  </div>
+</a><a class="tgme_widget_message_photo_wrap grouped_media_wrap blured js-message_photo" style="left:227px;top:0px;width:226px;height:38px;margin-right:0px;margin-bottom:0px;background-image:url('https://cdn4.telesco.pe/file/LamPac-IIS40TCnc3IBgI5g2hzloSKhdB7pgpmqXyDGdnuPBWQh-0TFN3wgnCVpIg9Jx29Y2L6HMmni4_Z9nfHz5o4dz5A-XBjyHFhBRyDe35xJaifGHjMYPM2Sf-VBHntY_a0COp0uJIcAiVyMMWr4MwPchknpbDuNLNFPYFTTCOBz6j8Q3J6lEb1-BOgfEj11QzoxCB4vlNw8eSndPTGH0xAiElvhRqWiFRU3TN_HixG8PtENBqx6flocUBTt_mOEwH8Xrx2j4W0KyVeIFIQ8yRPgyTLSpiIr1xnExPdIGvOVzmvcP8K2vCFkKd8NsAFPpkhRNhErwZEr5Um5uRg.jpg')" data-ratio="5.8823529411765" href="https://t.me/ai_machinelearning_big_data/10927?single">
+  <div class="grouped_media_helper" style="top:0;bottom:0;left:114px;right:115px;">
+    <div class="tgme_widget_message_photo grouped_media" style="left:0;right:0;top:-1px;bottom:0px;"></div>
+  </div>
+</a>
+    </div>
+  </div>
+</div><div class="tgme_widget_message_text js-message_text" dir="auto"><div class="tgme_widget_message_text js-message_text" dir="auto"><b><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F9AA8.png')"><b>🚨</b></i> Китайская </b><a href="http://Z.AI/" target="_blank" rel="noopener"><b>Z.AI</b></a><b> привлекла &#036;5 млрд </b>-<b> и 60% средств направит на следующее поколение GLM и систему Fully Self-Training.<br/></b><br/>Финансирование состоит примерно из &#036;2 млрд через размещение акций и &#036;3 млрд через конвертируемые облигации. <br/><br/><a href="http://Z.AI/" target="_blank" rel="noopener">Z.AI</a> развивает подход, при котором каждая новая версия GLM всё больше участвует в создании среды, данных и инфраструктуры для обучения следующего поколения модели. Компания прямо связывает это направление с Recursive Self-Improvement - RSI. <br/><br/>GLM → строит среду и данные → обучает следующую GLM → цикл повторяется<br/><br/>Пока в этом процессе всё ещё много инженеров, но цель <a href="http://Z.AI/" target="_blank" rel="noopener">Z.AI</a> - максимально замкнуть этот контур.<br/><br/>И теперь на эту идею у компании есть ещё несколько миллиардов долларов.</div></div>
+<div class="tgme_widget_message_reactions js-message_reactions"><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/E29DA4.png')"><b>❤</b></i>38</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F94A5.png')"><b>🔥</b></i>25</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F918D.png')"><b>👍</b></i>18</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F9881.png')"><b>😁</b></i>2</span></div><div class="tgme_widget_message_footer compact js-message_footer">
+  
+  <div class="tgme_widget_message_info short js-message_info">
+    <span class="tgme_widget_message_views">7.58K</span><span class="copyonly"> views</span><span class="tgme_widget_message_meta"><a class="tgme_widget_message_date" href="https://t.me/ai_machinelearning_big_data/10926"><time datetime="2026-09-14T14:39:39+00:00" class="time">14:39</time></a></span>
+  </div>
+</div>
+  </div>
+  
+</div></div><div class="tgme_widget_message_wrap js-widget_message_wrap"><div class="tgme_widget_message text_not_supported_wrap js-widget_message" data-post="ai_machinelearning_big_data/10929" data-view="eyJjIjotMTExNDU5MTA4NiwicCI6MTA5MjksInQiOjE3ODk0MDc5ODMsImgiOiIxYTk1OWRiZTQ5NDhiYzc5Y2UifQ">
+  <div class="tgme_widget_message_user"><a href="https://t.me/ai_machinelearning_big_data"><i class="tgme_widget_message_user_photo bgcolor0" data-content="M"><img src="https://cdn4.telesco.pe/file/OZOUR4lzxXbPziBI1Sx4JhIoZoR6ub2__Nlxjnkl_dA3IvJPeNyR5ZerTDJItRjZnKTSygFFy0tRvk5k91Kd05YAv7VmiZpUxFmyp8gzyp2egyr8HeUPMr-EgsSctt325CJIYEWNocl3Gx6UtBqJlk5d5cwmlZvpo0oF--AuRyXEmPEN5h50sS5keB_UmpIuLOFKWNGUbeFFH-yO2jfT073eIRy9pdYf0WkoX4-FJFF1F4fpwcCRn2QH7ZgvoP-IAxA4BYgVuWTTf_p9nzIYQrVLsLPtxhcUp_ymeAf2zPyP8C2j4JE39my1vmd7Sw8cFIgDIBqj2KKeAI6xk_JPxA.jpg"></i></a></div>
+  <div class="tgme_widget_message_bubble">
+    
+        <i class="tgme_widget_message_bubble_tail">
+      <svg class="bubble_icon" width="9px" height="20px" viewBox="0 0 9 20">
+        <g fill="none">
+          <path class="background" fill="#ffffff" d="M8,1 L9,1 L9,20 L8,20 L8,18 C7.807,15.161 7.124,12.233 5.950,9.218 C5.046,6.893 3.504,4.733 1.325,2.738 L1.325,2.738 C0.917,2.365 0.89,1.732 1.263,1.325 C1.452,1.118 1.72,1 2,1 L8,1 Z"></path>
+          <path class="border_1x" fill="#d7e3ec" d="M9,1 L2,1 C1.72,1 1.452,1.118 1.263,1.325 C0.89,1.732 0.917,2.365 1.325,2.738 C3.504,4.733 5.046,6.893 5.95,9.218 C7.124,12.233 7.807,15.161 8,18 L8,20 L9,20 L9,1 Z M2,0 L9,0 L9,20 L7,20 L7,20 L7.002,18.068 C6.816,15.333 6.156,12.504 5.018,9.58 C4.172,7.406 2.72,5.371 0.649,3.475 C-0.165,2.729 -0.221,1.464 0.525,0.649 C0.904,0.236 1.439,0 2,0 Z"></path>
+          <path class="border_2x" d="M9,1 L2,1 C1.72,1 1.452,1.118 1.263,1.325 C0.89,1.732 0.917,2.365 1.325,2.738 C3.504,4.733 5.046,6.893 5.95,9.218 C7.124,12.233 7.807,15.161 8,18 L8,20 L9,20 L9,1 Z M2,0.5 L9,0.5 L9,20 L7.5,20 L7.5,20 L7.501,18.034 C7.312,15.247 6.64,12.369 5.484,9.399 C4.609,7.15 3.112,5.052 0.987,3.106 C0.376,2.547 0.334,1.598 0.894,0.987 C1.178,0.677 1.579,0.5 2,0.5 Z"></path>
+          <path class="border_3x" d="M9,1 L2,1 C1.72,1 1.452,1.118 1.263,1.325 C0.89,1.732 0.917,2.365 1.325,2.738 C3.504,4.733 5.046,6.893 5.95,9.218 C7.124,12.233 7.807,15.161 8,18 L8,20 L9,20 L9,1 Z M2,0.667 L9,0.667 L9,20 L7.667,20 L7.667,20 L7.668,18.023 C7.477,15.218 6.802,12.324 5.64,9.338 C4.755,7.064 3.243,4.946 1.1,2.983 C0.557,2.486 0.52,1.643 1.017,1.1 C1.269,0.824 1.626,0.667 2,0.667 Z"></path>
+        </g>
+      </svg>
+    </i>
+    <div class="tgme_widget_message_author accent_color"><a class="tgme_widget_message_owner_name" href="https://t.me/ai_machinelearning_big_data"><span dir="auto">Machinelearning</span></a></div>
+
+
+<div class="media_supported_cont"><a class="tgme_widget_message_photo_wrap 5278513626128000348 1228999725_460006748" href="https://t.me/ai_machinelearning_big_data/10929" style="width:800px;background-image:url('https://cdn4.telesco.pe/file/Ow7x-VUaMlKLgHBUUnn0EKjhp3CLkMdzYhco90Rqk-datJ6qr6YebM5DMqpv7VuPHm-b0WcMtOPBXycXJ2nBBrVNYIW9mDIf65cAbt5lx298J8DER7RrLhKZqd756RrMjcqvc1I-KY9EiWQNr-qLrmbH6C9IOiA22CcqkGcXC6K3ogXY8u5czoRPzCn_CuhgZbAe4fDPDCHVOr29W16942Gsa5hMX6lNF-l8WSI2iwyhbpqF9jAMhTZ-QYpVbI8YAJkGN8tx11aURsQxAXlbu43YDi9-uL4bZIMPNkOJboAnP--hqPGXnVUjQUgSCJxdd_95HYXmxkMgWTe_kgr4Qg.jpg')">
+  <div class="tgme_widget_message_photo" style="padding-top:33.625%"></div>
+</a><div class="tgme_widget_message_text js-message_text" dir="auto"><tg-emoji emoji-id="5389060466049823516"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F90A0.png')"><b>🐠</b></i></tg-emoji><b>Sakana AI представила PC-ALM - метод обучения глубоких нейросетей без классического обратного распространения ошибки.</b><br/><br/>Главный результат: PC-ALM смог обучать нейросети глубиной до 1000 слоёв, используя только локальные взаимодействия между соседними слоями.<br/><br/>Обычное глубокое обучение почти полностью опирается на backpropagation: ошибка считается на выходе сети, после чего градиенты передаются назад через все слои.<br/><br/>PC-ALM работает иначе.<br/><br/>Каждый слой рассматривается как локальная динамическая система, которая пытается уменьшить собственную ошибку предсказания. Вместо глобального прохода градиента используются:<br/><br/>- локальные ошибки предсказания<br/>- множители Лагранжа<br/>- расширенный лагранжиан<br/>- локальная динамика состояний<br/>- PI-регуляция внутри каждого слоя<br/><br/>Метод вырос из predictive coding — подхода, популярного в NeuroAI. В predictive coding каждый слой постепенно корректирует своё состояние так, чтобы уменьшать рассогласование с соседними слоями.<br/><br/>Проблема в том, что в очень глубоких сетях такие сигналы плохо распространяются: информация об ошибке с выхода сети затухает раньше, чем достигает внутренних слоёв.<br/><br/>PC-ALM добавляет специальные двойственные переменные — по сути дополнительные нейроны, представляющие множители Лагранжа. Они помогают передавать сигнал ошибки через большое число слоёв.<br/><br/>Авторы связывают этот подход с классической работой Яна Лекуна 1988 года, где множители Лагранжа для многослойной сети можно связать с градиентами функции потерь.<br/><br/>В результате получается обучение, где глобальная задача оптимизации раскладывается на множество локальных динамических процессов.<br/><br/>Особенно хорошо PC-ALM показал себя на очень глубоких и узких сетях, где обычный predictive coding начинает ломаться.<br/><br/>Помимо NeuroAI, подход может быть интересен для нейроморфного железа: там локальные вычисления и физическая динамика потенциально дешевле классического backpropagation на GPU.<br/><br/>Блог: <a href="https://pub.sakana.ai/pc-alm/" target="_blank" rel="noopener">https://pub.sakana.ai/pc-alm/</a><br/><br/>Статья: <a href="https://arxiv.org/abs/2605.31022" target="_blank" rel="noopener">https://arxiv.org/abs/2605.31022</a><br/><br/>Код: <a href="https://github.com/SakanaAI/pc-alm" target="_blank" rel="noopener">https://github.com/SakanaAI/pc-alm</a></div></div><div class="media_not_supported_cont"><div class="message_media_not_supported_wrap">
+  <div class="message_media_not_supported">
+    <div class="message_media_not_supported_label">Please open Telegram to view this post</div>
+    <a href="https://t.me/ai_machinelearning_big_data/10929" class="message_media_view_in_telegram">VIEW IN TELEGRAM</a>
+  </div>
+</div></div>
+<div class="tgme_widget_message_reactions js-message_reactions"><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F918D.png')"><b>👍</b></i>16</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09F94A5.png')"><b>🔥</b></i>11</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/E29DA4.png')"><b>❤</b></i>6</span><span class="tgme_reaction"><i class="emoji" style="background-image:url('//telegram.org/img/emoji/40/F09FA494.png')"><b>🤔</b></i>1</span></div><div class="tgme_widget_message_footer compact js-message_footer">
+  
+  <div class="tgme_widget_message_info short js-message_info">
+    <span class="tgme_widget_message_views">2.17K</span><span class="copyonly"> views</span><span class="tgme_widget_message_meta"><a class="tgme_widget_message_date" href="https://t.me/ai_machinelearning_big_data/10929"><time datetime="2026-09-14T17:31:52+00:00" class="time">17:31</time></a></span>
+  </div>
+</div>
+  </div>
+  
+</div></div>
+    </section>
+  </div>
+</main>
+    <script src="//telegram.org/js/jquery.min.js"></script>
+    <script src="//telegram.org/js/jquery-ui.min.js"></script>
+    <script src="//telegram.org/js/tgwallpaper.min.js?3"></script>
+<script src="//telegram.org/js/tgsticker.js?32"></script>
+
+    <script src="//telegram.org/js/widget-frame.js?68"></script>
+    <script src="//telegram.org/js/telegram-web.js?14"></script>
+    <script>TWeb.init();
+</script>
+    
+  </body>
+</html>
+<!-- page generated in 213.41ms -->

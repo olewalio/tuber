@@ -1,0 +1,138 @@
+
+==============================================================================
+ПРИЁМКА ТЗ-21: договор формата фида (EXCHANGE-FEED v2)
+==============================================================================
+начало:                    2026-09-15 20:55:52 UTC
+репозиторий:               /root/tuber-x
+боевая база X (только чт.): /root/tuber-x/data/tuber_x.db
+рабочий каталог приёмки:    /tmp/tuber_x_accept21_q2efkn5x
+фид Telegram:  /root/tuber-telegram/data/exchange/external_candidates.jsonl (есть=True)
+фид tuber-os:  /root/tuber-os/data/exchange/external_candidates.jsonl (есть=True)
+боевая база X ДО (COUNT): {'accounts': 72, 'candidates': 1407, 'posts': 602, 'stories': 100}
+  рабочая база tuber-x ДО (COUNT): {'accounts': 72, 'candidates': 1407, 'posts': 602, 'stories': 100}
+  рабочая база tuber-os ДО (COUNT): {'videos': 30780, 'channel_candidates': 2152, 'channels': 7090, 'quota_log': 8959}
+  рабочая база tuber-telegram ДО (COUNT): {'channels': 155, 'posts': 3573, 'classified': 0}
+
+==============================================================================
+П.1-2. Живые файлы продюсеров на диске: ФАКТИЧЕСКИЙ формат (что было)
+==============================================================================
+Живые файлы могли быть записаны ДО правки продюсеров (их обновит плановый
+экспорт). Приёмка фиксирует фактический формат и проверяет главное:
+потребитель обязан разобрать ЛЮБОЙ из двух видов, не падая.
+  tuber-telegram: строк kind=x — 152
+      mentions: {'int': 152}
+      videos: {'list': 152}
+      video_ids: {}
+      sources: {'list': 152, 'элемент:str': 152}
+      examples: {'list': 152, 'элемент:dict': 152}
+      source: {'str': 152}
+[ 1] OK   живой фид tuber-telegram: фактический формат зафиксирован, импорт не падает
+      данные: videos={'list': 152}; examples={'list': 152, 'элемент:dict': 152}; video_ids={}; импорт ок
+  tuber-os: строк kind=x — 1086
+      mentions: {'int': 1086}
+      videos: {'int': 1086}
+      video_ids: {}
+      sources: {}
+      examples: {'list': 1086, 'элемент:str': 1086}
+      source: {'str': 1086}
+[ 2] OK   живой фид tuber-os: фактический формат зафиксирован, импорт не падает
+      данные: videos={'int': 1086}; examples={'list': 1086, 'элемент:str': 1086}; video_ids={}; импорт ок
+
+==============================================================================
+П.3-4. Реальный экспорт продюсеров в tmp и проверка канона
+==============================================================================
+[ 3] OK   реальный экспорт tuber-os соответствует канону
+      данные: строк=2182; нарушений=0; первые=[]
+[ 4] OK   реальный экспорт tuber-telegram соответствует канону
+      данные: строк=239; нарушений=0; первые=[]
+
+==============================================================================
+П.5. Настоящий импорт обоих фидов на СНИМКЕ боевой базы X (VACUUM INTO)
+==============================================================================
+снимок: /tmp/tuber_x_accept21_q2efkn5x/prod_x_snapshot.db
+полный JSON прогона:
+{"feeds": [{"path": "/root/tuber-telegram/data/exchange/external_candidates.jsonl", "feed_tag": "tuber-telegram", "rows": 239, "x_rows": 152, "skipped_kinds": 87, "bad_lines": 0, "bad_fields": 0}, {"path": "/root/tuber-os/data/exchange/external_candidates.jsonl", "feed_tag": "tuber-os", "rows": 2182, "x_rows": 1086, "skipped_kinds": 1096, "bad_lines": 0, "bad_fields": 0}], "feeds_missing": [], "imported_new": 367, "merged": 24, "skipped_filter": {"bad_handle": 0, "service_handle": 0, "blocklist": 0, "already_registered": 14, "bot": 2, "news_giant": 22, "below_mention_threshold": 760}, "bad_fields": 0, "skipped_limit": 0, "queue_total": 1774, "dry": false}
+[ 5] OK   импорт обоих живых фидов на снимке (без исключений)
+      данные: imported_new=367; merged=24; skipped_limit=0; queue_total=1774; bad_fields=0
+feeds: [{"path": "/root/tuber-telegram/data/exchange/external_candidates.jsonl", "feed_tag": "tuber-telegram", "rows": 239, "x_rows": 152, "skipped_kinds": 87, "bad_lines": 0, "bad_fields": 0}, {"path": "/root/tuber-os/data/exchange/external_candidates.jsonl", "feed_tag": "tuber-os", "rows": 2182, "x_rows": 1086, "skipped_kinds": 1096, "bad_lines": 0, "bad_fields": 0}]
+
+==============================================================================
+П.6. Приток: каждый фид отдельно (чистая база) и вместе (слияние по handle)
+==============================================================================
+  tuber-telegram: строк=239, kind=x=152, imported_new=39, merged=0, skipped_filter={'bad_handle': 0, 'service_handle': 0, 'blocklist': 0, 'already_registered': 0, 'bot': 0, 'news_giant': 5, 'below_mention_threshold': 108}, skipped_limit=0, queue_total=39
+  tuber-os: строк=2182, kind=x=1086, imported_new=359, merged=0, skipped_filter={'bad_handle': 0, 'service_handle': 0, 'blocklist': 0, 'already_registered': 0, 'bot': 2, 'news_giant': 19, 'below_mention_threshold': 706}, skipped_limit=0, queue_total=359
+  вместе: imported_new=401, merged=0, skipped_filter={'bad_handle': 0, 'service_handle': 0, 'blocklist': 0, 'already_registered': 0, 'bot': 2, 'news_giant': 23, 'below_mention_threshold': 763}, skipped_limit=0, queue_total=401
+  общих handle в двух фидах (сливаются в одну запись): 13 — ['artificialanlys', 'chatgpt', 'claudedevs', 'deepseek_ai', 'elonmusk', 'evanhub', 'hilbertspaess', 'openai', 'polynoamial', 'sama', 'sharifshameem', 'thsottiaux', 'ylecun']
+  объединение по одному фиду: 385; вместе: 401; перешли порог только вместе (mentions сложились): 16 — ['_sholtodouglas', 'antlingagi', 'cdngdev', 'dimillian', 'elevenmusic_io', 'gabrielchua', 'gavinsbaker', 'grummz', 'lentils80', 'mrfanduu', 'peterwildeford', 'rehan_shei', 'runwayml', 'sataericux', 'unitreerobotics']
+[ 6] OK   приток посчитан по каждому фиду и вместе; вместе ⊇ каждого по отдельности
+      данные: по фидам={'tuber-telegram': 39, 'tuber-os': 359}; вместе=401; общих=13; перешли порог вместе=16
+
+==============================================================================
+П.7. Идемпотентность: повтор на ТОМ ЖЕ снимке
+==============================================================================
+[ 7] OK   повтор -> imported_new=0, merged>0
+      данные: imported_new=0; merged=391; queue_total=1774
+
+==============================================================================
+П.8. Кто отсеян как news_giant: факты из живого фида tuber-os
+==============================================================================
+  @ndtv: упоминаний 370; пример: WLxGO3EgjFk: e us on Facebook: https://www.facebook.com/ndtv/ Follow us on Twitter: https://twitter.com/ndtv/ 
+  @skynews: упоминаний 259; пример: INpVD65s8mA: hannel for more videos: http://www.youtube.com/skynews Follow us on X: https://twitter.com/skynew
+  @khabar_gaon: упоминаний 249; пример: yQUqn7GrrT0: com/khabargaon Instagram: https://www.instagram.com/khabargaon Twitter: https://x.com/khabar_gaon
+  @foxnews: упоминаний 150; пример: kvkXkeCjrbA: Facebook: https://www.facebook.com/FoxNews/ Follow Fox News on Twitter: https://twitter.com/FoxNe
+  @bloombergradio: упоминаний 146; пример: YxjL1wLLnHE: .com/company/bloomberg-news/ More from Bloomberg: Bloomberg Radio: https://twitter.com/BloombergR
+  @foxbusiness: упоминаний 137; пример: WNmUYyqF2P0: k: https://www.facebook.com/FoxBusiness Follow Fox Business on Twitter: https://twitter.com/foxbu
+  @cbsnews: упоминаний 114; пример: 7u1FZzhp5aw: BS News on Facebook: https://facebook.com/cbsnews Follow CBS News on X: https://twitter.com/cbsne
+  @dwnews: упоминаний 105; пример: xOUElf7catg: dwnews ►Facebook: https://www.facebook.com/deutschewellenews/ ►Twitter: https://twitter.com/dwnew
+  @firstpost: упоминаний 105; пример: KJEbRvRVdmc: acebook: https://www.facebook.com/firstpostin/ Follow Firstpost on X: https://twitter.com/firstpo
+  @bbgenespanol: упоминаний 105; пример: Rcl0Q-Yewn0: pp: https://trib.al/PIK6kY1 TikTok: https://vm.tiktok.com/ZGeuw69Ao/ X: https://x.com/BBGenEspano
+  @ajenglish: упоминаний 100; пример: srvFjZr9q7U: Subscribe to our channel: http://bit.ly/AJSubscribe Follow us on X : https://twitter.com/AJEnglis
+  @bloombergtv: упоминаний 88; пример: YxjL1wLLnHE: tures, profiles and more. Connect with Bloomberg Television on: X: https://twitter.com/BloombergT
+  @bsurveillance: упоминаний 88; пример: YxjL1wLLnHE: rg Radio: https://twitter.com/BloombergRadio Bloomberg Surveillance: https://twitter.com/bsurveil
+  @bbgoriginals: упоминаний 87; пример: YxjL1wLLnHE: Bloomberg Politics: https://twitter.com/bpolitics Bloomberg Originals: https://twitter.com/bbgori
+  @bpolitics: упоминаний 87; пример: YxjL1wLLnHE: rg Surveillance: https://twitter.com/bsurveillance Bloomberg Politics: https://twitter.com/bpolit
+  @forbes: упоминаний 86; пример: 6F1MpmYZCxY: om Forbes on Facebook: http://fb.com/forbes Forbes Video on Twitter: http://www.twitter.com/forbe
+  @reuters: упоминаний 82; пример: e5XtFfJqHLQ: ters on Facebook: https://www.facebook.com/Reuters Follow Reuters on X: https://twitter.com/Reute
+  @businessinsider: упоминаний 3; пример: wFBsryJNjZ8: ... on Instagram: https://www.instagram.com/businessinsider ... on X: https://x.com/BusinessInsid
+  @cnn: упоминаний 1; пример: Q6ZDUl2FhTU: 8562 https://www.cnbc.com/2026/08/19/open-ai-ipo-timing-2027-friar.html https://x.com/CNN/status/
+[ 8] OK   верхние новостники-гиганты живого фида есть в NEWS_GIANTS
+      данные: всего отсеяно=19; обязательные=['khabar_gaon', 'ndtv', 'skynews']; пропущено=[]
+
+==============================================================================
+П.9. Рабочие базы (tuber_x.db, tuber.db, tuber_telegram.db) не изменились
+==============================================================================
+  tuber-x: ДО={'accounts': 72, 'candidates': 1407, 'posts': 602, 'stories': 100} ПОСЛЕ={'accounts': 72, 'candidates': 1407, 'posts': 602, 'stories': 100} совпало=True
+  tuber-os: ДО={'videos': 30780, 'channel_candidates': 2152, 'channels': 7090, 'quota_log': 8959} ПОСЛЕ={'videos': 30780, 'channel_candidates': 2152, 'channels': 7090, 'quota_log': 8959} совпало=True
+  tuber-telegram: ДО={'channels': 155, 'posts': 3573, 'classified': 0} ПОСЛЕ={'channels': 155, 'posts': 3573, 'classified': 0} совпало=True
+[ 9] OK   все три рабочие базы не изменены приёмкой (COUNT до = COUNT после)
+      данные: совпало по всем: True
+
+==============================================================================
+П.10. Полный pytest -q в каждом проекте
+==============================================================================
+  tuber-x: rc=0; ..................................................................       [100%]
+[10] OK   pytest -q в tuber-x зелёный
+      данные: rc=0; ..................................................................       [100%]
+  tuber-os: rc=0; 484 passed in 15.32s
+[10] OK   pytest -q в tuber-os зелёный
+      данные: rc=0; 484 passed in 15.32s
+  tuber-telegram: rc=0; 29 passed in 1.13s
+[10] OK   pytest -q в tuber-telegram зелёный
+      данные: rc=0; 29 passed in 1.13s
+
+==============================================================================
+СВОДКА ПРИЁМКИ
+==============================================================================
+проверок: 12, OK: 12, FAIL: 0
+    1 OK   живой фид tuber-telegram: фактический формат зафиксирован, импорт не падает
+    2 OK   живой фид tuber-os: фактический формат зафиксирован, импорт не падает
+    3 OK   реальный экспорт tuber-os соответствует канону
+    4 OK   реальный экспорт tuber-telegram соответствует канону
+    5 OK   импорт обоих живых фидов на снимке (без исключений)
+    6 OK   приток посчитан по каждому фиду и вместе; вместе ⊇ каждого по отдельности
+    7 OK   повтор -> imported_new=0, merged>0
+    8 OK   верхние новостники-гиганты живого фида есть в NEWS_GIANTS
+    9 OK   все три рабочие базы не изменены приёмкой (COUNT до = COUNT после)
+   10 OK   pytest -q в tuber-x зелёный
+   10 OK   pytest -q в tuber-os зелёный
+   10 OK   pytest -q в tuber-telegram зелёный

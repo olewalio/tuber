@@ -1,0 +1,1 @@
+x=function(t){return(t[2],16)+(t[5],16);};

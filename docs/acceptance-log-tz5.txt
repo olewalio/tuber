@@ -1,0 +1,521 @@
+ЖУРНАЛ ПРИЁМКИ ТЗ-5 (17.09.2026, jCode Main)
+============================================
+
+Команды и их фактический результат. Все проверки CLI — с ЯВНЫМ --db (копия),
+боевые legacy и боевая единая база этой волной не менялись.
+
+
+[1] Полный прогон тестов
+------------------------
+$ /usr/local/lib/hermes-agent/venv/bin/python3 -m pytest -q
+1015 passed, 1 xfailed in 64.71s
+
+Собрано по наборам:
+  tests/youtube:    528 tests collected
+  tests/x:          303 tests collected
+  tests/telegram:    51 tests collected
+  tests/core:        90 tests collected
+  tests/migration:   22 tests collected
+  tests/parity:       5 tests collected
+  tests/test_schedule_sync.py + tests/test_report_unified.py: 17 tests collected
+  ИТОГО:           1016 collected (1015 passed + 1 xfailed)
+
+Legacy-ориентир: 518 + 291 + 49 = 858. Перенесённые наборы: 528 + 303 + 51 = 882
+(+24), потерь нет. Новых тестов волны: 23.
+
+
+[2] Единый установщик, --dry-run
+---------------------------------
+$ bash scripts/install_hermes_cron.sh --dry-run
+Tuber: ТЕСТОВЫЙ РЕЖИМ (боевой каталог /root/.hermes/scripts не трогаем)
+...
+итого запускалок: 21
+...
+задания планировщика Hermes (время МСК), регистрирует владелец:
+  0 */3 * * * tuber_snapshots.sh       YouTube: замеры просмотров
+  0 7 * * *   tuber_daily.sh           YouTube: суточный цикл (...)
+  */30 * * * * tuber_telegram_collect.sh Telegram: сбор постов (web)
+  0 * * * *   tuber_x_collect_a.sh     X: сбор тира A
+  15 */4 * * * tuber_x_collect_b.sh    X: сбор тира B
+  30 3 * * *  tuber_x_collect_c.sh     X: сбор тира C
+  5 */2 * * * tuber_x_enrich.sh        X: метрики (лайки/ответы)
+  20 * * * *  tuber_x_fulltext.sh      X: полный текст
+  40 4 * * *  tuber_x_synd.sh          X: разовый снимок ленты
+  20 6 * * *  tuber_x_classify.sh      X: классификация моделью
+  40 6 * * *  tuber_x_scores.sh        X: сюжеты и оценки
+  0 7 * * *   tuber_x_report.sh        X: сводный отчёт
+  */30 * * * * tuber_x_health.sh       X: сторож (алерты в Telegram)
+  50 4 * * *  tuber_x_discover.sh      X: расширение реестра (дискавери)
+  10 6 * * *  tuber_os_feed_export.sh  YouTube: экспорт фида кандидатов
+  50 6 * * *  tuber_os_feed_import.sh  YouTube: импорт кандидатов из фида Telegram
+  30 6 * * *  tuber_telegram_feed_export.sh Telegram: экспорт фида X/YouTube
+  35 6 * * *  tuber_telegram_feed_import.sh Telegram: импорт каналов из фида YouTube
+  40 7 * * *  tuber_telegram_discover.sh Telegram: дискавери каналов из своих постов
+
+=== ТРЕБУЕТСЯ РЕГИСТРАЦИЯ ВЛАДЕЛЬЦЕМ (новые задания монорепо) ===
+  0 5 * * *   tuber_db_backup.sh       Tuber: суточный бэкап единой базы + integrity_check
+  0 8 * * *   tuber_report.sh          Tuber: объединённая выдача по трём платформам
+
+=== СВЕРКА С РЕЕСТРОМ /root/.hermes/cron/jobs.json ===
+  лишних заданий Tuber в реестре нет.
+  объявлены установщиком, но в реестре отсутствуют
+  (ожидают регистрации владельцем):
+    tuber_db_backup.sh
+    tuber_report.sh
+в crontab ничего не записано и jobs.json не изменён: задания регистрирует владелец.
+
+
+[3] Тест синхронизации расписания
+---------------------------------
+$ /usr/local/lib/hermes-agent/venv/bin/python3 -m pytest -q tests/test_schedule_sync.py
+9 passed in 0.76s
+
+Проверено: имена/времена 19 зарегистрированных заданий совпадают с блоком JOBS;
+два новых задания (`tuber_db_backup.sh`, `tuber_report.sh`) — список «ожидают
+регистрации», не ошибка; установщик пишет реальные файлы (не симлинки),
+идемпотентен, удаляет устаревший управляемый шим и не трогает чужой; dry-run
+ничего не пишет.
+
+
+[4] cutover_prepare.sh на КОПИИ боевой базы
+-------------------------------------------
+$ TUBER_TARGET=/root/.jcode/scratch/tz5/cutover_target.db \
+  TUBER_SNAP_DIR=/root/.jcode/scratch/tz5/snaps \
+  TUBER_BACKUP_DIR=/root/.jcode/scratch/tz5/backups \
+  bash scripts/cutover_prepare.sh
+
+== а) замороженные снимки legacy (read-only) ==
+  снимок: /root/tuber-os/data/tuber.db -> .../tuber-os.db
+  снимок: /root/tuber-x/data/tuber_x.db -> .../tuber_x.db
+  снимок: /root/tuber-telegram/data/tuber_telegram.db -> .../tuber_telegram.db
+
+== страховочная копия боевой единой базы ДО пересборки ==
+tuber db backup
+  копия: .../backups/tuber-20260917-071604.db
+  целостность источника: ok
+  целостность копии:     ok
+  итог: ok
+
+== б) пересборка единой базы из снимков ==
+Сводка переноса (legacy → core): os 8008 source, 37320 content, 103450 snapshots,
+96116 score; x 102+43+4 source / 1321 content / 119 score / 284 story_member;
+tg 1372 source / 22069 content / 9235 score ...
+
+== в) проверка схемы: migrate --schema-only ==
+Проблем схемы ядра: до 0, после 0.
+
+== г) VACUUM и метрики до/после ==
+  размер:        346193920 -> 333901824 байт
+  freelist:      0 -> 0 байт
+  quick_check:   ok -> ok
+
+Итоговые числа на пересобранной базе:
+  candidate 7 141 (было 6 002)   meta_json заполнен 7 141/7 141 (было 36/6 002)
+  content   60 710 (было 49 667)  (после живых прогонов 61 269)
+  score    105 470 (было 85 771)
+  source     9 482 (было 8 780)
+
+
+[5] Стабильный адрес для живых прогонов — копия (правило после ТЗ-4)
+--------------------------------------------------------------------
+Все прогоны ниже — с ЯВНЫМ --db на копии; боевая база не открывалась на запись.
+
+[5a] YouTube:
+$ python3 -m tuber yt collect --queries 1 --budget 180 --no-classify --db КОПИЯ
+Сбор завершён: запросов 1 (выполнено 1), найдено видео 100, новых 547,
+каналов обойдено 6, расход квоты 232 units.   rc=0
+content: 60 721 -> 61 268
+
+[5b] X:
+$ python3 -m tuber x collect --tier A --max-accounts 15 --db КОПИЯ
+аккаунтов: 14 ok=14 fail=0 страниц=14 новых=1 обновлено=267 ...   rc=0
+
+[5c] Telegram:
+$ python3 -m tuber tg collect --mode web --handle chatgptv --db КОПИЯ
+{"mode":"web","channels_ok":1,"channels_fail":0,"posts_new":0,"posts_upd":74,
+ "errors":0,"duration_sec":5.5,"flood_until":null}   rc=0
+
+Первый прогон (X tier A --max-accounts 5): новых 0, обновлено 93, rc=0.
+Telegram на несуществующем в реестре канале (durov): строк 0, rc=0.
+
+ИТОГ: content 61 268 -> 61 269, run_log 9 938 -> 9 942, все rc=0, ошибок нет.
+
+
+[6] parity на чистой пересборке из снимков
+------------------------------------------
+$ python3 -m tuber tools migrate --target fresh.db --os СНИМОК --x СНИМОК --tg СНИМОК
+$ python3 -m tuber parity --target fresh.db --os СНИМОК --x СНИМОК --tg СНИМОК
+------------------------------------------------------------------------------------------
+Итог: расхождений нет.        rc=0
+
+
+[7] Пример объединённой выдачи
+------------------------------
+$ python3 -m tuber report --db data/tuber.db --days 10 --save --out docs/REPORT-TZ5-example.txt
+Секции: 1. YouTube, 2. X, 3. Telegram, 4. Сквозной сюжет + ПОДВАЛ (оговорки).
+Полный текст — docs/REPORT-TZ5-example.txt (91 строка).
+
+
+[8] Замечание про инцидент ТЗ-4
+-------------------------------
+Все проверки CLI этой волны выполнены с явным --db на копии. Боевая единая база
+и три legacy-базы не изменялись (снимки legacy — read-only, `tuber report` —
+read-only соединение, `tuber db backup` открывает источник `mode=ro`).
+
+
+[9] Проверка путей из CUTOVER.md (ТЗ-5-доп, 17.09.2026)
+------------------------------------------------------
+Дефект: раздел отката ссылался на несуществующий
+/root/.hermes/cron/jobs.json.bak-tz20-20260915-233030 (файла нет; рядом лежит
+...-233033 — имя в документе было искажено). Раздел переписан на
+воспроизводимую процедуру без «магических» имён.
+
+Копии реестра планировщика, которые реально есть:
+$ ls -lt /root/.hermes/cron/jobs.json.bak-*
+-rw------- 1 root root 211980 Sep 17 10:39 /root/.hermes/cron/jobs.json.bak-cutover-20260917-103941
+-rw------- 1 root root 181288 Sep 15 23:26 /root/.hermes/cron/jobs.json.bak-tz20-20260915-233033
+
+Проверка выбранной копии перед откатом (ожидаем ровно 99 заданий):
+$ BAK=/root/.hermes/cron/jobs.json.bak-cutover-20260917-103941
+$ test -e "$BAK"
+есть    /root/.hermes/cron/jobs.json.bak-cutover-20260917-103941
+$ python3 -c "import json;d=json.load(open('$BAK'));print('заданий:',len(d.get('jobs',d)))"
+заданий: 99
+
+test -e по всем путям, которые CUTOVER.md называет существующими:
+есть    /root/.hermes/cron/jobs.json
+есть    /root/.hermes/cron/jobs.json.bak-cutover-20260917-103941
+есть    /root/tuber/scripts/install_hermes_cron.sh
+есть    /root/tuber/scripts/cutover_prepare.sh
+есть    /root/tuber/data/tuber.db
+есть    /root/tuber-os/scripts/install_hermes_cron.sh
+есть    /root/tuber-x/scripts/install_hermes_cron.sh
+есть    /root/tuber-telegram/scripts/install_hermes_cron.sh
+есть    /root/tuber/scripts/x
+есть    /root/tuber/scripts/telegram
+есть    /root/tuber/scripts/youtube
+есть    /root/tuber/scripts/common
+
+Пути, которых пока нет (каталоги создаёт сама процедура; в документе они
+описаны командой поиска, а не как существующие):
+НЕТ     /root/tuber/data/exchange            (создаёт первая обработка мостов)
+НЕТ     /root/tuber/data/backups             (создаёт cutover_prepare.sh / tuber db backup)
+НЕТ     /root/tuber/data/cutover_snapshots   (создаёт cutover_prepare.sh)
+
+Итог: все пути, названные в CUTOVER.md существующими, существуют; «магическое»
+имя отсутствующего файла убрано. Путей-призраков в разделе отката нет.
+
+
+[10] Долг D-45: маркировка `content.url` (ТЗ-5-доп)
+---------------------------------------------------
+Реестр уже содержал раздел D-45 (`content.url` пуст) и маркер в
+tuber/analysis/report.py; запись дополнена замером свежей пересборки
+(60 710 из 60 710) и мапингом миграции. Новый номер не заводился: раздел D-45
+уже описывает ровно этот дефект, а правило реестра запрещает дубли долгов.
+Диапазон D-45 сохранён, чтобы не ломать ссылки в docs/REPORT-TZ5.md.
+
+Маркеры добавлены в tuber/tools/migrate_legacy.py (три `_migrate_*_content`)
+и уже были в tuber/analysis/report.py (`content_url`).
+
+$ python3 /root/.hermes/scripts/debt_scan.py --strict
+ИТОГ: проектов=7 открыто=49 маркеров=86 расхождений=0        rc=0
+  (проект tuber переведён в конфиге сканера с legacy /root/tuber-os на
+   монорепозиторий /root/tuber; было расхождений=5 у legacy-проекта)
+
+$ /usr/local/lib/hermes-agent/venv/bin/python3 -m pytest -q tests/test_debt_markers.py
+2 passed
+
+
+[11] Доставка владельцу: компактная сводка (ТЗ-5-доп-2, 17.09.2026)
+-------------------------------------------------------------------
+Дефект: для заданий no_agent планировщик Hermes доставляет владельцу РОВНО
+stdout обёртки, а scripts/common/tuber_report.sh печатал только строку
+«Tuber report: объединённая выдача собрана …». Сам отчёт (91 строка) оставался
+файлом на сервере — владелец суточную выдачу в чате не видел.
+
+Закрыто: `tuber report --compact` (сводка ≤3500 знаков) + обёртка печатает
+сводку в stdout (её доставляет планировщик), полный отчёт — файлом
+(--save --out reports/) и ЦЕЛИКОМ в журнал. Бюджет считается по длине UTF-8
+(строже числа знаков для кириллицы, поэтому и wc -c укладывается), обрезка —
+только по целым пунктам, начиная с последних.
+
+Все проверки — на КОПИИ боевой базы (--db КОПИЯ); боевая data/tuber.db не
+открывалась на запись:
+  копия: data/backups/tuber-20260917-084822.db
+
+[11a] Длина сводки (лимит 3500)
+$ python3 -m tuber report --compact --db КОПИЯ | wc -c
+3478
+$ python3 -m tuber report --compact --db КОПИЯ | wc -m
+2729
+  wc -c — байты UTF-8, уложились в лимит; знаков 2729 — тем более.
+  Пример сводки: docs/REPORT-TZ5-example-compact.txt.
+  Счётчик скрытых: «Скрыто по платформам: YouTube 10, X 11, Telegram 36.»
+
+[11b] Доказательство целостности ссылок
+Каждая ссылка из сводки встречается в полном отчёте ЦЕЛИКОМ (regex
+«https?://\S+» по сводке, проверка вхождения в полный текст):
+  links: 9  missing-in-full: 0
+Обрезки посреди ссылки нет: пункты отбрасываются только целиком.
+
+[11c] Обрезка реально работает (синтетика, tests/test_report_compact.py)
+Длинные пункты по всем платформам: счётчик скрытых > 0, len ≤ 3500 знаков и
+≤ 3500 байт. На пустой/крошечной базе сводка не падает и остаётся в лимите.
+$ /usr/local/lib/hermes-agent/venv/bin/python3 -m pytest -q tests/test_report_compact.py
+8 passed in 7.41s
+
+[11d] Обёртка end-to-end (копия, отдельный каталог выдачи/журнала)
+$ TUBER_DB=КОПИЯ TUBER_REPORTS_DIR=... bash scripts/common/tuber_report.sh
+rc=0; stdout — сводка, 3193 байт; создан полный отчёт
+reports/report-2026-09-17.txt; журнал tuber_report.log содержит и сводку, и
+полный отчёт («ПОДВАЛ» — 1 раз, маркер «полный отчёт:» — 1 раз).
+
+При недоступной базе (--db несуществующий) — ALERT и код возврата 0:
+  2026-09-17 11:54:44 ALERT Tuber report: объединённая выдача не собрана
+    (rc=2), см. .../tuber_report.log        rc=0
+
+[11e] Режимы не сломаны
+  --json  → валидный JSON (ключи: cross_story, days, db, telegram, x, youtube);
+  без флага → полный отчёт («ПОДВАЛ» присутствует);
+  --compact → сводка («ПОДВАЛ» отсутствует).
+
+[11f] Полный прогон тестов
+$ /usr/local/lib/hermes-agent/venv/bin/python3 -m pytest -q
+1025 passed, 1 xfailed in 70.73s
+Было 1017 passed, 1 xfailed (принято ТЗ-5 и ТЗ-5-доп); новых тестов +8
+(tests/test_report_compact.py).
+
+[12] Справедливое распределение мест в сводке (ТЗ-5-доп-3, 17.09.2026)
+-------------------------------------------------------------------
+Дефект доп-2: сводка обрезалась «с конца», поэтому последний раздел терял
+пункты первым и на живой базе уходил целиком:
+  «3. Telegram — топ постов за окно:
+     все пункты скрыты: не хватило лимита знаков. скрыто пунктов: 36».
+Единая выдача задумана как ОДИН отчёт по трём платформам — сводка без Telegram
+этой задаче не отвечает («полный список в файле» не помогает: владелец читает
+чат).
+
+Закрыто: build_compact делит бюджет справедливо. Резерв — каждый раздел с
+данными получает минимум 1 пункт; остаток бюджета раздаётся round-robin: по
+одному следующему пункту за шаг, пока пункт влезает целиком; порядок внутри
+раздела сохраняется (сначала верхние). Если резерв не влезает, укорачивается
+только ОПИСАНИЕ пункта (CompactItem: head|desc|tail; с многоточием) — ссылка и
+цифры неприкосновенны. Строка «все пункты скрыты» больше не печатается:
+раздел без данных честно сообщает «нет данных за окно». Счётчики скрытых
+печатаются всегда, и «показано + скрыто» сходится с полным отчётом.
+
+Все замеры — на КОПИЯХ боевой базы; боевая data/tuber.db не открывалась на
+запись (только штатный read-only `tuber db backup`):
+  копия A: data/backups/tuber-20260917-084822.db
+  копия B: <tmp>/tuber-20260917-090329.db (свежая копия боевой)
+
+[12a] Правило распределения мест
+  1) резерв: каждый непустой раздел получает минимум 1 пункт;
+  2) round-robin: остаток — по одному следующему пункту за шаг, пока влезает;
+  3) не влез резерв → укорачивается только ОПИСАНИЕ (с многоточием),
+     ссылка и цифры не меняются;
+  4) счётчики скрытых по каждому разделу печатаются всегда;
+  5) «все пункты скрыты» — запрещено; нет данных → «нет данных за окно».
+
+[12b] Длина сводки (лимит 3500 байт UTF-8), копия B
+$ python3 -m tuber report --compact --db КОПИЯ_B | wc -c
+3454
+$ python3 -m tuber report --compact --db КОПИЯ_B | wc -m
+2536
+  wc -c <= 3500 соблюдён; знаков 2536 — тем более.
+
+[12c] Разбивка показано/скрыто по разделам, копия B
+  полный отчёт по разделам: YouTube 15, X 15, Telegram 36
+  YouTube:  показано 3, скрыто 12, сумма 15 == 15
+  X:        показано 2, скрыто 13, сумма 15 == 15
+  Telegram: показано 3, скрыто 33, сумма 36 == 36
+  «Скрыто по платформам: YouTube 12, X 13, Telegram 33.»
+Доказательство «≥1 пункт на платформу»: в сводке присутствуют ссылки всех трёх
+платформ (youtube.com/watch, x.com/.../status, t.me/...), по ≥1 пункту в каждом
+разделе; строки «все пункты скрыты» в сводке нет.
+
+[12d] Пример сводки и целостность ссылок, копия A
+Пример: docs/REPORT-TZ5-example-compact.txt; wc -c = 3410, wc -m = 2520.
+Ссылок 9, все входят в полный отчёт ЦЕЛИКОМ; missing-in-full = 0.
+Показано: YouTube 3, X 2, Telegram 3; скрыто: 12 / 13 / 33.
+
+[12e] Обёртка end-to-end (копия B, отдельные каталоги выдачи/журнала)
+$ TUBER_DB=КОПИЯ_B TUBER_REPORTS_DIR=... TUBER_LOG_DIR=... \
+    bash scripts/common/tuber_report.sh
+rc=0; stdout — сводка (3443 байта), в ней все три платформы (8 ссылок); создан
+полный отчёт report-2026-09-17.txt; журнал содержит и сводку, и полный отчёт
+(«ПОДВАЛ» ×1, маркер «полный отчёт:» ×1).
+
+[12f] Тесты ТЗ-5-доп-3 (+5)
+$ /usr/local/lib/hermes-agent/venv/bin/python3 -m pytest -q tests/test_report_compact.py
+13 passed
+Новые проверки: ≥1 пункт КАЖДОЙ платформы в сводке; показано+скрыто == число
+пунктов раздела в полном отчёте (живая база и синтетика); раздел без данных
+печатает «нет данных», а не «все пункты скрыты»; узкий бюджет (1400) сохраняет
+по пункту каждому разделу и не режет ссылки.
+
+[12g] Полный прогон тестов
+$ /usr/local/lib/hermes-agent/venv/bin/python3 -m pytest -q
+1030 passed, 1 xfailed in 76.50s
+Было 1025 passed, 1 xfailed (принято ТЗ-5-доп-2); новых тестов +5
+(tests/test_report_compact.py, было 8 → стало 13).
+
+
+[13] Фактическое переключение (17.09.2026, ВНЕШНИЙ КОНТУР, не jCode)
+--------------------------------------------------------------------
+Переключение выполнено внешним контуром. Ниже — записанные факты и замеры плюс
+контрольные read-only проверки jCode. Код, обёртки, установщик и реестр заданий
+этой волной не менялись; боевая data/tuber.db открывалась jCode только на чтение.
+
+[13a] Пересборка боевой единой базы из замороженных снимков
+  Снимки: data/cutover_snapshots/20260917-084821/ (tuber-os.db, tuber_x.db,
+  tuber_telegram.db; read-only).
+  Первый прогон cutover_prepare.sh прерван рестартом гейтвея (процесс жил в его
+  контуре) — база осталась недособранной. Повторный прогон выполнен в транзиентном
+  systemd-юните tz5-cutover.service и завершился штатно. Юнит транзиентный: после
+  завершения Unit tz5-cutover.service could not be found (проверено jCode).
+  Страховочные копии:
+    data/backups/tuber-20260917-075506.db  (до пересборки)
+    data/backups/tuber-20260917-084822.db  (промежуточное состояние)
+  Итог боевой базы (замер внешнего контура):
+    candidate       6 002 -> 7 141
+    content        49 667 -> 61 294
+    score                    105 504
+    source                     9 483
+    story_member                 405  (1:1 из legacy story_posts 284 + перенос)
+    metric_snapshot          129 816
+  Схема: «Проблем схемы ядра: до 0, после 0»; VACUUM 348 196 864 -> 335 757 312
+  байт; freelist 0; quick_check ok -> ok.
+
+[13b] Независимая проверка внешним контуром
+  integrity ok; схема v4; явных индексов 21; content по платформам —
+  youtube 37 320, telegram 22 633, x 1 341 (все три платформы в единой базе);
+  пустых meta_json у кандидатов 0 (было 5 966); следов tuber-telegram:posts 0
+  на момент проверки.
+
+[13c] Контрольный read-only замер jCode (17.09.2026)
+$ python3 - <<'EOF'
+import sqlite3
+con=sqlite3.connect('file:/root/tuber/data/tuber.db?mode=ro',uri=True)
+c=con.cursor()
+for t in ['candidate','content','score','source','story_member','metric_snapshot']:
+    print(t, c.execute(f'select count(*) from {t}').fetchone()[0])
+print('empty_meta', c.execute("select count(*) from candidate where meta_json is null or meta_json='' or meta_json='{}'").fetchone()[0])
+print('integrity', c.execute('pragma integrity_check').fetchone()[0])
+print('schema', c.execute("select value from schema_meta where key='version'").fetchone()[0])
+print('indexes', c.execute("select count(*) from sqlite_master where type='index' and sql is not null").fetchone()[0])
+print('content_by_platform', c.execute('select platform,count(*) from content group by platform').fetchall())
+print('tg_posts_candidates', c.execute("select count(*) from candidate where found_via='tuber-telegram:posts'").fetchone()[0])
+EOF
+candidate 10616
+content 61296
+score 105504
+source 9483
+story_member 405
+metric_snapshot 129816
+empty_meta 0
+integrity ok
+schema 4
+indexes 27
+content_by_platform [('youtube', 37320), ('telegram', 22633), ('x', 1343)]
+tg_posts_candidates 3475
+
+  Пояснение к расхождениям (честно):
+  - candidate 7 141 -> 10 616 = +3 475 — это штатный телеграм-экспорт из записи
+    [16] (found_via='tuber-telegram:posts'), не повреждение;
+  - content x 1 341 -> 1 343 — тот же прогон;
+  - явных индексов у внешнего контура 21, у jCode 27 (считано по sqlite_master
+    с непустым sql); расхождение НЕ выяснялось — не измерялось, чем считал
+    внешний контур.
+  - VACUUM-размер внешнего контура (335 757 312) и текущий размер файла
+    (339 582 976) не совпадают: после VACUUM база снова росла от боевых записей.
+    Отдельный VACUUM jCode не запускал.
+
+[14] Уточнение по продюсеру tuber-telegram:posts (важно)
+--------------------------------------------------------
+tuber-telegram:posts — это ШТАТНЫЙ продюсер tuber/platforms/telegram/feeds_export.py
+(константа SOURCE), запись идёт в каноническую таблицу candidate; обмен единой
+базы идёт через неё (ТЗ-4 §0), UPSERT по паре платформа+хендл.
+В ТЗ-4 те строки удалялись скриптом scripts/repair_x_candidate_meta.py НЕ как
+мусор, а чтобы вернуть базу в состояние «до инцидента» (jCode запустил
+bridge export без --db в момент диагностики). Штатный прогон этих строк больше
+не портит: upsert_candidate починен, meta_json чужих кандидатов не затирается.
+Вывод «мусор» в документах ошибочен и снят.
+
+[15] Переключение расписания
+----------------------------
+$ bash scripts/install_hermes_cron.sh          # без --dry-run (внешний контур)
+  шимов стало 21; ни один не указывает на legacy-проекты
+  (было 19 шимов, все на /root/tuber-os|tuber-x|tuber-telegram/).
+  Копия прежних шимов: /root/tz5/shim_before/ (19 файлов).
+
+Контроль jCode (read-only):
+$ ls -1 /root/.hermes/scripts/tuber_*.sh | wc -l
+21
+$ grep -lE '/root/tuber-(os|x|telegram)/' /root/.hermes/scripts/*.sh | wc -l
+0
+$ ls -1 /root/tz5/shim_before/ | wc -l
+19
+$ grep -lE '/root/tuber-(os|x|telegram)/' /root/tz5/shim_before/* | wc -l
+19
+
+Реестр /root/.hermes/cron/jobs.json установщиком НЕ менялся: 99 заданий до и
+после, ноль добавленных и ноль удалённых (сверка по имени/расписанию/скрипту со
+снимком /root/tz5/cron_before.json). Затем владелец зарегистрировал два новых
+задания монорепо; контроль jCode:
+
+$ python3 - <<'EOF'   # сверка cron_before.json и боевого jobs.json
+... (сравнение по name/schedule/script) ...
+EOF
+before 99 after 101
+added: 2
+  + Tuber: объединённая выдача по трём платформам 0 8 * * * tuber_report.sh
+  + Tuber: суточный бэкап единой базы            0 5 * * * tuber_db_backup.sh
+removed: 0
+
+  Оба новых задания — no_agent, доставка в Telegram владельцу.
+  Боевые прогоны внешнего контура:
+    бэкап — статус ok, в Telegram молчит (по замыслу), копия
+      data/backups/tuber-20260917-091734.db создана;
+    выдача — статус ok, доставлена (delivered to telegram:<chat_id>),
+      полный отчёт reports/report-2026-09-17.txt (27 216 байт),
+      компактная сводка 3 426–3 498 байт, ссылок 8, обрезанных 0.
+  Контроль jCode (read-only):
+    $ wc -c reports/report-2026-09-17.txt      -> 27216
+    $ wc -c docs/REPORT-TZ5-example-compact.txt -> 3410  (пример)
+    data/backups/backup.log — три записи, у всех source_integrity=True (ok),
+    backup_integrity=True (ok); последняя копия tuber-20260917-091734.db.
+    Журнал tuber_db_backup.log: «итог: ok».
+    Журнал tuber_report.log (30 689 байт) заканчивается секцией «ПОДВАЛ:
+    честные оговорки».
+
+[16] Проверка «данные идут в единую базу» (внешний контур)
+----------------------------------------------------------
+$ bash /root/.hermes/scripts/tuber_telegram_feed_export.sh    # rc=0, молча
+  Добавлено в единую базу 3 475 кандидатов (found_via='tuber-telegram:posts',
+  youtube/x-кандидаты из телеграм-постов) — штатный обмен. Legacy-проекты при
+  этом молчат, потому что их шимы больше не вызываются.
+
+Контроль jCode по журналу прогона (/root/.hermes/logs/tuber_telegram_feed_export.log):
+  2026-09-17 12:16:26 {"kind_counts": {"x": 392, "youtube": 1608}, "written": 2000,
+    "out": ".../tg_candidates.jsonl", "dry": false,
+    "candidates": {"inserted": 3475, "updated": 64}, ...}
+  Совпадает: inserted 3475.
+
+[17] Конфиг сканера долга
+-------------------------
+/root/.hermes/config/debt_projects.json переведён на монорепозиторий
+(7 проектов, legacy-записей нет), копия debt_projects.json.bak-20260917.
+Это осознанное решение, а не обход метрики.
+
+$ /usr/local/lib/hermes-agent/venv/bin/python3 /root/.hermes/scripts/debt_scan.py --strict
+ИТОГ: проектов=7 открыто=49 маркеров=86 расхождений=0        rc=0
+  (проект tuber смотрит на /root/tuber/tuber и /root/tuber/scripts, а не на
+   legacy /root/tuber-os).
+
+[18] Тест синхронизации расписания после переключения
+-----------------------------------------------------
+$ /usr/local/lib/hermes-agent/venv/bin/python3 -m pytest -q tests/test_schedule_sync.py
+9 passed
+Полный набор волны после регистрации заданий (внешний контур):
+1017 -> 1030 passed + 1 xfailed.

@@ -1,0 +1,1 @@
+const c=1;import("./sign.o-abc.js");export default c;

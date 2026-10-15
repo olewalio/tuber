@@ -1,0 +1,10 @@
+{"kind": "youtube", "handle": "dQw4w9WgXcQ", "mentions": 1, "source": "tuber-os"}
+{"kind": "telegram", "handle": "@AI_Channel_One", "mentions": 5, "ai_hint": 1, "examples": ["Первый пример упоминания", "Второй пример", "Третий пример не должен попасть в notes"]}
+{"kind": "telegram", "handle": "existing_active", "mentions": 3, "examples": ["уже в реестре"]}
+{"kind": "telegram", "handle": "spamnewsbot", "mentions": 4, "examples": ["бот-агрегатор"]}
+{"kind": "telegram", "handle": "cnn", "mentions": 9, "examples": ["гигант новостник"]}
+{"kind": "telegram", "handle": "aibot", "mentions": 4, "ai_hint": 1, "examples": ["ИИ-бот, явный признак"]}
+{"kind": "telegram", "handle": "joinchat", "mentions": 5}
+{"kind": "telegram", "handle": "ab", "mentions": 5}
+{"kind": "telegram", "handle": "rare_chan", "mentions": 1}
+{"kind": "telegram", "handle": "rare_ai", "mentions": 1, "ai_hint": 1, "examples": ["редкий, но ИИ"]}

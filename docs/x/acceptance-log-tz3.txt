@@ -1,0 +1,130 @@
+# Журнал приёмки ТЗ-3 (X → монорепозиторий)
+# Дата: 2026-09-16 21:16:54 UTC
+# Боевые базы только читаются: снимок для сверки — data/acceptance/*.db (sqlite3 .backup).
+
+## 1. Тесты монорепозитория
+=========================== short test summary info ============================
+FAILED tests/x/test_story_pairs.py::test_required_different_pairs_not_glued
+1 failed, 895 passed in 53.58s
+
+## 2. Число тестов X
+298 tests collected in 0.12s
+
+## 3. Сверка отчётов legacy ↔ монорепо + parity + время
+1. копии баз → /root/tuber/data/acceptance/x_legacy_copy.db, /root/tuber/data/acceptance/unified_copy.db
+   домиграция X: 4396 строк, пропусков 0
+2a. parity на копиях (правила X)
+правило                                        было      стало     дельта  статус
+------------------------------------------------------------------------------------------
+x.accounts                                       72         72         +0  OK
+x.posts                                         811        811         +0  OK
+x.post_metrics_history                          809        809         +0  OK
+x.scores                                        103        103         +0  OK
+x.stories                                       100        100         +0  OK
+x.story_posts                                   123        123         +0  OK
+x.classified                                    598        598         +0  OK
+x.classify_daily                                  2          2         +0  OK
+x.cursors                                        85         85         +0  OK
+x.candidates                                   1407       1407         +0  OK
+x.requests                                     2700       2700         +0  OK
+x.instances                                       4          4         +0  OK
+x.runs                                          167        167         +0  OK
+x.run_log                                      1611       1611         +0  OK
+x.metrics_daily                                   2          2         +0  OK
+x.report_texts                                    1          1         +0  OK
+x.blocklist                                       0          0         +0  OK
+------------------------------------------------------------------------------------------
+Итог: расхождений нет.
+   код parity: 0 (0 — расхождений нет, 2 — есть)
+2. отчёт legacy (2026-09-15)
+   код 0, 62 строк, 0.13 с
+3. отчёт монорепозитория (2026-09-15)
+   код 0, 62 строк, 0.95 с
+4. построчная сверка
+   строк расхождения: 2
+   --- legacy
+   +++ core
+   @@ -24,7 +24,7 @@
+       Раунд: Flam, сумма: 40 млн; кто: @chandrarsrikant; 2026-09-15 09:17 UTC; https://x.com/chandrarsrikant/status/2099789614395556279
+       Запуск: GPT 5.6 Terra; кто: @onusoz; 2026-09-15 11:25 UTC; https://x.com/onusoz/status/2099821884259098777
+       Раунд: кредит ByteDance, сумма: 29.6 млрд; кто: @StragglerLiu; 2026-09-15 12:26 UTC; https://x.com/StragglerLiu/status/2099837324511347191
+   -   Запуск: инференс-сервис; кто: @Cointelegraph; 2026-09-15 13:25 UTC; https://x.com/Cointelegraph/status/2099851980843925762
+   +   Запуск: GPU-аренда; кто: @Cointelegraph; 2026-09-15 13:25 UTC; https://x.com/Cointelegraph/status/2099851981557035395
+       Запуск: деплой моделей; кто: @Cointelegraph; 2026-09-15 13:25 UTC; https://x.com/Cointelegraph/status/2099851981242433591
+    
+    4. Новинки и инструменты
+5. время (лучший из 3 повторов)
+   legacy 0.13 с, монорепо 0.19 с, отношение 1.48×
+   вердикт: OK
+
+## 4. EXPLAIN QUERY PLAN: legacy (копия, соединение mode=ro)
+### primary_post
+    SEARCH sp USING COVERING INDEX sqlite_autoindex_story_posts_1 (story_id=?)
+    SEARCH p USING INDEX sqlite_autoindex_posts_1 (tweet_id=?)
+    SEARCH a USING INTEGER PRIMARY KEY (rowid=?) LEFT-JOIN
+    USE TEMP B-TREE FOR ORDER BY
+    -> строк 1, 0.2 мс
+    tweet_id: 2099851980843925762
+### stories_window
+    SEARCH p USING INDEX idx_posts_deleted_at (deleted_at=?)
+    SEARCH c USING INDEX sqlite_autoindex_classified_1 (text_hash=?)
+    SEARCH a USING INTEGER PRIMARY KEY (rowid=?)
+    USE TEMP B-TREE FOR ORDER BY
+    -> строк 57, 2.8 мс
+### money_stories
+    SCAN sp USING COVERING INDEX sqlite_autoindex_story_posts_1
+    SEARCH s USING INTEGER PRIMARY KEY (rowid=?)
+    SEARCH p USING INDEX sqlite_autoindex_posts_1 (tweet_id=?)
+    SEARCH c USING INDEX sqlite_autoindex_classified_1 (text_hash=?)
+    USE TEMP B-TREE FOR DISTINCT
+    USE TEMP B-TREE FOR ORDER BY
+    -> строк 7, 0.5 мс
+
+## 5. EXPLAIN QUERY PLAN: монорепозиторий (копия, адаптер)
+### primary_post
+    SEARCH sm USING COVERING INDEX sqlite_autoindex_story_member_1 (story_id=?)
+    LIST SUBQUERY 6
+    SEARCH main.story USING COVERING INDEX idx_x_story_xconf (platform=?)
+    CREATE BLOOM FILTER
+    SEARCH c USING INDEX idx_x_content_post (platform=? AND external_id=?)
+    CORRELATED SCALAR SUBQUERY 3
+    SEARCH c USING INTEGER PRIMARY KEY (rowid=?)
+    SEARCH s USING INTEGER PRIMARY KEY (rowid=?) LEFT-JOIN
+    USE TEMP B-TREE FOR ORDER BY
+    -> строк 1, 0.5 мс
+    tweet_id: 2099851981557035395
+### stories_window
+    SCAN cc
+    SEARCH c USING INDEX idx_x_content_hash (platform=? AND text_hash=?)
+    SEARCH s USING INTEGER PRIMARY KEY (rowid=?)
+    USE TEMP B-TREE FOR ORDER BY
+    -> строк 57, 3.6 мс
+### money_stories
+    SEARCH s USING INTEGER PRIMARY KEY (rowid=?)
+    LIST SUBQUERY 9
+    SEARCH main.story USING COVERING INDEX idx_x_story_xconf (platform=?)
+    SEARCH sm USING COVERING INDEX sqlite_autoindex_story_member_1 (story_id=?)
+    REUSE LIST SUBQUERY 9
+    SEARCH c USING INDEX idx_x_content_post (platform=? AND external_id=?)
+    CORRELATED SCALAR SUBQUERY 6
+    SEARCH c USING INTEGER PRIMARY KEY (rowid=?)
+    SEARCH cc USING INDEX sqlite_autoindex_classify_cache_1 (text_hash=?)
+    CORRELATED SCALAR SUBQUERY 3
+    SEARCH c USING INTEGER PRIMARY KEY (rowid=?)
+    CORRELATED SCALAR SUBQUERY 4
+    SEARCH src USING INTEGER PRIMARY KEY (rowid=?)
+    USE TEMP B-TREE FOR ORDER BY
+    -> строк 7, 0.8 мс
+
+## 6. Боевые базы (mtime, md5) на момент журнала
+/root/tuber-x/data/tuber_x.db 2026-09-17 00:15:59.699752756 +0300
+/root/tuber/data/tuber.db 2026-09-16 21:15:28.028923695 +0300
+a06def21b00756f25fd486504bedfb8f  /root/tuber-x/data/tuber_x.db
+5fea770346dd988f4da55ef4f24fd1c5  /root/tuber/data/tuber.db
+
+## 7. Почему mtime боевой X-базы отличается от снимка 00:06
+Базу X пишет боевой крон проекта tuber-x (hermes jobs.json: tuber_x_collect_b.sh
+расписание '15 */4 * * *'): в 00:15:59 MSK он добавил 1 пост и 7 запросов
+(posts 810 → 811, requests 2693 → 2700). Волна ТЗ-3 к базе не писала:
+все замеры и приёмки — на копиях; открытие боевого файла было только на чтение
+(соединение mode=ro либо .backup).

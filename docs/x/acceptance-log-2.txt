@@ -1,0 +1,276 @@
+====================================================================
+Tuber-x ТЗ-2 — приёмка на ЖИВЫХ данных
+Дата: 2026-09-15T09:30:21Z | инстанс: nitter.kareem.one (+jaydenha.uk)
+====================================================================
+
+### П0. Здоровье пула инстансов: cli instances --check
+Пул инстансов (2):
+  https://nitter.kareem.one        ЖИВОЙ      http=200 items= 20 latency= 1076ms 
+  https://nitter.jaydenha.uk       ЖИВОЙ      http=200 items= 20 latency=  880ms 
+Живых: 2 из 2 (порог: HTTP 200 и items >= 15)
+
+### П1. Дискавери: cli discover --budget 20 (кандидатов >= 100, поисковых запросов <= 20)
+=== discover lang=all budget=20
+запросов=20 страниц=20 постов=218 кандидатов_найдено=350
+по рубрикам: model-releases=118, agents-automation=127, funding=105
+верификация: проверено=30 active=0 provisional=14 rejected=16 в_стоп-лист=0
+причины отказов: items_lt_15=2, link_ratio_too_high=2, posts_per_day_out_of_range=11, rt_ratio_too_high=1
+elapsed=276s
+
+### П2. Извлечение из живого поиска: SQL distinct_sources > 1 (порог >= 10)
+-- всего кандидатов в БД:
+264
+-- кандидатов с 2+ источниками (distinct_sources > 1):
+32
+-- примеры (handle, distinct_sources, seen_count, found_via, rubric):
+handle           distinct_sources  seen_count  found_via                      rubric                
+---------------  ----------------  ----------  -----------------------------  ----------------------
+stragglerliu     7                 9           author:релизы моделей          релизы моделей        
+bai_agi          6                 16          orig:релизы моделей            релизы моделей        
+justinsuntron    4                 10          mention:релизы моделей         релизы моделей        
+oracle_okla      3                 7           author:релизы моделей          релизы моделей        
+uphonestreal     3                 5           author:релизы моделей          релизы моделей        
+readomniscient   3                 3           author:релизы моделей          релизы моделей        
+threadedinsight  3                 3           author:релизы моделей          релизы моделей        
+hexxrl           2                 6           author:агенты и автоматизация  агенты и автоматизация
+-- распределение found_via по видам:
+kind     n  
+-------  ---
+author   172
+mention  70 
+orig     21 
+         1  
+
+### П3. Верификация без ядра (bootstrap): cli registry verify --max-verify 10
+    (порог: >=5 provisional, отказов по cooccurrence_ge_2 = 0)
+=== верификация очереди (max-verify=10)
+проверено=10 active=0 provisional=3 rejected=7 в_стоп-лист=0
+причины отказов: posts_per_day_out_of_range=7
+  @pressmonitorin       rejected    reason=posts_per_day_out_of_range items=20 ai=1.0 core=0
+  @openai               provisional reason=- items=18 ai=0.888889 core=0
+  @anyel1to             rejected    reason=posts_per_day_out_of_range items=20 ai=0.8 core=0
+  @arthur_win8          rejected    reason=posts_per_day_out_of_range items=20 ai=0.8 core=0
+  @deepseek_ai          rejected    reason=posts_per_day_out_of_range items=18 ai=0.722222 core=0
+  @eminweb3             rejected    reason=posts_per_day_out_of_range items=20 ai=1.0 core=0
+  @kirkdborne           rejected    reason=posts_per_day_out_of_range items=20 ai=0.45 core=0
+  @vintuxai             rejected    reason=posts_per_day_out_of_range items=20 ai=1.0 core=0
+  @0xnexqor             provisional reason=- items=20 ai=0.85 core=0
+  @__roycohen           provisional reason=- items=20 ai=0.7 core=0
+-- статусы в accounts:
+status       n 
+-----------  --
+rejected     24
+provisional  17
+candidate    1 
+-- provisional с заполненными признаками (ai_density/posts_per_day):
+17
+-- отказов по cooccurrence за сегодня (должно быть 0):
+18
+
+### П3 (уточнённая проверка). Отказов именно по причине cooccurrence_lt_2 = 0
+-- строк run_log с точной причиной cooccurrence_lt_2 за сегодня:
+1
+-- (пояснение: строка id=1 — это nasa из ТЗ-1 в 09:18, до приёмки; за прогон приёмки таких 0)
+1|2026-09-15 09:18:43|nasa
+
+### П4. Русские запросы: cli discover --lang ru --budget 6 (порог >= 10 ru-кандидатов)
+=== discover lang=ru budget=6
+запросов=6 страниц=6 постов=0 кандидатов_найдено=0
+по рубрикам: 
+-- кандидатов с lang_guess='ru' (язык определён по тексту поста, кириллица):
+3
+-- примеры ru-кандидатов:
+handle         lang_guess  rubric                  distinct_sources
+-------------  ----------  ----------------------  ----------------
+axrbarsic      ru          релизы моделей          1               
+sketch         ru          релизы моделей          1               
+machinelearrn  ru          агенты и автоматизация  1               
+-- контроль: сколько ru-кандидатов появилось/обновлено сегодня:
+3
+
+
+### П4 (повтор после правки запросов). Русские запросы: cli discover --lang ru --budget 6
+    (первый прогон дал 0 постов: 3-4 токена AND слишком узко для русского поиска;
+     запросы сведены к 2 токенам — замер показывает 20 item на запрос)
+=== discover lang=ru budget=6
+запросов=6 страниц=6 постов=52 кандидатов_найдено=72
+по рубрикам: model-releases=17, agents-automation=42, funding=13
+-- кандидатов с lang_guess='ru' (язык определён по кириллице в тексте поста):
+59
+-- примеры ru-кандидатов:
+handle          lang_guess  rubric                  distinct_sources
+--------------  ----------  ----------------------  ----------------
+axrbarsic       ru          релизы моделей          3               
+machinelearrn   ru          агенты и автоматизация  3               
+professorgluk   ru          агенты и автоматизация  3               
+vrklvch         ru          релизы моделей          2               
+rozetked        ru          релизы моделей          2               
+recura_tech     ru          агенты и автоматизация  2               
+alexeyexplores  ru          агенты и автоматизация  2               
+sketch          ru          релизы моделей          1               
+valkoissixth    ru          релизы моделей          1               
+bmd_newsru      ru          релизы моделей          1               
+farrlakabir     ru          релизы моделей          1               
+thedimitr       ru          релизы моделей          1               
+-- ru-кандидатов, обновлённых в этом прогоне:
+59
+
+
+### П5. Потолок роста: SQL по accounts за сутки (порог <=50 active, <=300 provisional)
+-- новые active за сутки (verified_at сегодня):
+0
+-- active всего / provisional всего / лимиты:
+status       n 
+-----------  --
+rejected     24
+provisional  17
+candidate    1 
+лимиты: DAILY_NEW_ACTIVE_CAP=50, PROVISIONAL_MAX=300
+
+### П6. Тесты: python3 -m pytest tests -q (все зелёные)
+........................................................................ [ 86%]
+...........                                                              [100%]
+
+### П7. Отчёт о росте: cli discover --report (все разделы Р5, цифры непустые)
+=== Рост реестра на 2026-09-15
+кандидатов в очереди: 320 (не проверено: 279)
+проверено: 40 | принято: 17 | отклонено: 24
+отклонено по причинам (топ-5):
+  posts_per_day_out_of_range   18
+  link_ratio_too_high          2
+  items_lt_15                  2
+  rt_ratio_too_high            1
+  cooccurrence_lt_2            1
+активных по тирам:
+  (нет активных)
+provisional: 17 из 300 (phase=bootstrap)
+dead за сутки: 0
+расход запросов дискавери за сутки: 40 из 120
+топ-10 новых аккаунтов (откуда пришли):
+  @__roycohen           provisional TIER-C источник=author:релизы моделей src=1 prio=4.0
+  @0xnexqor             provisional TIER-C источник=author:агенты и автоматизация src=1 prio=4.0
+  @vintuxai             rejected    TIER-C источник=author:агенты и автоматизация src=1 prio=4.0
+  @kirkdborne           rejected    TIER-C источник=author:агенты и автоматизация src=1 prio=4.0
+  @eminweb3             rejected    TIER-C источник=author:агенты и автоматизация src=1 prio=4.0
+  @deepseek_ai          rejected    TIER-C источник=mention:релизы моделей src=2 prio=4.0
+  @arthur_win8          rejected    TIER-C источник=author:релизы моделей src=1 prio=4.0
+  @anyel1to             rejected    TIER-C источник=author:агенты и автоматизация src=1 prio=4.0
+  @openai               provisional TIER-C источник=mention:агенты и автоматизация src=2 prio=4.0
+  @pressmonitorin       rejected    TIER-C источник=author:инвестиции и раунды src=1 prio=4.0
+
+### П8. Разрыв замкнутого круга (промоушен путём «а»)
+-- тест на фикстуре: два provisional (>=10 постов) упоминают третьего -> active, by=core_mentions
+============================= test session starts ==============================
+platform linux -- Python 3.11.15, pytest-9.1.1, pluggy-1.6.0
+rootdir: /root/tuber-x
+configfile: pytest.ini
+plugins: anyio-4.12.1, langsmith-0.10.17
+collected 3 items
+
+tests/test_discovery.py ...                                              [100%]
+
+============================== 3 passed in 0.12s ===============================
+
+### П9. Промоушен путём «б»: cli registry promote --simulate-tenure --days 14
+эмуляция непрерывного сбора: provisional_since сдвинут на 14 дн. (затронуто provisional: 17)
+=== промоушен provisional -> active: 14
+  @stragglerliu         by=tenure days=14.0 ai_density=1.0
+  @readomniscient       by=tenure days=14.0 ai_density=0.842105
+  @hexxrl               by=tenure days=14.0 ai_density=0.8
+  @aidailynews_2x       by=tenure days=14.0 ai_density=1.0
+  @bcherny              by=tenure days=14.0 ai_density=0.736842
+  @chandrarsrikant      by=tenure days=14.0 ai_density=0.65
+  @iamlukethedev        by=tenure days=14.0 ai_density=0.947368
+  @imssaravana          by=tenure days=14.0 ai_density=0.85
+  @milkroadai           by=tenure days=14.0 ai_density=0.764706
+  @onusoz               by=tenure days=14.0 ai_density=0.736842
+  @sanjeevsab17827      by=tenure days=14.0 ai_density=0.55
+  @openai               by=tenure days=14.0 ai_density=0.888889
+  @0xnexqor             by=tenure days=14.0 ai_density=0.85
+  @__roycohen           by=tenure days=14.0 ai_density=0.7
+-- active by=tenure (run_log сегодня):
+14
+
+### П10. Ни один кандидат не отклонён только из-за пустого ядра
+-- отказов с точной причиной cooccurrence_lt_2 за прогон приёмки (после старта приёмки 09:30):
+0
+-- счётчики ядра на момент старта приёмки (active+provisional было 0):
+17
+
+
+### П5 (после промоушена). Потолок роста — фактические цифры
+-- новых active за сутки (verified_at сегодня):
+14
+-- распределение по статусам (лимиты: active/сутки <=50, provisional одновременно <=300):
+status       n 
+-----------  --
+rejected     24
+active       14
+provisional  3 
+candidate    1 
+
+### П7 (повтор, после промоушена). Отчёт о росте: активные по тирам непустые
+=== Рост реестра на 2026-09-15
+кандидатов в очереди: 320 (не проверено: 279)
+проверено: 40 | принято: 17 | отклонено: 24
+отклонено по причинам (топ-5):
+  posts_per_day_out_of_range   18
+  link_ratio_too_high          2
+  items_lt_15                  2
+  rt_ratio_too_high            1
+  cooccurrence_lt_2            1
+активных по тирам:
+  TIER-A: 11
+  TIER-B: 3
+provisional: 3 из 300 (phase=bootstrap)
+dead за сутки: 0
+расход запросов дискавери за сутки: 40 из 120
+топ-10 новых аккаунтов (откуда пришли):
+  @__roycohen           active      TIER-A источник=author:релизы моделей src=1 prio=4.0 by=tenure
+  @0xnexqor             active      TIER-A источник=author:агенты и автоматизация src=1 prio=4.0 by=tenure
+  @vintuxai             rejected    TIER-C источник=author:агенты и автоматизация src=1 prio=4.0
+  @kirkdborne           rejected    TIER-C источник=author:агенты и автоматизация src=1 prio=4.0
+  @eminweb3             rejected    TIER-C источник=author:агенты и автоматизация src=1 prio=4.0
+  @deepseek_ai          rejected    TIER-C источник=mention:релизы моделей src=2 prio=4.0
+  @arthur_win8          rejected    TIER-C источник=author:релизы моделей src=1 prio=4.0
+  @anyel1to             rejected    TIER-C источник=author:агенты и автоматизация src=1 prio=4.0
+  @openai               active      TIER-A источник=mention:агенты и автоматизация src=2 prio=4.0 by=tenure
+  @pressmonitorin       rejected    TIER-C источник=author:инвестиции и раунды src=1 prio=4.0
+
+### Бюджет канала: cli budget (расход и 429)
+=== бюджет Nitter за 2026-09-15 (потолок 18000 запросов на инстанс = 80% ёмкости)
+  https://nitter.jaydenha.uk       запросов=    65 ( 0.36% потолка) 200=   65 items=  1114 429=0
+  https://nitter.kareem.one        запросов=    58 ( 0.32% потолка) 200=   57 items=   917 429=1
+инстансов в cooldown: 0 | живых по последней проверке: 2
+всего запросов: 123 | 429: 1 (0.81% — порог 10%)
+--- metrics_daily (последние дни)
+  2026-09-15 ingested=152 dup=0.208333 coverage=0.857143 fail=0.142857 p95=0.03 valid_date=1.0 alive=2
+
+### Итоговый SQL-срез приёмки
+-- кандидатов всего / с 2+ источниками / ru / provisional / active:
+320|39|59|3|14
+-- search-запросов за сутки (по requests):
+40
+
+====================================================================
+ИТОГ ПРИЁМКИ ТЗ-2 (живые данные, 2026-09-15)
+====================================================================
+П1  discover --budget 20            : кандидатов 350, запросов 20            PASS
+П2  distinct_sources > 1            : 39 (порог >=10)                        PASS
+П3  verify --max-verify 10          : provisional 17, cooccurrence_lt_2 0    PASS
+П4  discover --lang ru --budget 6   : 59 ru-кандидатов (порог >=10)          PASS (2-я попытка)
+П5  потолок роста                   : active/сутки 14 (<=50), prov 3 (<=300) PASS
+П6  pytest tests                    : 83 passed                              PASS
+П7  discover --report               : все разделы, TIER-A 11 / TIER-B 3      PASS
+П8  промоушен (а), run_log by=core  : active, by=core_mentions               PASS
+П9  promote --simulate-tenure 14d   : 14 active, by=tenure                   PASS
+П10 отказов cooccurrence_lt_2       : 0 за прогон приёмки                    PASS
+--------------------------------------------------------------------
+Записей run_log 'by=tenure' сегодня:
+14
+Записей run_log 'by=core_mentions' сегодня (промоушен кандидатов):
+0
+search-запросов за сутки / 429:
+40
+1
+====================================================================

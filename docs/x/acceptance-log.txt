@@ -1,0 +1,203 @@
+############ П1. СХЕМА И ИНИЦИАЛИЗАЦИЯ
+$ python3 -m tuber_x.cli init && sqlite3 data/tuber_x.db ".tables"
+БД: /root/tuber-x/data/tuber_x.db
+journal_mode: wal
+таблицы: accounts, candidates, cursors, instances, metrics_daily, posts, requests, run_log, runs
+accounts       cursors        metrics_daily  requests       runs         
+candidates     instances      posts          run_log      
+--- повторный init:
+БД: /root/tuber-x/data/tuber_x.db
+journal_mode: wal
+таблицы: accounts, candidates, cursors, instances, metrics_daily, posts, requests, run_log, runs
+EXIT=0
+
+############ П2. ПУЛ ИНСТАНСОВ
+$ python3 -m tuber_x.cli instances --check
+Пул инстансов (2):
+  https://nitter.kareem.one        ЖИВОЙ      http=200 items= 20 latency= 1587ms 
+  https://nitter.jaydenha.uk       ЖИВОЙ      http=200 items= 20 latency= 1026ms 
+Живых: 2 из 2 (порог: HTTP 200 и items >= 15)
+EXIT=0
+
+############ П3. ЖИВОЙ СБОР
+$ python3 -m tuber_x.cli registry add nasa --tier C
+добавлен: @nasa tier=C status=candidate source=-
+EXIT=0
+$ python3 -m tuber_x.cli collect --tier C --max-accounts 1
+=== collect tier=C 
+аккаунтов: 1 ok=1 fail=0 страниц=1 новых=20 обновлено=0 без_даты=0
+  @nasa                 items= 20 pages=1 new= 20 upd=  0 skipped_no_date=0
+EXIT=0
+--- аккаунт в БД после сбора:
+handle  status     tier  posts_collected  last_success_at      fail_streak  cursor                       ppd    cv  
+------  ---------  ----  ---------------  -------------------  -----------  ---------------------------  -----  ----
+nasa    candidate  C     20               2026-09-15T09:18:00  0            DAAHCgABHSPyej5__-sLAAIA...  1.779  1.26
+--- постов в БД:
+posts  rss  snowflake  first                last               
+-----  ---  ---------  -------------------  -------------------
+20     20   0          2026-09-03T12:15:00  2026-09-14T17:59:22
+
+############ П4. ПОЛНОТА (0 новых id при повторном обходе)
+$ python3 -m tuber_x.cli collect --tier C --max-accounts 1 --verify-completeness
+=== collect tier=C 
+аккаунтов: 1 ok=1 fail=0 страниц=1 новых=0 обновлено=20 без_даты=0
+  @nasa                 items= 20 pages=1 new=  0 upd= 20 skipped_no_date=0
+=== полнота: повторный обход 1 аккаунтов, новых id = 0
+НОРМА: 0 новых id — успеваем за потоком
+EXIT=0
+
+############ П5. ВАЛИДНОСТЬ ДАТ (доля ≥ 99%)
+total  invalid  valid_share
+-----  -------  -----------
+20     0        100.0%     
+
+############ П6. КУРСОР И БЭКФИЛЛ (≥ 50 уникальных постов, без дублей)
+постов до бэкфилла: 20
+$ python3 -m tuber_x.cli backfill nasa --pages 3
+  страница 1: items=20 новых=20 уже_было=0 без_даты=0
+  страница 2: items=14 новых=14 уже_было=0 без_даты=0
+  страница 3: items=20 новых=19 уже_было=0 без_даты=0
+=== backfill @nasa: страниц=3 новых=53 уже_было=0 без_даты=0
+уникальных постов в БД по аккаунту: 73
+EXIT=0
+--- проверка отсутствия дублей по tweet_id:
+rows_total  uniq_tweet_id  dups
+----------  -------------  ----
+73          73             0   
+
+############ П7. КВОТА
+$ python3 -m tuber_x.cli budget
+=== бюджет Nitter за 2026-09-15 (потолок 18000 запросов на инстанс = 80% ёмкости)
+  https://nitter.kareem.one        запросов=     8 ( 0.04% потолка) 200=    8 items=   160 429=0
+  https://nitter.jaydenha.uk       запросов=     5 ( 0.03% потолка) 200=    5 items=    94 429=0
+инстансов в cooldown: 0 | живых по последней проверке: 2
+всего запросов: 13 | 429: 0 (0.00% — порог 10%)
+--- metrics_daily (последние дни)
+  2026-09-15 ingested=73 dup=0.215054 coverage=1.0 fail=0.0 p95=0.0265 valid_date=1.0 alive=2
+EXIT=0
+
+############ П9. ИЗОЛЯЦИЯ ТРАНСПОРТА
+$ grep -rn "urlopen" tuber_x/
+grep: tuber_x/__pycache__/nitter_broker.cpython-311.pyc: binary file matches
+tuber_x/nitter_broker.py:4:CryptoGraph. Прямые `urlopen` вне этого файла запрещены — проверяется
+tuber_x/nitter_broker.py:438:        """Единственный `urlopen` проекта (Р3, изоляция транспорта)."""
+tuber_x/nitter_broker.py:444:            with urllib.request.urlopen(req, timeout=timeout) as resp:
+--- только исходники (без __pycache__):
+tuber_x/nitter_broker.py:4:CryptoGraph. Прямые `urlopen` вне этого файла запрещены — проверяется
+tuber_x/nitter_broker.py:438:        """Единственный `urlopen` проекта (Р3, изоляция транспорта)."""
+tuber_x/nitter_broker.py:444:            with urllib.request.urlopen(req, timeout=timeout) as resp:
+EXIT=0
+
+############ П8. ТЕСТЫ
+$ python3 -m pytest tests -q
+........................................................................ [100%]
+EXIT=0
+
+############ ДОП. ВАЛИДАТОР Р4.3 НА ЖИВЫХ ДАННЫХ
+$ python3 -m tuber_x.cli registry verify nasa
+@nasa: ОТКЛОНЁН — cooccurrence_lt_2
+  items=20 авторов_ядра=0 (-) источник_признаков=db
+  постов/сутки=4.283700043195606 cv=1.9899432756278026 ссылки=0.3835616438356164 ретвиты=0.3698630136986301 дубли=0.0
+    OK  items_ge_15
+    FAIL cooccurrence_ge_2
+    OK  posts_per_day_in_range
+    OK  cv_ok
+    OK  link_ratio_ok
+    OK  dup_ratio_ok
+    OK  rt_ratio_ok
+EXIT=1 (1 = отклонён, это ожидаемо: доверенного ядра ещё нет, см. REPORT-1)
+
+$ python3 -m tuber_x.cli registry list
+аккаунтов: 1
+handle               tier status      постов  п/сутки    cv last_success_at      fail
+@nasa                C    rejected        73     4.28  1.99 2026-09-15T09:18:43     0
+
+############ СВОДКА ПО БД
+id  mode           accounts_ok  accounts_fail  posts_new  posts_upd  errors
+--  -------------  -----------  -------------  ---------  ---------  ------
+1   collect:C      1            0              20         0          0     
+2   collect:C      1            0              0          20         0     
+3   backfill:nasa  0            0              0          0          0     
+4   backfill:nasa  1            0              53         0          0     
+5   verify:nasa    0            1              0          0          0     
+--- metrics_daily:
+day         posts_ingested  dup_rate  coverage  fail_rate  latency_p95_min  valid_date_ratio  instances_alive
+----------  --------------  --------  --------  ---------  ---------------  ----------------  ---------------
+2026-09-15  73              0.215054  1.0       0.0        0.0265           1.0               2              
+--- instances:
+host                        healthy  rss_ok  items_last_test  requests_today  day         cooldown_until  fail_streak
+--------------------------  -------  ------  ---------------  --------------  ----------  --------------  -----------
+https://nitter.kareem.one   1        1       20               10              2026-09-15                  0          
+https://nitter.jaydenha.uk  1        1       20               5               2026-09-15                  0          
+--- run_log:
+level  handle  msg                                                         
+-----  ------  ------------------------------------------------------------
+INFO   nasa    кандидат отклонён: cooccurrence_lt_2 (меньше 2 разных авторо
+--- число тестов:
+tests/test_registry_validate.py: 17
+
+
+############ ДОП.2: DRY-RUN НА ЖИВЫХ ДАННЫХ (Р5.7)
+добавлен: @cointelegraph tier=C status=candidate source=acceptance dry-run
+$ python3 -m tuber_x.cli collect --tier C --max-accounts 1 --dry-run
+=== collect tier=C (dry-run: без записи в БД)
+аккаунтов: 1 ok=1 fail=0 страниц=1 новых=20 обновлено=0 без_даты=0
+  @cointelegraph        items= 20 pages=1 new= 20 upd=  0 skipped_no_date=0
+EXIT=0
+--- в БД ничего не записано (posts, runs, last_success_at):
+posts  runs  ok_accounts
+-----  ----  -----------
+73     5     1          
+
+############ ДОП.3: БЭКФИЛЛ, ПОВТОРНЫЙ ЗАПУСК (идемпотентность)
+$ python3 -m tuber_x.cli backfill cointelegraph --pages 2
+  страница 1: items=20 новых=20 уже_было=0 без_даты=0
+  страница 2: items=20 новых=20 уже_было=0 без_даты=0
+=== backfill @cointelegraph: страниц=2 новых=40 уже_было=0 без_даты=0
+уникальных постов в БД по аккаунту: 40
+$ python3 -m tuber_x.cli backfill cointelegraph --pages 2  (повтор)
+  страница 1: items=19 новых=19 уже_было=0 без_даты=0
+  страница 2: items=20 новых=20 уже_было=0 без_даты=0
+=== backfill @cointelegraph: страниц=2 новых=39 уже_было=0 без_даты=0
+уникальных постов в БД по аккаунту: 79
+rows_total  uniq
+----------  ----
+152         152 
+
+############ ФИНАЛЬНАЯ СВОДКА (после всех прогонов)
+=== бюджет Nitter за 2026-09-15 (потолок 18000 запросов на инстанс = 80% ёмкости)
+  https://nitter.kareem.one        запросов=    16 ( 0.09% потолка) 200=   16 items=   319 429=0
+  https://nitter.jaydenha.uk       запросов=     9 ( 0.05% потолка) 200=    9 items=   174 429=0
+инстансов в cooldown: 0 | живых по последней проверке: 2
+всего запросов: 25 | 429: 0 (0.00% — порог 10%)
+--- metrics_daily (последние дни)
+  2026-09-15 ingested=152 dup=0.116279 coverage=0.833333 fail=0.166667 p95=0.0303 valid_date=1.0 alive=2
+--- валидность дат по всей таблице:
+total  invalid  valid_share
+-----  -------  -----------
+152    19       87.5       
+--- разбор по media/retweet/quote:
+total  rt  quote  reply  photo  video  gif  with_links  owners  origins
+-----  --  -----  -----  -----  -----  ---  ----------  ------  -------
+152    27  2      19     102    35     0    36          2       14     
+--- идемпотентность: повторный collect tier=C
+=== collect tier=C 
+аккаунтов: 1 ok=1 fail=0 страниц=1 новых=0 обновлено=20 без_даты=0
+  @cointelegraph        items= 20 pages=1 new=  0 upd= 20 skipped_no_date=0
+--- runs:
+mode                    n  new  upd  ok  fail
+----------------------  -  ---  ---  --  ----
+backfill:cointelegraph  2  79   0    2   0   
+backfill:nasa           2  53   0    1   0   
+collect:C               3  20   40   3   0   
+verify:nasa             1  0    0    0   1   
+
+############ П5 ПОВТОР (корректное сравнение дат: ISO-строки с 'T', а не пробелом)
+total  invalid  valid_share
+-----  -------  -----------
+152    0        100.0%     
+(предыдущий вывод 87.5% — артефакт SQL: published_at_utc хранится с 'T', а datetime('now') отдаёт пробел, из-за чего посты текущих суток сравнивались как 'будущее')
+--- доля valid по published_src:
+published_src  n  
+-------------  ---
+rss            152

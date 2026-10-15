@@ -1,0 +1,25 @@
+[Unit]
+Description=HypeParser X web (поиск постов X по коэффициенту просмотры/подписчики)
+Documentation=file:///root/tuber/deploy/README-hype.md
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+# Слушаем только петлю; наружу отдаёт nginx (deploy/nginx-hype.conf).
+# Не плодим лишние процессы/потоки: стандартная библиотека, ThreadingHTTPServer.
+ExecStart=/usr/local/lib/hermes-agent/venv/bin/python3 -m tuber.platforms.x.hype_web --host 127.0.0.1 --port 8730
+WorkingDirectory=/root/tuber
+Environment=PYTHONUNBUFFERED=1
+# Бюджет X и путь к БД — штатные переменные проекта (при необходимости
+# переопределить, раскомментируйте и задайте значения):
+#Environment=TUBER_X_SESSION_SEARCH_DAILY_CAP=100
+#Environment=TUBER_X_SESSION_FILE=/root/tuber/config/x_session.json
+Restart=always
+RestartSec=5
+# Мягкая остановка: завершаем по SIGTERM, как умеет serve_forever.
+KillSignal=SIGTERM
+TimeoutStopSec=15
+
+[Install]
+WantedBy=multi-user.target

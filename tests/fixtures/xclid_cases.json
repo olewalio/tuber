@@ -1,0 +1,100 @@
+[
+ {
+  "vk_bytes": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12
+  ],
+  "anim_key": "0a1b2c3d",
+  "method": "GET",
+  "path": "/i/api/graphql/abc/SearchTimeline",
+  "time": 1750000000.123,
+  "randint": 7,
+  "expected": "BwYFBAMCAQAPDg0MCxd5+ASs/YWFNfep30yEAZokdDwHBA"
+ },
+ {
+  "vk_bytes": [
+   9,
+   8,
+   7,
+   6,
+   5,
+   4,
+   3,
+   2,
+   1,
+   0,
+   10,
+   20
+  ],
+  "anim_key": "ffee00112233",
+  "method": "GET",
+  "path": "/i/api/graphql/xyz/UserTweets",
+  "time": 1760000001.999,
+  "randint": 0,
+  "expected": "AAkIBwYFBAMCAQAKFJEUmATV2crUwpwqZwPB+046nZa2Aw"
+ },
+ {
+  "vk_bytes": [
+   200,
+   201,
+   202,
+   203,
+   204,
+   205,
+   206,
+   207
+  ],
+  "anim_key": "deadbeefcafe",
+  "method": "POST",
+  "path": "/i/api/graphql/q/HomeTimeline",
+  "time": 1700000000.0,
+  "randint": 255,
+  "expected": "/zc2NTQzMjEwb3L7/qJLVI5mR05GuqNRGfynndH8"
+ },
+ {
+  "vk_bytes": [
+   0,
+   255,
+   128,
+   64,
+   32,
+   16,
+   8,
+   4,
+   2,
+   1
+  ],
+  "anim_key": "0123456789abcdef",
+  "method": "GET",
+  "path": "/",
+  "time": 1682924400.0,
+  "randint": 123,
+  "expected": "e3uE+ztba3N/eXp7e3t7Lo6trHY6FG5TVn9eAccr1Xg"
+ },
+ {
+  "vk_bytes": [
+   11,
+   22,
+   33,
+   44,
+   55,
+   66
+  ],
+  "anim_key": "abad1dea",
+  "method": "GET",
+  "path": "/i/api/1.1/search/typeahead.json",
+  "time": 1900000000.5,
+  "randint": 42,
+  "expected": "KiE8CwYdaLpl2ibT/ZqFsu3K41bVY3Iy59sTKQ"
+ }
+]

@@ -1,0 +1,422 @@
+ЖУРНАЛ ПРИЁМКИ ТЗ-3d (Tuber): гигиена индексов на таблицах ядра
+Дата: 17.09.2026. Заказчик: владелец проекта. Проект: /root/tuber.
+База HEAD на момент приёмки: 95b87f2.
+
+Все замеры выполнены на КОПИЯХ. Боевая база data/tuber.db не изменялась:
+  md5 до работ    5fea770346dd988f4da55ef4f24fd1c5  mtime=1789582528 size=239194112
+  md5 после работ 5fea770346dd988f4da55ef4f24fd1c5  mtime=1789582528 size=239194112
+  (сверка — шаги 1 и 14 в §1)
+
+Артефакты приёмки:
+        9765 Б  md5=3d945a88325d30130f6247cfdedc32a0  /root/tz3d/acc/accept.log
+        1668 Б  md5=94f8a1c2cd0e03d1f0455e234bff2f02  /root/tz3d/dup/repro.log
+        1915 Б  md5=61e87da69b7c5957643c67e26daca67f  /root/tz3d/plan_probe.txt
+        1162 Б  md5=20ba8e32d1bfc3a08aa2bc0eddd68708  /root/tz3d/full_tests.txt
+       11220 Б  md5=dc8847a9e7fe29b3614452094199c1a3  /root/tz3d/accept_tz3d.sh
+        3529 Б  md5=03ddfa6ec14142a4eee2664dfa2dde83  /root/tz3d/dupe_repro.sh
+        2887 Б  md5=c25d4e4e0ecb36d098001e7b3730d537  /root/tz3d/plan_probe.py
+        6211 Б  md5=0a03f496b430f8e5deeb0d0149833b75  /root/tz3d/measure.py
+        1667 Б  md5=518c957f188e5af3cefeeb96ac9ea0df  /root/tz3d/removed_verdicts.txt
+        2672 Б  md5=6e5ab6c357dbb60dd357089d599f420a  /root/tz3d/index_owner.txt
+       85694 Б  md5=6a1a030dca1a15451125be1e6393b70f  /root/tz3d/patho_report2.txt
+
+Копии баз, на которых шли замеры:
+     284020736 Б  /root/tz3d/acc/cleanup.db
+     284020736 Б  /root/tz3d/acc/sys.db
+     284020736 Б  /root/tz3d/acc/timing_before.db
+     284020736 Б  /root/tz3d/acc/timing_after.db
+     284020736 Б  /root/tz3d/acc/timing_dupe.db
+     297140224 Б  /root/tz3d/dup/u_plain.db
+     297140224 Б  /root/tz3d/dup/u_dupe.db
+
+------------------------------------------------------------------------
+
+=== 1. ПРИЁМОЧНЫЙ ПРОГОН (bash accept_tz3d.sh), дословный вывод ===
+  источник: /root/tz3d/acc/accept.log (175 строк)
+
+
+  ### 0. Окружение
+    system: Python 3.12.3 SQLite 3.45.1 | /usr/bin/python3
+    venv  : Python 3.11.15 SQLite 3.53.1 | /usr/local/lib/hermes-agent/venv/bin/python3
+    модуль tuber виден venv:/root/tuber/tuber/__init__.py
+
+  ### 1. Боевая база до работ (md5/mtime — сверяются в конце)
+    /root/tuber/data/tuber.db mtime=1789582528 size=239194112
+    md5 5fea770346dd988f4da55ef4f24fd1c5  /root/tuber/data/tuber.db
+
+  ### 2. Слепки
+       239194112  /root/tz3d/acc/cleanup.db
+       239194112  /root/tz3d/acc/sys.db
+       239194112  /root/tz3d/acc/timing_after.db
+       239194112  /root/tz3d/acc/timing_before.db
+       239194112  /root/tz3d/acc/timing_dupe.db
+
+  ### 3. ЗАМЕР ДО (cleanup.db — форма уже собранной базы)
+  Файл: /root/tz3d/acc/cleanup.db
+    размер: 239,194,112 Б (228.11 МБ)
+    page_size=4096 page_count=58397 freelist=0 (0.00 МБ свободно внутри файла)
+    индексов явных: 9, автоиндексов: 18
+    по таблицам: candidate=1, content=4, metric_snapshot=1, run_log=1, score=1, transport_request=1
+    проблем схемы ядра: 53
+      - нет таблицы: cursor
+      - нет таблицы: classify_daily
+      - нет индекса: idx_content_source_ext
+      - нет индекса: idx_source_ext
+      - нет индекса: idx_metric_ext
+      - нет индекса: idx_score_ext
+      - нет индекса: idx_classification_ext
+      - нет индекса: idx_seo_field_ext
+      - нет индекса: idx_thumbnail_vision_ext
+      - нет индекса: idx_comment_check_ext
+      - нет индекса: idx_run_log_platform
+      - нет триггера: trg_content_latest_denorm_ins
+      - нет триггера: trg_content_latest_denorm_upd
+      - нет триггера: trg_metric_snapshot_denorm_ins
+      - нет триггера: trg_metric_snapshot_denorm_upd
+      - нет триггера: trg_classification_denorm_ins
+      - нет триггера: trg_classification_denorm_upd
+      - нет триггера: trg_score_denorm_ins
+      - нет триггера: trg_score_denorm_upd
+      - нет триггера: trg_seo_field_denorm_ins
+      - нет триггера: trg_seo_field_denorm_upd
+      - нет триггера: trg_thumbnail_vision_denorm_ins
+      - нет триггера: trg_thumbnail_vision_denorm_upd
+      - нет триггера: trg_content_comment_denorm_ins
+      - нет триггера: trg_content_comment_denorm_upd
+    детектор дублей: чисто
+    страниц под индексами: 31.21 МБ
+      sqlite_autoindex_legacy_map_1         12.48 МБ
+      idx_metric_content                     3.57 МБ
+      sqlite_autoindex_metric_snapshot_1     3.57 МБ
+      sqlite_autoindex_score_1               2.89 МБ
+      idx_content_pub                        1.90 МБ
+      idx_content_source                     1.62 МБ
+      sqlite_autoindex_content_1             1.61 МБ
+      idx_score_sig                          1.08 МБ
+      idx_content_hash                       1.06 МБ
+      idx_content_author                     0.45 МБ
+      sqlite_autoindex_source_1              0.29 МБ
+      sqlite_autoindex_candidate_1           0.23 МБ
+      idx_treq_host_ts                       0.15 МБ
+      idx_candidate_status                   0.09 МБ
+      idx_run_log_run                        0.09 МБ
+    крупнейшие объекты:
+      content                              113.13 МБ
+      score                                 28.99 МБ
+      legacy_map                            22.18 МБ
+      sqlite_autoindex_legacy_map_1         12.48 МБ
+      metric_snapshot                       11.67 МБ
+      seo_field                              9.49 МБ
+      idx_metric_content                     3.57 МБ
+      sqlite_autoindex_metric_snapshot_1     3.57 МБ
+
+  ### 4. Форма ядровых таблиц в базе ДО миграции
+    metric_snapshot: platform=False external_id=False всего_колонок=23
+    score: platform=False external_id=False всего_колонок=18
+    content: platform=True external_id=True всего_колонок=27
+    строк: content=49634, metric_snapshot=109440, score=85771, legacy_map=338384
+
+  ### 5. ЗАМЕР отчёта ДО (timing_before.db, окно 10 дней, потолок 900 с)
+    exit=1 wall=20s строк_отчёта=419
+    [OK] отчёт ДО выполнен (exit=1, строк=419)
+      предупреждений CLI: 3
+
+  ### 6. План тяжёлого подзапроса отчёта ДО
+     SCAN metric_snapshot USING INDEX idx_metric_content
+
+  ### 7. Миграция схемы: migrate --schema-only (venv), прогон 1
+    exit=0 wall=5s
+    | Сводка чистки схемы (ТЗ-3d, без переноса данных):
+    | 
+    | Лишних индексов на таблицах ядра нет (база уже чистая).
+    | VACUUM: не выполнялся
+    | ANALYZE: выполнен
+    md5 6ce3e256b0d496c42410647fb781c24b  /root/tz3d/acc/cleanup.db
+
+  ### 8. ЗАМЕР ПОСЛЕ (cleanup.db)
+  Файл: /root/tz3d/acc/cleanup.db
+    размер: 284,020,736 Б (270.86 МБ)
+    page_size=4096 page_count=69341 freelist=3491 (13.64 МБ свободно внутри файла)
+    индексов явных: 19, автоиндексов: 20
+    по таблицам: candidate=1, classification=1, comment_check=1, content=5, content_comment=1, metric_snapshot=2, run_log=2, score=2, seo_field=1, source=1, thumbnail_vision=1, transport_request=1
+    проблем схемы ядра: 0
+    детектор дублей: чисто
+    страниц под индексами: 45.64 МБ
+      sqlite_autoindex_legacy_map_1         12.48 МБ
+      idx_metric_ext                         5.64 МБ
+      idx_score_ext                          4.52 МБ
+      idx_metric_content                     3.57 МБ
+      sqlite_autoindex_metric_snapshot_1     3.57 МБ
+      sqlite_autoindex_score_1               2.89 МБ
+      idx_content_pub                        1.90 МБ
+      idx_content_source_ext                 1.73 МБ
+      idx_content_source                     1.62 МБ
+      sqlite_autoindex_content_1             1.61 МБ
+      idx_score_sig                          1.08 МБ
+      idx_content_hash                       1.06 МБ
+      idx_classification_ext                 1.02 МБ
+      idx_seo_field_ext                      1.00 МБ
+      idx_content_author                     0.45 МБ
+    крупнейшие объекты:
+      content                              114.70 МБ
+      score                                 34.21 МБ
+      legacy_map                            22.86 МБ
+      metric_snapshot                       15.03 МБ
+      sqlite_autoindex_legacy_map_1         12.48 МБ
+      seo_field                             11.16 МБ
+      idx_metric_ext                         5.64 МБ
+      idx_score_ext                          4.52 МБ
+
+  ### 9. Идемпотентность: migrate --schema-only (venv), прогон 2
+    exit=0 wall=0s
+    | Сводка чистки схемы (ТЗ-3d, без переноса данных):
+    | 
+    | Лишних индексов на таблицах ядра нет (база уже чистая).
+    | VACUUM: не выполнялся
+    | ANALYZE: выполнен
+    [OK] повторный прогон не изменил файл (md5 тот же)
+
+  ### 10. Тот же migrate --schema-only системным интерпретатором (sys.db)
+    exit=0 wall=5s
+    | Сводка чистки схемы (ТЗ-3d, без переноса данных):
+    | 
+    | Лишних индексов на таблицах ядра нет (база уже чистая).
+    | VACUUM: не выполнялся
+    | ANALYZE: выполнен
+
+  ### 11. Сверка результата: venv vs system
+    явных индексов: venv=19 system=19  расхождение=нет
+    триггеров:      venv=20 system=20  расхождение=нет
+    таблиц:         venv=32 system=32  расхождение=нет
+
+  ### 12. ЗАМЕР отчёта ПОСЛЕ (timing_after.db: слепок + schema-only)
+    exit=1 wall=17s строк_отчёта=419
+    [OK] отчёт ПОСЛЕ выполнен (exit=1, строк=419)
+    [OK] содержимое отчёта до/после: ИДЕНТИЧНО (без строки с датой прогона)
+
+  ### 13. Дефект ТЗ-3d: префикс-дубль idx_x_metric_ext (platform, external_id)
+    внедрён idx_x_metric_ext (platform, external_id) — ровно то, что делал адаптер X
+    детектор: поймал 1 проблем(ы)
+     ! metric_snapshot: idx_x_metric_ext ['platform', 'external_id'] — префикс idx_metric_ext ['platform', 'external_id', 'captured_at']
+    страж: DuplicateIndexError: idx_x_metric_ext ['platform', 'external_id'] на таблице ядра 'metric_snapshot' перекрыт индекс idx_metric_ext ['platform', 'external_id', 'captured_at']; ядро уже держит этот access-path — уберите индекс из адаптера или расширьте ядровой (ТЗ-3d, долг D-33)
+    план запроса с дублем:
+        SEARCH metric_snapshot USING COVERING INDEX idx_x_metric_ext (platform=? AND external_id=?)
+    отчёт с дублем: exit=1 wall=16s строк=419 (124 = таймаут)
+
+  ### 14. Боевая база после работ (должна быть неизменна)
+    /root/tuber/data/tuber.db mtime=1789582528 size=239194112
+    md5 5fea770346dd988f4da55ef4f24fd1c5  /root/tuber/data/tuber.db
+
+  ### ИТОГ
+    [OK] все шаги выполнились без ошибок
+
+------------------------------------------------------------------------
+
+=== 2. ВОСПРОИЗВЕДЕНИЕ ДЕФЕКТА НА КОПИИ ТЗ-3c (bash dupe_repro.sh) ===
+  источник: /root/tz3d/dup/repro.log (25 строк)
+
+  ### A. Копия без дубля: схема и план
+    индексов: 38
+    idx_metric_ext: ['platform', 'external_id', 'captured_at']
+    план подзапроса отчёта (MAX(id) ... GROUP BY external_id):
+        SEARCH metric_snapshot USING INDEX idx_x_metric_ext (platform=?)
+
+  ### B. Время подзапроса отчёта на копии БЕЗ дубля
+    18370 групп, 0.13 с
+    score по external_id: 0, 0.000 с
+
+  ### C. Внедрение префикс-дубля и повторный план/замер
+  Traceback (most recent call last):
+    File "<stdin>", line 5, in <module>
+  sqlite3.OperationalError: index idx_x_metric_ext already exists
+
+  ### D. Полный отчёт на копии БЕЗ дубля (потолок 900 с)
+    exit=1 wall=18s строк=423
+      Точные метрики вовлечённости (кликабельность, доходимость) по чужим видео недоступны — их не выводим.
+      ВНИМАНИЕ: индекс виральности не посчитан ни у одного видео на окне — запустите `tuber viral-refresh`.
+
+  ### E. Полный отчёт на копии С дублем (потолок 900 с)
+    exit=1 wall=17s строк=423
+      Точные метрики вовлечённости (кликабельность, доходимость) по чужим видео недоступны — их не выводим.
+      ВНИМАНИЕ: индекс виральности не посчитан ни у одного видео на окне — запустите `tuber viral-refresh`.
+    ГОТОВО
+
+------------------------------------------------------------------------
+
+=== 3. ПЛАНЫ И ВРЕМЯ ПОДЗАПРОСОВ ОТЧЁТА (plan_probe.py) ===
+  источник: /root/tz3d/plan_probe.txt (34 строк)
+
+  --- ДО миграции (форма собранной базы) (/root/tz3d/acc/timing_before.db)
+      score: 85771 строк
+      metric_snapshot: 109440 строк
+      content: 49634 строк
+      коррелированный MAX(computed_at), пример video_id=--8Rr6ahsGI:
+          SEARCH score USING COVERING INDEX sqlite_autoindex_score_1 (content_id=?)
+          SCALAR SUBQUERY 1
+          SEARCH content USING COVERING INDEX sqlite_autoindex_content_1 (platform=? AND external_id=?)
+      на один вызов: 0.01 мс → на 18 349 видео ≈ 0 с
+      групповой подзапрос: SCAN metric_snapshot USING INDEX idx_youtube_metric_quality
+         18352 групп, 0.05 с
+
+  --- ПОСЛЕ migrate --schema-only (/root/tz3d/acc/cleanup.db)
+      score: 85771 строк
+      metric_snapshot: 109440 строк
+      content: 49634 строк
+      коррелированный MAX(computed_at), пример video_id=--8Rr6ahsGI:
+          SEARCH score USING COVERING INDEX idx_score_ext (platform=? AND external_id=?)
+      на один вызов: 0.00 мс → на 18 349 видео ≈ 0 с
+      групповой подзапрос: SCAN metric_snapshot
+      групповой подзапрос: USE TEMP B-TREE FOR GROUP BY
+         18352 групп, 0.05 с
+
+  --- копия ТЗ-3c, дубль idx_x_metric_ext присутствует (/root/tz3d/dup/u_plain.db)
+      score: 85771 строк
+      metric_snapshot: 112149 строк
+      content: 49704 строк
+      коррелированный MAX(computed_at), пример video_id=--8Rr6ahsGI:
+          SEARCH score USING COVERING INDEX idx_score_ext (platform=? AND external_id=?)
+      на один вызов: 0.00 мс → на 18 349 видео ≈ 0 с
+      групповой подзапрос: SCAN metric_snapshot
+      групповой подзапрос: USE TEMP B-TREE FOR GROUP BY
+         18370 групп, 0.05 с
+
+
+------------------------------------------------------------------------
+
+=== 4. ПОЛНЫЙ НАБОР ТЕСТОВ (venv-python -m pytest -q), хвост ===
+  источник: /root/tz3d/full_tests.txt (6 строк)
+
+  ........................................................................ [ 76%]
+  ........................................................................ [ 84%]
+  ........................................................................ [ 91%]
+  ........................................................................ [ 99%]
+  ....                                                                     [100%]
+  939 passed, 1 xfailed in 62.35s (0:01:02)
+
+------------------------------------------------------------------------
+
+=== 5. ПЕР-ИНДЕКСНЫЙ ВЕРДИКТ ДЕТЕКТОРА ПО УБРАННЫМ ИНДЕКСАМ (removed_index_verdicts.py)
+  Свежая ядровая схема + по одному индексу версии HEAD: что детектор считает
+  конфликтом (exact/prefix), а что законным индексом. ===
+  источник: /root/tz3d/removed_verdicts.txt (15 строк)
+
+  --- ядровые индексы (ядро владеет): 18
+
+  --- X: адаптер создавал 16 индексов в HEAD, сейчас создаёт 8 (структурный список)
+    idx_x_source_handle          конфликта нет (индекс законный, оставлен/не тронут)
+    idx_x_source_ext             source: idx_source_ext и idx_x_source_ext — точный дубль ['platform', 'external_id']
+    idx_x_content_hash           конфликта нет (индекс законный, оставлен/не тронут)
+    idx_x_content_author         конфликта нет (индекс законный, оставлен/не тронут)
+    idx_x_content_pub            конфликта нет (индекс законный, оставлен/не тронут)
+    idx_x_score_sig              конфликта нет (индекс законный, оставлен/не тронут)
+    idx_x_member_story           конфликта нет (индекс законный, оставлен/не тронут)
+    idx_x_metric_ext             metric_snapshot: idx_x_metric_ext ['platform', 'external_id'] — префикс idx_metric_ext ['platform', 'external_id', 'captured_at']
+
+  --- YouTube: адаптер создавал 4 индексов в HEAD, сейчас создаёт 3 (структурный список)
+    idx_youtube_source_ext       source: idx_source_ext и idx_youtube_source_ext — точный дубль ['platform', 'external_id']
+    idx_youtube_source_ext       source: idx_x_source_ext и idx_youtube_source_ext — точный дубль ['platform', 'external_id']
+
+------------------------------------------------------------------------
+
+=== 6. ВЛАДЕЛЕЦ И СУДЬБА КАЖДОГО АДАПТЕРНОГО ИНДЕКСА (index_owner_classify.py)
+  Таблица, признак «таблица ядра», статус в новой ревизии, колонки. ===
+  источник: /root/tz3d/index_owner.txt (25 строк)
+
+  ядровых таблиц в REQUIRED_TABLES: 31
+
+  === X (в HEAD индексов: 16, сейчас создаёт 8)
+    idx_x_source_handle          source               ядровая                УБРАН     (platform, handle)
+    idx_x_source_ext             source               ядровая                УБРАН     (platform, external_id)
+    idx_x_content_post           content              ядровая                оставлен  (platform, external_id, source_id)
+    idx_x_content_hash           content              ядровая                УБРАН     (platform, text_hash)
+    idx_x_content_author         content              ядровая                УБРАН     (platform, author_handle)
+    idx_x_content_pub            content              ядровая                УБРАН     (platform, is_repost, published_at)
+    idx_x_score_sig              score                ядровая                УБРАН     (platform, significance)
+    idx_x_score_story            score                ядровая                оставлен  (platform, story_id)
+    idx_x_story_pub              story                ядровая                оставлен  (platform, first_pub_at)
+    idx_x_story_xconf            story                ядровая                оставлен  (platform, xconf)
+    idx_x_member_story           story_member         ядровая                УБРАН     (story_id)
+    idx_x_cache_status           classify_cache       ядровая                оставлен  (status)
+    idx_x_cache_at               classify_cache       ядровая                оставлен  (classified_at)
+    idx_x_metric_ext             metric_snapshot      ядровая                УБРАН     (platform, external_id)
+    idx_x_req_ts                 transport_request    ядровая                оставлен  (platform, ts)
+    idx_x_req_kind               transport_request    ядровая                оставлен  (platform, kind, status)
+
+  === YouTube (в HEAD индексов: 4, сейчас создаёт 3)
+    idx_youtube_source_ext       source               ядровая                УБРАН     (platform, external_id)
+    idx_youtube_metric_quality   metric_snapshot      ядровая                оставлен  (content_id, interval_quality)
+    idx_youtube_content_videos   content              ядровая                оставлен  (platform, external_id, source_external_id, is_short)
+    idx_youtube_score_vpd        score                ядровая                оставлен  (platform, json_extract(axes_json, '$.vpd'))
+
+------------------------------------------------------------------------
+
+=== 7. ПОВТОРНЫЙ ЗАМЕР «ПАТОЛОГИЧЕСКОЙ» КОПИИ ТЗ-3c (/tmp/unified5.db, 296 812 544 Б)
+  Хвост вывода: 18,0 с, 423 строки — многоминутный прогон не воспроизводится. ===
+  источник: /root/tz3d/patho_report2.txt (25 строк)
+
+  Средняя длина заголовка: 49.3 знаков.
+  Доля вероятных шортсов (до 180 секунд): 0.0%.
+  Частые теги: AI (4), Anthropic (3), Apple Intelligence (2), Siri AI (2), Will AI kill humans (2), ai agents (2), ai automation (2), ai infrastructure (2), iOS 27 (2), iOS 27 features (2).
+  Публикации по часам (МСК): 0:00 — 2, 3:00 — 2, 4:00 — 2, 5:00 — 2, 7:00 — 1, 8:00 — 1, 10:00 — 1, 13:00 — 3, 15:00 — 2, 16:00 — 3, 17:00 — 3, 18:00 — 2, 19:00 — 2, 20:00 — 2, 21:00 — 2.
+  Публикации по дням недели: понедельник — 4, вторник — 8, среда — 5, четверг — 7, суббота — 1, воскресенье — 5.
+  1. Grok Bot за $20: девять сценариев использования — заголовок 47 знаков, 7 слов, число: да, год: нет, формат: Видео, тегов: 10, лайков на 1000: 2.7, комментариев на 1000: 0.2.
+  2. Oracle увольняет тысячи сотрудников ради ИИ-инфраструктуры — заголовок 58 знаков, 6 слов, число: нет, год: нет, формат: Видео, тегов: 27, лайков на 1000: 4.1, комментариев на 1000: 0.9.
+  3. Экс-сотрудник Anthropic о риске гибели человечества от ИИ — заголовок 57 знаков, 8 слов, число: нет, год: нет, формат: Видео, тегов: 5, лайков на 1000: 6.7, комментариев на 1000: 2.2.
+  4. Обзор Seedance 2.5 и Lumina AI для видео — заголовок 40 знаков, 8 слов, число: да, год: нет, формат: Видео, тегов: 0, лайков на 1000: 0.7, комментариев на 1000: 0.1.
+  5. Жидкостное охлаждение Kixx для дата-центров эпохи ИИ — заголовок 52 знаков, 7 слов, число: нет, год: нет, формат: Видео, тегов: 11, лайков на 1000: 0.0, комментариев на 1000: 0.0.
+  6. Скандал века: задача Навье-Стокса и OpenAI — заголовок 42 знаков, 6 слов, число: нет, год: нет, формат: Видео, тегов: 25, лайков на 1000: 21.1, комментариев на 1000: 1.3.
+  7. Почему ИИ-компании призывают притормозить — заголовок 41 знаков, 4 слов, число: нет, год: нет, формат: Видео, тегов: 1, лайков на 1000: 4.6, комментариев на 1000: 1.4.
+  8. Главные функции iOS 27: Siri AI и скрытые изменения — заголовок 51 знаков, 9 слов, число: да, год: нет, формат: Видео, тегов: 29, лайков на 1000: 17.4, комментариев на 1000: 0.8.
+  9. 7 агентов Grok Bot, которые я использую каждый день — заголовок 51 знаков, 9 слов, число: да, год: нет, формат: Видео, тегов: 0, лайков на 1000: 2.5, комментариев на 1000: 0.2.
+  10. Берни Сандерс бьёт тревогу из-за угрозы вымирания от ИИ — заголовок 55 знаков, 9 слов, число: нет, год: нет, формат: Видео, тегов: 1, лайков на 1000: 10.6, комментариев на 1000: 3.5.
+
+  ============================================================
+  SEO-ОФОРМЛЕНИЕ (как оформлены залетевшие)
+  ============================================================
+  Заголовки у залетевших: медиана 64 знаков (n=1469), с цифрой 44.6%, с вопросом 8.6%.
+  Время публикации: пики — 16:00 (108), 18:00 (107), 17:00 (105) МСК.
+  Теги: есть у 52.8% залетевших, среднее 16.9 (база с тегами 775); без тегов 694 видео.
+  Длительность: медиана полных 13.3 мин, лучшая зона «20-40 мин» (медиана просмотров 95257, n=83).
+  Точные метрики вовлечённости (кликабельность, доходимость) по чужим видео недоступны — их не выводим.
+  ВНИМАНИЕ: индекс виральности не посчитан ни у одного видео на окне — запустите `tuber viral-refresh`.
+
+------------------------------------------------------------------------
+
+=== 8. СВОДКА `migrate --schema-only` ПОСЛЕ ПОЧИНКИ (check_summary_fix.sh)
+  Копия боевой базы, два прогона, сверка md5: прогон 1 показывает сделанную
+  работу (создано/снято, проблемы 53 -> 0), прогон 2 идемпотентен. ===
+  источник: /root/tz3d/acc/summary_check.txt (33 строк)
+
+  === проверка сводки migrate --schema-only (после правки jCode) ===
+  дата: 2026-09-17T08:29:23+03:00
+  копия боевой базы: data/tuber.db -> /root/tz3d/acc/verify_summary.db
+  md5 исходной:  5fea770346dd988f4da55ef4f24fd1c5
+  md5 копии:     5fea770346dd988f4da55ef4f24fd1c5
+
+  --- прогон 1 ---
+  Сводка чистки схемы (ТЗ-3d, без переноса данных):
+
+  Лишних индексов на таблицах ядра нет (проверка дублей пройдена).
+  Выполнено: создано таблиц 2, индексов 10, триггеров 20, колонок 24; снято индексов 0.
+  Дозаполнено строк бэкфиллом денормализации: 334340 (classification 34471, comment_check 60, content.source_external_id 33986, content_comment 1170, content_latest 35274, metric_snapshot 109440, score 85771, seo_field 33986, thumbnail_vision 182)
+  Проблем схемы ядра: до 53, после 0.
+  VACUUM: не выполнялся
+  ANALYZE: выполнен
+  exit=0 wall=4s
+  md5 после прогона 1: 6ce3e256b0d496c42410647fb781c24b
+
+  --- прогон 2 ---
+  Сводка чистки схемы (ТЗ-3d, без переноса данных):
+
+  Лишних индексов на таблицах ядра нет (проверка дублей пройдена).
+  Выполнено: создано таблиц 0, индексов 0, триггеров 0, колонок 0; снято индексов 0.
+  Схема уже актуальна (делать нечего).
+  Дозаполнено строк бэкфиллом денормализации: 0
+  Проблем схемы ядра: до 0, после 0.
+  VACUUM: не выполнялся
+  ANALYZE: выполнен
+  exit=0 wall=1s
+  md5 после прогона 2: 6ce3e256b0d496c42410647fb781c24b
+
+  --- размер файла: 284020736 Б
+  --- целостность копии: ok

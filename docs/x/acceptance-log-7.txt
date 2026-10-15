@@ -1,0 +1,135 @@
+
+==============================================================================
+ПРИЁМКА ТЗ-7 (задачи 1–4)
+==============================================================================
+начало:            2026-09-15 11:50:30 UTC
+рабочая БД (RO):   /root/tuber-x/data/tuber_x.db
+окно тишины до старта: есть (ожидание 4.0с)
+статусы рабочей БД ДО:  user_version=3 posts=484 classified[classified=395, heuristic=5] stories=222 scores=50 report_texts=1 | A/provisional=11, B/provisional=3, C/candidate=1, C/provisional=3, C/rejected=24
+копия (backup API): /root/.jcode/scratch/tuber_x_acc7_x64ada8s/tuber_x_copy.db
+[1] OK   копия создана через sqlite3 backup API и не совпадает с рабочей БД
+      данные: копия=tuber_x_copy.db
+
+==============================================================================
+ЗАДАЧА 4. install_hermes_cron.sh в тестовом режиме (боевой каталог не трогаем)
+==============================================================================
+--- вывод установщика ---
+   Tuber-x: установка запускалок в /root/.jcode/scratch/tuber_x_acc7_x64ada8s/hermes_scripts
+   источник обёрток: /root/tuber-x/scripts
+   
+   установлено:
+     tuber_x_collect_a.sh -> /root/tuber-x/scripts/tuber_x_collect.sh
+     tuber_x_collect_b.sh -> /root/tuber-x/scripts/tuber_x_collect.sh
+     tuber_x_collect_c.sh -> /root/tuber-x/scripts/tuber_x_collect.sh
+     tuber_x_enrich.sh -> /root/tuber-x/scripts/tuber_x_enrich.sh
+     tuber_x_fulltext.sh -> /root/tuber-x/scripts/tuber_x_fulltext.sh
+     tuber_x_classify.sh -> /root/tuber-x/scripts/tuber_x_classify.sh
+     tuber_x_scores.sh -> /root/tuber-x/scripts/tuber_x_scores.sh
+     tuber_x_report.sh -> /root/tuber-x/scripts/tuber_x_report.sh
+     tuber_x_synd.sh -> /root/tuber-x/scripts/tuber_x_synd.sh
+     tuber_x_health.sh -> /root/tuber-x/scripts/tuber_x_health.sh
+   
+   итого запускалок: 10
+   
+   точные имена для планировщика Hermes (время МСК):
+     tuber_x_collect_a.sh
+     tuber_x_collect_b.sh
+     tuber_x_collect_c.sh
+     tuber_x_enrich.sh
+     tuber_x_fulltext.sh
+     tuber_x_classify.sh
+     tuber_x_scores.sh
+     tuber_x_report.sh
+     tuber_x_synd.sh
+     tuber_x_health.sh
+   
+   в crontab ничего не записано: задания регистрирует заказчик.
+   сторож tuber_x_health.sh печатает только строки ALERT; в планировщике
+   Hermes такие строки доставляются владельцу в Telegram.
+   в системный crontab сторож ставить нельзя: почту он не доставляет.
+[2] OK   установщик создал ровно десять ссылок-запускалок
+      данные: rc=0; ссылок=10; имена=['tuber_x_classify.sh', 'tuber_x_collect_a.sh', 'tuber_x_collect_b.sh', 'tuber_x_collect_c.sh', 'tuber_x_enrich.sh', 'tuber_x_fulltext.sh', 'tuber_x_health.sh', 'tuber_x_report.sh', 'tuber_x_scores.sh', 'tuber_x_synd.sh']
+
+==============================================================================
+ЗАДАЧА 4. Список созданных ссылок и их фактическое разрешение
+==============================================================================
+   OK  tuber_x_classify.sh      readlink=/root/tuber-x/scripts/tuber_x_classify.sh
+       разрешение -> /root/tuber-x/scripts/tuber_x_classify.sh
+   OK  tuber_x_collect_a.sh     readlink=/root/tuber-x/scripts/tuber_x_collect.sh
+       разрешение -> /root/tuber-x/scripts/tuber_x_collect.sh
+   OK  tuber_x_collect_b.sh     readlink=/root/tuber-x/scripts/tuber_x_collect.sh
+       разрешение -> /root/tuber-x/scripts/tuber_x_collect.sh
+   OK  tuber_x_collect_c.sh     readlink=/root/tuber-x/scripts/tuber_x_collect.sh
+       разрешение -> /root/tuber-x/scripts/tuber_x_collect.sh
+   OK  tuber_x_enrich.sh        readlink=/root/tuber-x/scripts/tuber_x_enrich.sh
+       разрешение -> /root/tuber-x/scripts/tuber_x_enrich.sh
+   OK  tuber_x_fulltext.sh      readlink=/root/tuber-x/scripts/tuber_x_fulltext.sh
+       разрешение -> /root/tuber-x/scripts/tuber_x_fulltext.sh
+   OK  tuber_x_health.sh        readlink=/root/tuber-x/scripts/tuber_x_health.sh
+       разрешение -> /root/tuber-x/scripts/tuber_x_health.sh
+   OK  tuber_x_report.sh        readlink=/root/tuber-x/scripts/tuber_x_report.sh
+       разрешение -> /root/tuber-x/scripts/tuber_x_report.sh
+   OK  tuber_x_scores.sh        readlink=/root/tuber-x/scripts/tuber_x_scores.sh
+       разрешение -> /root/tuber-x/scripts/tuber_x_scores.sh
+   OK  tuber_x_synd.sh          readlink=/root/tuber-x/scripts/tuber_x_synd.sh
+       разрешение -> /root/tuber-x/scripts/tuber_x_synd.sh
+[3] OK   каждая ссылка указывает на исполняемую обёртку проекта
+      данные: проверено=10
+[4] OK   повторный запуск установщика идемпотентен (ссылки не изменились)
+      данные: rc=0; ссылки совпали=True
+
+==============================================================================
+ЗАДАЧА 1. Запускалки collect определяют тир из имени файла (без сети)
+==============================================================================
+[5] OK   запуск без аргументов берёт тир из имени файла (a->A, b->B, c->C)
+      данные: результаты={ tuber_x_collect_a.sh:(0, 'A'), tuber_x_collect_b.sh:(0, 'B'), tuber_x_collect_c.sh:(0, 'C') }
+
+==============================================================================
+ЗАДАЧА 4. tuber_x_health.sh на копии: пустой stdout при норме, rc=0
+==============================================================================
+   stdout сторожа (длина 0): ''
+[6] OK   сторож печатает пустой вывод при отсутствии аномалий и возвращает 0
+      данные: rc=0; строк ALERT в stdout=0
+
+==============================================================================
+ЗАДАЧА 4. Системный crontab не изменён установщиком
+==============================================================================
+[7] OK   установщик ничего не записал в системный crontab
+      данные: rc до/после=0/0; текст совпал=True
+
+==============================================================================
+ТЕСТЫ
+==============================================================================
+[8] OK   полный набор тестов зелёный
+      данные: pytest rc=0; ..............................................................           [100%]
+
+==============================================================================
+СТАТУСЫ РАБОЧЕЙ БД ДО/ПОСЛЕ
+==============================================================================
+окно тишины после работы: есть (ожидание 4.0с)
+статусы рабочей БД ДО:    user_version=3 posts=484 classified[classified=395, heuristic=5] stories=222 scores=50 report_texts=1 | A/provisional=11, B/provisional=3, C/candidate=1, C/provisional=3, C/rejected=24
+статусы рабочей БД ПОСЛЕ: user_version=3 posts=484 classified[classified=395, heuristic=5] stories=222 scores=50 report_texts=1 | A/provisional=11, B/provisional=3, C/candidate=1, C/provisional=3, C/rejected=24
+[9] OK   рабочая БД не изменена приёмкой (снимки ДО/ПОСЛЕ совпали)
+      данные: posts 484->484; classified {'classified': 395, 'heuristic': 5}->{'classified': 395, 'heuristic': 5}
+
+==============================================================================
+СВОДКА
+==============================================================================
+проверок: 9, OK: 9, FAIL: 0
+    1 OK   копия создана через sqlite3 backup API и не совпадает с рабочей БД
+    2 OK   установщик создал ровно десять ссылок-запускалок
+    3 OK   каждая ссылка указывает на исполняемую обёртку проекта
+    4 OK   повторный запуск установщика идемпотентен (ссылки не изменились)
+    5 OK   запуск без аргументов берёт тир из имени файла (a->A, b->B, c->C)
+    6 OK   сторож печатает пустой вывод при отсутствии аномалий и возвращает 0
+    7 OK   установщик ничего не записал в системный crontab
+    8 OK   полный набор тестов зелёный
+    9 OK   рабочая БД не изменена приёмкой (снимки ДО/ПОСЛЕ совпали)
+
+==============================================================================
+ОБЯЗАТЕЛЬНЫЕ СТРОКИ ПРИЁМКИ
+==============================================================================
+рабочая БД: /root/tuber-x/data/tuber_x.db
+статусы рабочей БД ДО:    user_version=3 posts=484 classified[classified=395, heuristic=5] stories=222 scores=50 report_texts=1 | A/provisional=11, B/provisional=3, C/candidate=1, C/provisional=3, C/rejected=24
+статусы рабочей БД ПОСЛЕ: user_version=3 posts=484 classified[classified=395, heuristic=5] stories=222 scores=50 report_texts=1 | A/provisional=11, B/provisional=3, C/candidate=1, C/provisional=3, C/rejected=24
+рабочая БД не изменена: ДА

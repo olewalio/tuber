@@ -1,0 +1,33 @@
+{
+  "_comment": "Фильтр кандидатов-каналов для моста источников (ТЗ-17). Один файл конфига на все скрипты моста: scripts/bridge_common.py читает его и применяет ко всем путям импорта (фид tuber-os и дискавери из своих постов). Ничего в этом файле не зашито в код — правится без изменения скриптов.",
+  "handle_regex": "^[a-z0-9_]{5,32}$",
+  "handle_regex_note": "Допустимый telegram-хендл: 5-32 символа [a-z0-9_] ПОСЛЕ нормализации (нижний регистр, без @). Всё, что короче 5, длиннее 32 или содержит прочие символы, отбрасывается как служебное/мусор (например, одиночное 's', ссылки-хвосты, кириллица, точки).",
+  "reserved_paths": [
+    "s", "c", "me", "tg", "joinchat", "addstickers", "addemoji", "addtheme",
+    "addlist", "share", "iv", "proxy", "socks", "setlanguage", "login",
+    "confirmphone", "bg", "boost", "giftcode", "invoice", "premium",
+    "telegram", "telegramtips", "telegramnews", "durov", "wallet", "passport",
+    "contact", "terms", "privacy", "username", "setname", "setbirthday",
+    "stars", "affiliate", "mystars", "fragment", "collectible"
+  ],
+  "reserved_paths_note": "Служебные пути t.me/telegram.me, которые НЕ являются названиями чужих каналов: это инвайты, виджеты, настройки, служебные/афилированные аккаунты платформы. Такие хендлы не импортируются как кандидаты.",
+  "bot_suffix": "bot",
+  "bot_note": "Хендл, оканчивающийся на 'bot', отбрасывается как бот, ЕСЛИ у кандидата нет явного ИИ-признака (ai_hint == 1). При ai_hint == 1 бот пропускается: это ИИ-бот, потенциально релевантный.",
+  "news_giants": [
+    "ndtv", "skynews", "foxnews", "cnn", "cnnbrk", "cnni", "bbc", "bbcnews",
+    "bbcbreaking", "bbcrussian", "reuters", "bloomberg", "wsj", "nytimes",
+    "guardian", "theguardian", "forbes", "dw", "dwrussian", "rt", "rtnews",
+    "rt_russian", "tass_agency", "tass", "rian", "ria", "rian_ru", "rianovosti",
+    "apnews", "nbcnews", "abcnews", "cbsnews", "cnbc", "aljazeera",
+    "aljazeerarussian", "washingtonpost", "economist", "espn", "thetimes",
+    "telegraph", "independent", "businessinsider", "theverge", "verge",
+    "huffpost", "politico", "time", "newsweek", "usatoday", "latimes",
+    "mirror", "dailymail", "nypost", "buzzfeed", "vice", "lenta", "lentach",
+    "ria_novosti", "rbc_news", "rbc", "vedomosti", "kommersant", "kommersant_ru",
+    "izvestia", "izvestia_ru", "kantorovich", "breakingmash", "mash", "bazabazon",
+    "meduzalive", "meduza", "tvrain", "novaya_gazeta", "dozhd"
+  ],
+  "news_giants_note": "Каналы-гиганты новостников и медиа-агрегаторов: это не авторские ИИ-каналы, а крупные редакции. Импортировать их как кандидатов в реестр авторских каналов бессмысленно (шум и нагрузка), поэтому фильтр их отбрасывает по точному совпадению хендла (без учёта регистра).",
+  "min_mentions_default": 2,
+  "min_mentions_note": "Кандидат ниже порога --min-mentions не берётся, КРОМЕ случая ai_hint == 1: явный ИИ-признак из фида/постов перебивает порог."
+}

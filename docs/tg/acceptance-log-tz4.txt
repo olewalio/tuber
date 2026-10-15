@@ -1,0 +1,147 @@
+
+==============================================================================
+ПРИЁМКА ТЗ-4: перенос Telegram в монорепозиторий tuber
+==============================================================================
+начало:          2026-09-17 06:55:02 UTC
+репозиторий:     /root/tuber
+рабочий каталог: /tmp/tuber_tg_accept4_iw5fwu43
+
+==============================================================================
+П.5 (до). Боевые базы: sha256 + mtime ДО
+==============================================================================
+  os  /root/tuber-os/data/tuber.db
+      mtime=1789624865.283086 size=159240192 sha256=35fabe49b5b38c71…
+  x   /root/tuber-x/data/tuber_x.db
+      mtime=1789626650.527672 size=5550080 sha256=d5dad10d193f0d1e…
+  tg  /root/tuber-telegram/data/tuber_telegram.db
+      mtime=1789626736.6511974 size=45604864 sha256=2057e871fa2953ac…
+
+==============================================================================
+Заморозка копий legacy (read-only `.backup`)
+==============================================================================
+  os  -> /tmp/tuber_tg_accept4_iw5fwu43/copy-os.db
+  x   -> /tmp/tuber_tg_accept4_iw5fwu43/copy-x.db
+  tg  -> /tmp/tuber_tg_accept4_iw5fwu43/copy-tg.db
+
+==============================================================================
+П.1. Тесты: монорепозиторий против legacy-проекта Telegram
+==============================================================================
+  весь монорепозиторий: 993 tests collected in 0.46s
+  tests/telegram:       51 tests collected in 0.04s
+  /root/tuber-telegram: 49 tests collected in 0.03s
+[ 1] OK   перенесённых тестов Telegram не меньше, чем в /root/tuber-telegram
+      данные: было 49 (legacy-проект), стало 51 (tests/telegram); весь монорепозиторий — 993 (собрано)
+
+==============================================================================
+Пересборка единой базы из замороженных копий (migrate)
+==============================================================================
+Сводка переноса (legacy → core):
+
+legacy_db  legacy_table           target_table                 rows
+--------------------------------------------------------------------
+os         channel_candidates     candidate                    2730
+os         channels               source                       8008
+os         comment_checks         comment_check                  80
+os         llm_usage              llm_usage                    2337
+os         query_candidates       candidate                    2208
+os         quota_log              quota_usage                   206
+os         seo_fields             seo_field                   37320
+os         snapshots              metric_snapshot            103450
+os         thumbnail_vision       thumbnail_vision              182
+os         topics                 topic                          17
+os         video_classification   classification              37231
+os         video_comments         content_comment              1563
+os         video_scores           score                       96116
+os         videos                 content                     37320
+tg         channel_baselines      source_baseline               391
+tg         channels               source                       1372
+tg         posts                  content                     21482
+tg         run_log                run_log                      7703
+tg         runs                   run                           129
+tg         scores                 score                        9235
+x          accounts               source                        102
+x          candidates             candidate                    2203
+x          classified             classify_cache                998
+x          classify_daily         classify_daily                  3
+x          cursors                cursor                        162
+x          cursors                source                         43
+x          darks                  source                          4
+x          instances              transport_instance              4
+x          metrics_daily          metrics_daily                   3
+x          post_metrics_history   metric_snapshot              1308
+x          posts                  content                      1321
+x          report_texts           report_text                     1
+x          requests               transport_request            4129
+x          run_log                run_log                      2127
+x          runs                   run                           217
+x          scores                 score                         119
+x          stories                story                          76
+x          story_posts            story_member                  284
+
+[ 0] OK   migrate из копий завершился кодом 0
+      данные: rc=0
+
+==============================================================================
+П.4. parity на пересобранной из копий базе
+==============================================================================
+  tg.stories                                        0          0         +0  OK
+  tg.story_members                                  0          0         +0  OK
+  tg.metrics_daily                                  0          0         +0  OK
+  tg.account_state                                  0          0         +0  OK
+  ------------------------------------------------------------------------------------------
+  Итог: расхождений нет.
+[ 4] OK   parity: ноль необъяснённых расхождений
+      данные: rc=0; ['tg.account_state                                  0          0         +0  OK', '------------------------------------------------------------------------------------------', 'Итог: расхождений нет.']
+
+==============================================================================
+П.2. Офлайн-прогон `tuber tg scoring all` на КОПИИ единой базы
+==============================================================================
+  legacy scores:                9235
+  score(telegram) ДО прогона:   9235
+    react=82 er=48.5% xconf=1 sig=32.8542 @vidyagramskills https://t.me/vidyagramskills/44
+    react=303 er=44.2% xconf=1 sig=30.9683 @tech_priestess https://t.me/tech_priestess/2752
+    react=41 er=38.0% xconf=1 sig=29.9686 @generalov_ai_agents https://t.me/generalov_ai_agents/817
+  {"forwards": {"channels_scanned": 878, "pages_fetched": 0, "posts_seen": 0, "forwards_filled_before": 0, "forwards_filled_after": 0, "forwards_null_left": 21482, "rows_updated": 0, "errors": 0, "posts_total": 21482, "reason_no_data": "разметка t.me/s не содержит счётчика форвардов (есть только tgme_widget_message_views и ..._forwarded_from)"}, "baselines": {"channels_in_window": 853, "baselines_written": 806, "window_days": 90, "min_posts_in_window": 5}, "scores": {"posts_total": 21482, "channels_total": 878, "posts_scored": 16859, "posts_null_views": 4623, "anomalies": 26, "global_median_er": 0.010443864229765013, "channels_with_baseline": 806, "half_life_days": 30.0, "er_anomaly_threshold": 0.5}, "report_path": "/tmp/tuber_tg_accept4_iw5fwu43/reports/significance-2026-09-17.md"}
+  score(telegram) ПОСЛЕ:        21482
+[ 2] OK   scoring пересчитал оценки, строк score(telegram) >= legacy scores
+      данные: legacy=9235; до=9235; после=21482
+
+==============================================================================
+П.3. Экспорт/импорт кандидатов: JSONL round-trip и идемпотентность
+==============================================================================
+  экспорт: {"kind_counts": {"x": 381, "youtube": 1619}, "written": 2000, "out": "/tmp/tuber_tg_accept4_iw5fwu43/exchange/external_candidates.jsonl", "dry": false, "candidates": {"inserted": 3391, "updated": 62}, "top": [{"kind": "x", "handle": "cryptoladyhq", "mentions": 40}, {"kind": "x", "handle": "thsottiau
+  импорт 1: {"imported": 4, "skipped_existing": 0, "skipped_filter": 5, "skipped_limit": 0, "dry": false, "feed": "/root/tuber/tests/telegram/fixtures/tz17_feed.jsonl"}
+  импорт 2: {"imported": 0, "skipped_existing": 4, "skipped_filter": 5, "skipped_limit": 0, "dry": false, "feed": "/root/tuber/tests/telegram/fixtures/tz17_feed.jsonl"}
+  candidate всего: 10536; из них telegram: 4
+[ 3] OK   импорт фида идемпотентен: повтор даёт 0 новых
+      данные: импорт1=4, импорт2 imported=0, skipped_existing=4, candidate=10536
+  экспорт 2: candidates={'inserted': 0, 'updated': 3453}
+[3.1] OK   повторный экспорт не размножает candidate
+      данные: до=10536; после=10536; {'inserted': 0, 'updated': 3453}
+
+==============================================================================
+Контрактные тесты Telegram (в монорепозитории)
+==============================================================================
+[3.2] OK   tests/telegram/test_feed_contract.py зелёный
+      данные: rc=0; 3 passed in 0.18s
+
+==============================================================================
+Полный pytest -q монорепозитория
+==============================================================================
+[ 6] OK   полный набор монорепозитория зелёный
+      данные: rc=0; 992 passed, 1 xfailed in 64.94s (0:01:04)
+
+==============================================================================
+П.5 (после). Боевые базы: sha256 + mtime ПОСЛЕ
+==============================================================================
+  os  mtime=1789624865.283086 sha256=35fabe49b5b38c71…
+  x   mtime=1789626650.527672 sha256=d5dad10d193f0d1e…
+  tg  mtime=1789626736.6511974 sha256=2057e871fa2953ac…
+[ 5] OK   боевая tuber_telegram.db не тронута (sha256 и mtime совпали)
+      данные: sha256 2057e871fa2953ac… == 2057e871fa2953ac…; mtime 1789626736.6511974 == 1789626736.6511974
+  (изменение mtime у os/x-баз означает, что в них писал живой коллектор, а не этот инструмент: обращения сюда — read-only)
+
+==============================================================================
+СВОДКА
+==============================================================================
+проверок: 9, OK: 9, FAIL: 0
